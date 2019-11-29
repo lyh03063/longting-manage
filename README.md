@@ -1,2 +1,2 @@
-# longting-manage
-龙庭管理后台
+# tangball_manage
+唐球小程序管理后台

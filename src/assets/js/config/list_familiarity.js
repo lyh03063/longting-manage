@@ -1,0 +1,42 @@
+let _dataType = "familiarity",
+  _systemId = PUB._systemId;
+export default {
+  idKey: "_id", //键名
+  pageSize: 20,
+  listIndex: "list_familiarity", //vuex对应的字段~
+  focusMenu: true, //进行菜单聚焦
+  twoTitle: "熟悉度", //面包屑2级菜单
+  ...PUB.listCFCommon,//展开公共配置
+  //dynamicDict动态数据字典配置
+  dynamicDict: [
+    DYDICT.html_api_category
+  ],
+  //objParamAddon列表接口的附加参数
+  objParamAddon: {
+    _systemId,
+    _dataType
+  },
+  //公共的附加参数，针对所有接口
+  paramAddonPublic: {
+    _systemId,
+    _dataType
+  },
+  //-------列配置数组-------
+  columns: [COLUMNS.familiarity, COLUMNS.dataType, COLUMNS.dataId, COLUMNS.userId],
+  //-------筛选表单字段数组-------
+  searchFormItems: [F_ITEMS.dataId, F_ITEMS.userId,],
+  //-------详情字段数组-------
+  detailItems: [
+    D_ITEMS.familiarity,
+    D_ITEMS.dataType,
+    D_ITEMS.dataId,
+    D_ITEMS.userId,
+  ],
+  //-------新增、修改表单字段数组-------
+  formItems: [
+    F_ITEMS.familiarity,
+    F_ITEMS.dataType,
+    F_ITEMS.dataId,
+    F_ITEMS.userId,
+  ]
+}
