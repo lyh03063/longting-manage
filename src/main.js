@@ -1,20 +1,20 @@
 // import Vue from 'vue'
 Vue.config.productionTip = false
 // import lodash from 'lodash'//导入lodash方法库
-window.lodash=lodash
+window.lodash = lodash
 Vue.prototype.$lodash = lodash//让vue实例中可访问$store
 import axios from "axios";
 window.axios = axios;
 import ajax from "@/assets/js/ajax.js";
 window.ajax = ajax;
 import moment from "moment";
-window.moment = moment; 
+window.moment = moment;
 
 // import util from "@/assets/js/util.js";
 import config from "@/assets/js/config.js";
 
 
- 
+
 // import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import "./mock.js";
@@ -36,25 +36,43 @@ import list_html_api_category from "@/page/list_html_api_category";
 import list_familiarity from "@/page/list_familiarity";
 
 
+
+// 本来想实现这个路由表的优化，通过数组实现，但失败***用eval有不行
+// let arrPageManage = ["modify_password", "list_article_category", "list_article", "list_area", "list_admin", "list_role", "list_api_html", "list_html_api_category", "list_familiarity", "listHome"]
+
+// let arrRoutesManage = [
+
+// ];
+// arrPageManage.forEach(itemEach => {//循环：{000数组}
+//   arrRoutesManage.push({
+//     path: `/${itemEach}`, component: eval(itemEach)
+//   })
+// })
+console.log("global:", global);
+
+
+
+
+
 // window.util=util;
 // 3. 创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: login },
-  
-   
-    
+
+
+
     {
       path: '/manage',
       component: manage,
       redirect: '/listHome', //跳转
       children: [//子路由
-        
+
         {
-          path:'/modify_password',component:modify_password
+          path: '/modify_password', component: modify_password
         },
-        
+
         {
           path: '/list_article_category',
           component: list_article_category
@@ -93,17 +111,17 @@ const router = new VueRouter({
 
 
 
-        
+
         {
           path: '/listHome',
           component: listHome
         },
-       
-     
-        
-      
-        
-     
+
+
+
+
+
+
       ]
     },
   ]
@@ -112,19 +130,29 @@ const router = new VueRouter({
 // Vue.use(Vuex)//应用组件
 const store = new Vuex.Store({//定义Vuex的存储对象
   state: {
-    debug:false,
+    debug: false,
     activeMenuIndex: "",//当前激活的菜单index
     listState: {//存放列表的共享状态，
-    }, 
+    },
     defultFindJson: {//存放列表的默认查询参数，
       // list_article:{articleCategory:3  }
-    },   
+    },
+
+    arrLookup: {//存放列表的联合查询参数值，
+      // list_article:{articleCategory:3  }
+    },
   },
   mutations: {//变更事件
     setDebug(state, param) {//设置debug模式
-      state.debug= param;
+      state.debug = param;
     },
-
+    setListArrLookup(state, param) {//设置列表的联合查询参数值
+      state.arrLookup[param.listIndex] = param.arrLookup;
+      //对listState进行整个对象的变更（深拷贝），因为listState是有注册的，可以触发响应
+      state.arrLookup =lodash.cloneDeep(state.arrLookup);  //深拷贝
+      // let str = JSON.stringify(state.arrLookup)//对象转换成字符串
+      // state.arrLookup = JSON.parse(str)//字符串转换成对象
+    },
     setListFindJson(state, param) {//设置列表的初始筛选参数值
       state.defultFindJson[param.listIndex] = param.findJson;
       //对listState进行整个对象的变更（深拷贝），因为listState是有注册的，可以触发响应

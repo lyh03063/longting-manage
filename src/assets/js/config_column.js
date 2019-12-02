@@ -100,5 +100,12 @@ COLUMNS.familiarity = {...D_ITEMS.familiarity, width: 100,
   }
 };
 
+COLUMNS.studyTime = {
+  ...D_ITEMS.studyTime,
+  width: 140,
+ 
+};
+
+
 //#endregion
 

@@ -8,10 +8,10 @@
     <span
       :style="{color:dictFColor[valueNeed.familiarity]}"
     >{{dictFamiliarity[valueNeed.familiarity]||"未学"}}</span>
-    <span class="iconfont iconarrow-down" v-if="focusId!=valueNeed.dataId" style="color:#ddd">
+    <span class="iconfont iconarrow-down" v-if="focusId!=data._id" style="color:#ddd">
       <!--编辑按钮-->
     </span>
-    <div class="PSA T0 L0 BC_fff pop-box" v-if="focusId===valueNeed.dataId">
+    <div class="PSA T0 L0 BC_fff pop-box" v-if="focusId===data._id">
       <i
         :class="{'familiarity-option':true,'focus':valueNeed.familiarity==1}"
         @click="changeFamiliarity(1)"
@@ -36,11 +36,12 @@
 export default {
   //用于列表模糊查询的组件
   props: {
-    value: [Object],
+    value: [Object, Array],
     data: [Object]
   },
   data() {
     return {
+      dataIdFamiliarity: null, //熟悉度数据id
       valueNeed: null,
 
       //当前需要聚焦的数据id
@@ -65,74 +66,82 @@ export default {
   watch: {
     value: {
       handler(newVal, oldVal) {
-        this.valueNeed = this.value;
+        console.log("value change!!!!!");
+        console.log("newVal:", newVal);
+        // this.valueNeed = this.value;
+        this.valueNeed = lodash.get(this.value, `[0]._data`);
         if (!this.valueNeed) {
           this.valueNeed = {};
         }
       },
       immediate: true,
       deep: true
-    },
-    valueNeed: {
-      handler(newVal, oldVal) {
-        this.$emit("input", newVal);
-      },
-      immediate: true,
-      deep: true
     }
+    // valueNeed: {
+    //   handler(newVal, oldVal) {
+    //     this.$emit("input", [newVal]);
+    //   },
+    //   // immediate: true,
+    //   deep: true
+    // }
   },
   methods: {
     //显示熟悉度操作界面
     showDialogFamiliarity() {
-      this.focusId = this.valueNeed.dataId; //将focusId设置成当前点击的数据Id
+      this.focusId = this.data._id; //将focusId设置成当前点击的数据Id
     },
     //切换当前数据的熟悉度函数
     async changeFamiliarity(value) {
       let studyTime = moment().format("YYYY-MM-DD HH:mm"); //获取当前学习时间
 
-      alert(this.valueNeed._id);
-      //Q1:数据id存在，修改
-      if (this.valueNeed._id) {
+      this.dataIdFamiliarity =
+        this.dataIdFamiliarity || lodash.get(this.data, `relDoc[0]._id`);
+
+  
+      //Q1:熟悉度uuid存在
+      if (this.dataIdFamiliarity) {
         await axios({
           //请求接口
           method: "post",
           url: `${PUB.domain}/info/commonModify`,
           data: {
-            _id: this.valueNeed._id,
+            _id: this.dataIdFamiliarity,
             _dataType: "familiarity",
             _systemId: PUB._systemId,
-            _data: { familiarity: value }
+            _data: { familiarity: value, studyTime }
           }
         });
         this.valueNeed.familiarity = value;
-        //Q2:数据id不存在，新增
+
+        //Q2:熟悉度uuid不存在，新增
       } else {
         let { data } = await axios({
           //请求接口
           method: "post",
           url: `${PUB.domain}/info/commonAdd`,
           data: {
+            _idRel: this.data._id,
             _dataType: "familiarity",
             _systemId: PUB._systemId,
             _data: {
               userId: PUB.userId,
-              dataId: this.data._id,
+
               dataType: "html_api",
-              familiarity: value
+              familiarity: value,
+              studyTime
             }
           }
         });
         let docAdd = lodash.get(data, `addData._data`);
-        docAdd._id = lodash.get(data, `addData._id`);//补充_id
-        this.valueNeed = docAdd; //改变valueNeed
+        console.log("docAdd:", docAdd);
+        this.dataIdFamiliarity = lodash.get(data, `addData._id`);
+        alert(this.dataIdFamiliarity);
+        this.valueNeed = docAdd; //改变valueNeed---注意结构！！！！
+        this.$emit("input", [{ _data: this.valueNeed }]);
       }
     }
   },
-  created() {
-    
-
-
-  }
+  created() {}
 };
 </script>
 

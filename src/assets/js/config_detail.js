@@ -175,7 +175,10 @@ D_ITEMS._id = {
   prop: "_id",
 };
 
-
+D_ITEMS.studyTime = {
+  label: "学习时间",
+  prop: "studyTime",
+};
 
 //#endregion
 
