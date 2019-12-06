@@ -1,15 +1,16 @@
-let _dataType = "html_api",
+// import "@/assets/js/config_base.js"
+
+let _dataType = "note",
   _systemId = PUB._systemId;
-  PUB.listCF.list_html_api= {
+PUB.listCF.list_note = {
   idKey: "_id", //键名
   pageSize: 20,
-  listIndex: "list_html_api", //vuex对应的字段~
+  listIndex: "list_note", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
-  twoTitle: "Html-api", //面包屑2级菜单
+  twoTitle: "笔记", //面包屑2级菜单
   ...PUB.listCFCommon,//展开公共配置
   //批量操作按钮的配置
   batchBtns: {
-
     addon: [
       util.cfList.bBtns.add,
       util.cfList.bBtns.delete,
@@ -18,7 +19,7 @@ let _dataType = "html_api",
   },
   //dynamicDict动态数据字典配置
   dynamicDict: [
-    DYDICT.html_api_category,
+    DYDICT.note_category
   ],
   //objParamAddon列表接口的附加参数
   objParamAddon: {
@@ -33,18 +34,17 @@ let _dataType = "html_api",
     _dataType
   },
   //-------列配置数组-------
-  columns: [COLUMNS.title_fixed, COLUMNS.desc, COLUMNS.category, COLUMNS.familiarity_select, COLUMNS.html_display, COLUMNS.importance],
+  columns: [COLUMNS.title_fixed, COLUMNS.desc, COLUMNS.category_multiple, COLUMNS.familiarity_select, COLUMNS.importance],
   //-------筛选表单字段数组-------
-  searchFormItems: [F_ITEMS.title_search, F_ITEMS.html_api_category, F_ITEMS.html_display, F_ITEMS.importance],
+  searchFormItems: [F_ITEMS.title_search, F_ITEMS.note_category, F_ITEMS.importance],
   //-------详情字段数组-------
-  detailItems: [D_ITEMS._id, D_ITEMS.title, D_ITEMS.desc, D_ITEMS.detail, D_ITEMS.category, D_ITEMS.html_display, D_ITEMS.importance],
+  detailItems: [D_ITEMS.title, D_ITEMS.detail, D_ITEMS.desc, D_ITEMS.category, D_ITEMS.importance, D_ITEMS._id,],
   //-------新增、修改表单字段数组-------
   formItems: [
     F_ITEMS.title,
-    F_ITEMS.html_api_category,
+    F_ITEMS.note_category,
     F_ITEMS.desc,
     F_ITEMS.detail,
-    F_ITEMS.html_display,
     F_ITEMS.importance
   ]
 }

@@ -1,6 +1,8 @@
+// import "@/assets/js/config_base.js"
+
 let _dataType = "article",
-_systemId = PUB._systemId;
-export default {
+  _systemId = PUB._systemId;
+PUB.listCF.list_article = {
   idKey: "_id", //键名
   pageSize: 20,
   listIndex: "list_article", //vuex对应的字段~

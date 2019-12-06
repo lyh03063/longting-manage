@@ -1,6 +1,8 @@
+// import "@/assets/js/config_base.js"
+
 let _dataType = "article_category",
   _systemId = PUB._systemId;
-export default {
+PUB.listCF.list_article_category = {
   idKey: "_id", //键名
   pageSize: 20,
   listIndex: "list_article_category", //vuex对应的字段~
@@ -17,7 +19,7 @@ export default {
     _systemId,
     _dataType
   },
-   //-------列配置数组-------
+  //-------列配置数组-------
   columns: [
 
     COLUMNS.category_name,

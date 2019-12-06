@@ -35,7 +35,8 @@ import list_api_html from "@/page/list_api_html";
 import list_html_api_category from "@/page/list_html_api_category";
 import list_familiarity from "@/page/list_familiarity";
 
-
+import list_note from "@/page/list_note";
+import list_note_category from "@/page/list_note_category";
 
 // 本来想实现这个路由表的优化，通过数组实现，但失败***用eval有不行
 // let arrPageManage = ["modify_password", "list_article_category", "list_article", "list_area", "list_admin", "list_role", "list_api_html", "list_html_api_category", "list_familiarity", "listHome"]
@@ -106,8 +107,14 @@ const router = new VueRouter({
           path: '/list_familiarity',
           component: list_familiarity
         },
-
-
+        {
+          path: '/list_note',
+          component: list_note
+        },
+        {
+          path: '/list_note_category',
+          component: list_note_category
+        },
 
 
 

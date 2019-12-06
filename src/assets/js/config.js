@@ -1,16 +1,28 @@
 // import lodash from 'lodash'//导入lodash方法库
 import  "@/assets/js/config_base.js";//注意位置要提前
 
-import list_member from "@/assets/js/config/list_member.js";
-import list_area from "@/assets/js/config/list_area.js";
-import list_admin from "@/assets/js/config/list_admin.js";
-import list_role from "@/assets/js/config/list_role.js";
-import list_article_category from "@/assets/js/config/list_article_category.js";
-import list_article from "@/assets/js/config/list_article.js";
-import list_html_api from "@/assets/js/config/list_html_api.js";
-import list_html_api_category from "@/assets/js/config/list_html_api_category.js";
-import list_familiarity from "@/assets/js/config/list_familiarity.js";
 
+import "@/assets/js/config_detail.js"//基础字段
+import "@/assets/js/config_column.js"//列字段
+import "@/assets/js/config_form.js"//表单字段
+
+
+
+
+import  "@/assets/js/config/list_area.js";
+import  "@/assets/js/config/list_admin.js";
+import  "@/assets/js/config/list_role.js";
+
+
+import  "@/assets/js/config/list_html_api.js";
+import  "@/assets/js/config/list_html_api_category.js";
+import  "@/assets/js/config/list_familiarity.js";
+
+import  "@/assets/js/config/list_article.js";
+import  "@/assets/js/config/list_article_category.js";
+
+import  "@/assets/js/config/list_note.js";
+import  "@/assets/js/config/list_note_category.js";
 //#region PUB.objDictArr/PUB.dict公共字典对象
 PUB.objDictArr = {
   taskType: [
@@ -70,15 +82,10 @@ PUB.formatterDict = function (dictName, value) {
   return lodash.get(PUB.dict, `${dictName}.${value}.label`);
 }
 //#endregion
-PUB.listCF = {}
+// PUB.listCF = {}
 //页面对应的集合列表类型
-PUB.listCF.list_article_category =list_article_category;
-PUB.listCF.list_article =list_article;
-PUB.listCF.list_member =list_member
-PUB.listCF.list_area = list_area
-PUB.listCF.list_admin =list_admin
-PUB.listCF.list_role =list_role
-PUB.listCF.list_html_api =list_html_api
-PUB.listCF.list_html_api_category =list_html_api_category
-PUB.listCF.list_familiarity =list_familiarity
+
+
+
+
 export default {}

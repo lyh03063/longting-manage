@@ -6,7 +6,7 @@
         <div class="login-user-img-box">
           <div class="login-user-img el-icon-s-custom"></div>
         </div>
-        <h1>唐球后台管理登录</h1>
+        <h1>{{systemName}}登录</h1>
         <h2>管理员登录</h2>
         <el-form
           :model="ruleForm"
@@ -18,7 +18,7 @@
         >
           <el-form-item prop="userName">
             <div class>
-              <el-input v-model.number="ruleForm.userName" placeholder="管理账户">
+              <el-input v-model="ruleForm.userName" placeholder="管理账户">
                 <!-- <template slot="prepend">管理账户</template> -->
               </el-input>
             </div>
@@ -57,6 +57,7 @@ export default {
     };
 
     return {
+       systemName: PUB.systemName,
       ak47: true,
      
       ruleForm: {

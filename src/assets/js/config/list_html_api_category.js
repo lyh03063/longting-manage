@@ -1,7 +1,7 @@
 let _dataType = "html_api_category",
   _systemId = PUB._systemId;
  
-export default {
+  PUB.listCF.list_html_api_category= {
   idKey: "_id", //键名
   pageSize: 20,
   listIndex: "list_html_api_category", //vuex对应的字段~

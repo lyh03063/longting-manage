@@ -4,7 +4,7 @@
       <template v-slot:slot_column_familiarity="{row}">
         <div class>
           
-          <familiarity_select v-model="row.familiarityDoc" :data="row" dataType="html_api" ></familiarity_select>
+          <familiarity_select v-model="row.familiarityDoc" :data="row" dataType="note" ></familiarity_select>
         </div>
       </template>
       <template v-slot:slot_in_toolbar="{data}">
@@ -23,12 +23,12 @@ export default {
   components: { familiarity_select, score_panel },
   data() {
     return {
-      cfList: util.deepCopy(PUB.listCF.list_html_api)
+      cfList: util.deepCopy(PUB.listCF.list_note)
     };
   },
   computed: {
     arrLookup: function() {
-      return this.$store.state.arrLookup["list_html_api"];
+      return this.$store.state.arrLookup["list_note"];
     }
   },
   watch: {

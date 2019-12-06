@@ -1,5 +1,5 @@
 
-import "@/assets/js/config_detail.js"
+
 //#region COLUMNS:列字段管理
 
 
@@ -24,7 +24,7 @@ COLUMNS.orderId = {
   label: "订单号",
   prop: "orderId",
   width: 160,
- 
+
 };
 
 COLUMNS.aaaa = 11111;
@@ -37,61 +37,71 @@ COLUMNS.aaaa = 11111;
 COLUMNS.aaaa = 11111;
 COLUMNS.aaaa = 11111;
 COLUMNS.aaaa = 11111;
- /****************************赛事报名-END****************************/
+/****************************赛事报名-END****************************/
 
 
 
 
 
- COLUMNS.title_fixed = {...D_ITEMS.title, width: 120,fixed: true};
- COLUMNS.desc = {...D_ITEMS.desc, width: 160,};
+COLUMNS.title_fixed = { ...D_ITEMS.title, width: 320, fixed: true };
+COLUMNS.desc = { ...D_ITEMS.desc, width: 160, };
+COLUMNS.html_display = { ...D_ITEMS.html_display, width: 70, };
+COLUMNS.importance = {
+  ...D_ITEMS.importance, width: 70,
+  formatter: function (rowData) {
+    return lodash.get(DYDICT.importance, `${rowData.importance}.label`);
+  }
+};
+
 //  COLUMNS.detail = {...D_ITEMS.detail, width: 120,};
 
 
-COLUMNS.userName = {...D_ITEMS.userName, width: 150,};
-COLUMNS.passWord = {...D_ITEMS.passWord, width: 150,};
-COLUMNS.nickName = {...D_ITEMS.nickName, width: 120,};
-COLUMNS.role = {...D_ITEMS.role, width: 120,};
+COLUMNS.userName = { ...D_ITEMS.userName, width: 150, };
+COLUMNS.passWord = { ...D_ITEMS.passWord, width: 150, };
+COLUMNS.nickName = { ...D_ITEMS.nickName, width: 120, };
+COLUMNS.role = { ...D_ITEMS.role, width: 120, };
 
- /****************************角色-START****************************/
+/****************************角色-START****************************/
 
- COLUMNS.roleName = {...D_ITEMS.roleName, width: 120,};
- COLUMNS.rolePower = {...D_ITEMS.rolePower, width: 120,};
+COLUMNS.roleName = { ...D_ITEMS.roleName, width: 120, };
+COLUMNS.rolePower = { ...D_ITEMS.rolePower, width: 120, };
 
- /****************************角色-END****************************/
+/****************************角色-END****************************/
 
- /****************************分类-START****************************/
+/****************************分类-START****************************/
 
- COLUMNS.category_name = {...D_ITEMS.category_name, width: 120,};
- COLUMNS.category_remark = {...D_ITEMS.category_remark, width: 180,};
+COLUMNS.category_name = { ...D_ITEMS.category_name, width: 120, };
+COLUMNS.category_remark = { ...D_ITEMS.category_remark, width: 180, };
 
- /****************************分类-END****************************/
+/****************************分类-END****************************/
 
 
- COLUMNS.familiarity_select = {...D_ITEMS.familiarity, width: 300,
-  slot:"slot_column_familiarity",
-  showOverflowTooltip:false,//溢出不隐藏，但没啥用
+COLUMNS.familiarity_select = {
+  ...D_ITEMS.familiarity, width: 120,
+  slot: "slot_column_familiarity",
+  showOverflowTooltip: false,//溢出不隐藏，但没啥用
 };
 
-COLUMNS.familiarity = {...D_ITEMS.familiarity, width: 100,
+COLUMNS.familiarity = {
+  ...D_ITEMS.familiarity, width: 100,
 
- 
+
 };
 
 
- COLUMNS.dataType = {...D_ITEMS.dataType, width: 80,};
- COLUMNS.dataId = {...D_ITEMS.dataId, width: 210,};
- COLUMNS.userId = {...D_ITEMS.userId, width: 120,};
+COLUMNS.dataType = { ...D_ITEMS.dataType, width: 80, };
+COLUMNS.dataId = { ...D_ITEMS.dataId, width: 210, };
+COLUMNS.userId = { ...D_ITEMS.userId, width: 120, };
 
 
- COLUMNS._id = {...D_ITEMS._id, width: 120,};
-
-
-
+COLUMNS._id = { ...D_ITEMS._id, width: 120, };
 
 
 
- COLUMNS.category = {
+
+
+//单个的分类
+COLUMNS.category = {
   ...D_ITEMS.category,
   width: 120,
   formatter: function (rowData) {
@@ -100,10 +110,25 @@ COLUMNS.familiarity = {...D_ITEMS.familiarity, width: 100,
   }
 };
 
+//支持多个的分类
+COLUMNS.category_multiple = {
+  ...D_ITEMS.category,
+  width: 120,
+  formatter: function (rowData) {
+    if (!(rowData.categoryDoc&&rowData.categoryDoc.length))return ""
+    let arrCate = rowData.categoryDoc.map(doc => {
+      return doc.title
+    })
+    return arrCate.join();
+  }
+};
+
+
+
 COLUMNS.studyTime = {
   ...D_ITEMS.studyTime,
   width: 140,
- 
+
 };
 
 

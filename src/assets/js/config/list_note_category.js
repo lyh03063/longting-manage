@@ -1,11 +1,14 @@
-let _dataType = "admin",
-_systemId = PUB._systemId;
-PUB.listCF.list_admin= {
+// import "@/assets/js/config_base.js"
+
+let _dataType = "note_category",
+  _systemId = PUB._systemId;
+
+PUB.listCF.list_note_category = {
   idKey: "_id", //键名
   pageSize: 20,
-  listIndex: "list_admin", //vuex对应的字段~
+  listIndex: "list_note_category", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
-  threeTitle: "管理员", //面包屑2级菜单
+  twoTitle: "笔记分类", //面包屑2级菜单
   ...PUB.listCFCommon,//展开公共配置
   //objParamAddon列表接口的附加参数
   objParamAddon: {
@@ -18,28 +21,15 @@ PUB.listCF.list_admin= {
     _dataType
   },
   //-------列配置数组-------
-  columns: [
-    COLUMNS.Id,
-    COLUMNS.userName,
-    COLUMNS.passWord,
-    COLUMNS.nickName,
-    COLUMNS.role,
-  ],
+  columns: [COLUMNS.title_fixed, COLUMNS.desc, COLUMNS.category],
   //-------筛选表单字段数组-------
-  searchFormItems: [
-    F_ITEMS.Id,
-  ],
+  searchFormItems: [F_ITEMS.title_search],
   //-------详情字段数组-------
-  detailItems: [
-    D_ITEMS.Id,
-    D_ITEMS.userName,
-    D_ITEMS.passWord,
-  ],
+  detailItems: [D_ITEMS.title, D_ITEMS.desc, D_ITEMS.category],
   //-------新增、修改表单字段数组-------
   formItems: [
-    F_ITEMS.userName,
-    F_ITEMS.passWord ,
-    F_ITEMS.nickName,
-    F_ITEMS.role,
+    F_ITEMS.title,
+    F_ITEMS.desc,
+
   ]
 }

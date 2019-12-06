@@ -94,7 +94,17 @@ export default {
             index: "list_html_api_category",
             route: "/list_html_api_category",
             title: "Html-API分类"
-          }
+          },
+          {
+            index: "list_note",
+            route: "/list_note",
+            title: "笔记"
+          },
+          {
+            index: "list_note_category",
+            route: "/list_note_category",
+            title: "笔记分类"
+          },
         ]
       },
       {
@@ -127,11 +137,7 @@ export default {
           },
           { index: "list_admin", route: "/list_admin", title: "管理员" },
           { index: "list_role", route: "/list_role", title: "角色" },
-          {
-            index: "list_area",
-            route: "/list_area",
-            title: "地区管理"
-          }
+          
         ]
       }
     ];

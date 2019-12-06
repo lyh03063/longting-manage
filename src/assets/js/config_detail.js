@@ -1,3 +1,61 @@
+let _systemId = "sys_api"
+
+
+//#region DYDICT:公共数据字典对象管理
+
+
+
+window.DYDICT = {}//公共数据字典对象
+
+DYDICT.arr_importance =  [
+  { label: "次要", value: 1 },
+  { label: "一般", value: 2 },
+  { label: "重要", value: 3 },
+  { label: "很重要", value: 4 },
+]
+
+DYDICT.importance =  lodash.keyBy(DYDICT.arr_importance, 'value')
+
+DYDICT.arr_html_display =  [
+  { label: "block", value: "block" },
+  { label: "inline", value: "inline" },
+  { label: "inline-block", value: "inline-block" },
+  { label: "none", value: "none" },
+]
+
+
+
+DYDICT.html_api_category = {
+  ajax: {
+    param: { _systemId, _dataType: "html_api_category" },
+    url: "/info/getCommonList",
+  },
+  populateColumn: "categoryDoc",
+  idColumn: "category",
+  idColumn2: "_id"
+};
+
+DYDICT.note_category = {
+  ajax: {
+    param: { _systemId, _dataType: "note_category" },
+    url: "/info/getCommonList",
+  },
+  populateColumn: "categoryDoc",
+  idColumn: "category",
+  idColumn2: "_id"
+};
+
+
+
+DYDICT.aaa = 1111;
+DYDICT.aaa = 1111;
+
+
+
+//#endregion
+
+
+
 
 //#region D_ITEMS:详情字段管理
 window.D_ITEMS = {}//公共数据字典对象
@@ -94,8 +152,14 @@ D_ITEMS.desc = {
 D_ITEMS.detail = {
   label: "详情",
   prop: "detail",
+  type:"html",
 
 };
+
+
+
+
+
 /****************************通用数据-END****************************/
 
 
@@ -180,7 +244,27 @@ D_ITEMS.studyTime = {
   prop: "studyTime",
 };
 
+
 //#endregion
+
+
+//#region html-API
+D_ITEMS.html_display = {
+  label: "块级",
+  prop: "display",
+
+};
+D_ITEMS.importance = {
+  label: "重要性",
+  prop: "importance",
+
+};
+//#endregion
+
+
+
+
+
 
 D_ITEMS.aaaa = 1111;
 D_ITEMS.aaaa = 1111;

@@ -1,4 +1,4 @@
-import list_member_for_select from "@/assets/js/config/list_member_for_select.js"
+
 let _systemId = "sys_api";
 //#region F_ITEMS:表单字段管理
 import "@/assets/js/config_detail.js"
@@ -63,18 +63,7 @@ F_ITEMS.career = {
   prop: "career",
   type: "input"
 };
-F_ITEMS.ballAge = {
-  label: "球龄",
-  prop: "ballAge",
-  type: "select",
-  options: [
-    { label: "一年以下", value: 1 },
-    { label: "一到三年", value: 2 },
-    { label: "三到五年", value: 3 },
-    { label: "五到十年", value: 4 },
-    { label: "十年以上", value: 5 }
-  ]
-};
+
 F_ITEMS.idCard = {
   label: "身份证号",
   prop: "idCard"
@@ -94,6 +83,17 @@ F_ITEMS.title = { ...D_ITEMS.title };
 F_ITEMS.title_search = { ...D_ITEMS.title, type: "input_find_vague" };
 F_ITEMS.desc = { ...D_ITEMS.desc, type: "textarea" };
 F_ITEMS.detail = { ...D_ITEMS.detail, type: "editorTM" };
+
+F_ITEMS.html_display = {
+  ...D_ITEMS.html_display, type: "select",
+  options: DYDICT.arr_html_display
+};
+
+F_ITEMS.importance = {
+  ...D_ITEMS.importance, type: "select",
+  options: DYDICT.arr_importance
+};
+
 /****************************通用数据-END****************************/
 
 /****************************分类-START****************************/
@@ -110,7 +110,19 @@ F_ITEMS.html_api_category = {
   ...D_ITEMS.category,
   type: "select",
   ajax: {
-    param:  {_systemId ,_dataType:"html_api_category"},
+    param: { _systemId, _dataType: "html_api_category" },
+    url: "/info/getCommonList",
+    keyLabel: "title",
+    keyValue: "_id"
+  }
+};
+
+F_ITEMS.note_category = {
+  ...D_ITEMS.category,
+  type: "select",
+  multiple: true, //多选
+  ajax: {
+    param: { _systemId, _dataType: "note_category" },
     url: "/info/getCommonList",
     keyLabel: "title",
     keyValue: "_id"
@@ -118,11 +130,10 @@ F_ITEMS.html_api_category = {
 };
 
 
-
-F_ITEMS.familiarity = {...D_ITEMS.familiarity, type: "input"};
-F_ITEMS.dataType = {...D_ITEMS.dataType, type: "input"};
-F_ITEMS.dataId = {...D_ITEMS.dataId,type: "input"};
-F_ITEMS.userId = {...D_ITEMS.userId, type: "input"};
+F_ITEMS.familiarity = { ...D_ITEMS.familiarity, type: "input" };
+F_ITEMS.dataType = { ...D_ITEMS.dataType, type: "input" };
+F_ITEMS.dataId = { ...D_ITEMS.dataId, type: "input" };
+F_ITEMS.userId = { ...D_ITEMS.userId, type: "input" };
 
 
 

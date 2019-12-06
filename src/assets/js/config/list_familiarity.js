@@ -1,6 +1,7 @@
+
 let _dataType = "familiarity",
   _systemId = PUB._systemId;
-export default {
+  PUB.listCF.list_familiarity= {
   idKey: "_id", //键名
   pageSize: 20,
   listIndex: "list_familiarity", //vuex对应的字段~

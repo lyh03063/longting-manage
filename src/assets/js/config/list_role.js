@@ -1,6 +1,6 @@
 let _dataType = "role",
 _systemId = PUB._systemId;
-export default {
+PUB.listCF.list_role= {
   idKey: "_id", //键名
   pageSize: 20,
   listIndex: "list_role", //vuex对应的字段~

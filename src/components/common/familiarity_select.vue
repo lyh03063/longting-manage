@@ -5,6 +5,8 @@
     @mouseleave.stop="focusId=null"
     class="PSR DPIP"
   >
+
+
     <span
       :style="{color:dictFColor[valueNeed.familiarity]}"
     >{{dictFamiliarity[valueNeed.familiarity]||"未学"}}</span>
@@ -37,7 +39,8 @@ export default {
   //用于列表模糊查询的组件
   props: {
     value: [Object, Array],
-    data: [Object]
+    data: [Object],
+    dataType:{}
   },
   data() {
     return {
@@ -68,8 +71,8 @@ export default {
       handler(newVal, oldVal) {
         console.log("value change!!!!!");
         console.log("newVal:", newVal);
-        // this.valueNeed = this.value;
-        this.valueNeed = lodash.get(this.value, `[0]._data`);
+        this.valueNeed = this.value;
+        // this.valueNeed = lodash.get(this.value, `[0]._data`);
         if (!this.valueNeed) {
           this.valueNeed = {};
         }
@@ -77,13 +80,7 @@ export default {
       immediate: true,
       deep: true
     }
-    // valueNeed: {
-    //   handler(newVal, oldVal) {
-    //     this.$emit("input", [newVal]);
-    //   },
-    //   // immediate: true,
-    //   deep: true
-    // }
+   
   },
   methods: {
     //显示熟悉度操作界面
@@ -93,9 +90,9 @@ export default {
     //切换当前数据的熟悉度函数
     async changeFamiliarity(value) {
       let studyTime = moment().format("YYYY-MM-DD HH:mm"); //获取当前学习时间
-
+//relDoc[0].
       this.dataIdFamiliarity =
-        this.dataIdFamiliarity || lodash.get(this.data, `relDoc[0]._id`);
+        this.dataIdFamiliarity || lodash.get(this.valueNeed, `_id`);
 
   
       //Q1:熟悉度uuid存在
@@ -126,7 +123,7 @@ export default {
             _data: {
               userId: PUB.userId,
 
-              dataType: "html_api",
+              dataType: this.dataType,
               familiarity: value,
               studyTime
             }
@@ -135,9 +132,9 @@ export default {
         let docAdd = lodash.get(data, `addData._data`);
         console.log("docAdd:", docAdd);
         this.dataIdFamiliarity = lodash.get(data, `addData._id`);
-        alert(this.dataIdFamiliarity);
         this.valueNeed = docAdd; //改变valueNeed---注意结构！！！！
-        this.$emit("input", [{ _data: this.valueNeed }]);
+        //this.$emit("input", [{ _data: this.valueNeed }]);
+          this.$emit("input", this.valueNeed);
       }
     }
   },
@@ -150,6 +147,7 @@ export default {
 /****************************熟悉度切换-START****************************/
 
 .pop-box {
+  top:-10px;
   left: 50px;
   width: 215px;
   border: 1px #ddd solid;
@@ -160,7 +158,7 @@ export default {
 }
 
 .familiarity-option {
-  display: inline-block;
+  display: inline-block; 
   border: 1px #ddd solid;
   border-radius: 5px;
   line-height: 1;
