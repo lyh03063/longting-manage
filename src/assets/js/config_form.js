@@ -137,8 +137,25 @@ F_ITEMS.userId = { ...D_ITEMS.userId, type: "input" };
 
 
 
+//#region 分组
+F_ITEMS.group_dataType = {
+  ...D_ITEMS.group_dataType,
+  type: "select",
+  options: [
+    { value: "group", label: "组" },
+    { value: "html_api", label: "片段" },
+    { value: "note", label: "文件" },
+  ]
+};
 
+//#endregion
 
+//#region 关系
+F_ITEMS._idRel = { ...D_ITEMS._idRel, type: "input" };
+F_ITEMS._idRel2 = { ...D_ITEMS._idRel2, type: "input" };
+F_ITEMS.sort = { ...D_ITEMS.sort, type: "number" };
+
+//#endregion
 
 
 

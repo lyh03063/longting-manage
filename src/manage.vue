@@ -105,6 +105,11 @@ export default {
             route: "/list_note_category",
             title: "笔记分类"
           },
+            {
+            index: "list_group",
+            route: "/list_group",
+            title: "分组"
+          },
         ]
       },
       {
@@ -130,6 +135,16 @@ export default {
         icon: "el-icon-setting",
         title: "系统管理",
         menuItem: [
+           {
+            index: "list_all",
+            route: "/list_all",
+            title: "所有数据"
+          },
+           {
+            index: "list_relation",
+            route: "/list_relation",
+            title: "关系数据"
+          },
           {
             index: "list_familiarity",
             route: "/list_familiarity",

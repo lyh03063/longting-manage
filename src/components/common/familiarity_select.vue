@@ -10,10 +10,10 @@
     <span
       :style="{color:dictFColor[valueNeed.familiarity]}"
     >{{dictFamiliarity[valueNeed.familiarity]||"未学"}}</span>
-    <span class="iconfont iconarrow-down" v-if="focusId!=data._id" style="color:#ddd">
+    <span class="iconfont iconarrow-down" v-if="focusId!=data[idKey]" style="color:#ddd">
       <!--编辑按钮-->
     </span>
-    <div class="PSA T0 L0 BC_fff pop-box" v-if="focusId===data._id">
+    <div class="PSA T0 L0 BC_fff pop-box" v-if="focusId===data[idKey]">
       <i
         :class="{'familiarity-option':true,'focus':valueNeed.familiarity==1}"
         @click="changeFamiliarity(1)"
@@ -38,6 +38,10 @@
 export default {
   //用于列表模糊查询的组件
   props: {
+    //目标数据的id键***，在关系表中就不是_id了
+    idKey:{
+      default:"_id"
+    },
     value: [Object, Array],
     data: [Object],
     dataType:{}
@@ -85,7 +89,8 @@ export default {
   methods: {
     //显示熟悉度操作界面
     showDialogFamiliarity() {
-      this.focusId = this.data._id; //将focusId设置成当前点击的数据Id
+
+      this.focusId = this.data[this.idKey]; //将focusId设置成当前点击的数据Id
     },
     //切换当前数据的熟悉度函数
     async changeFamiliarity(value) {
@@ -117,7 +122,7 @@ export default {
           method: "post",
           url: `${PUB.domain}/info/commonAdd`,
           data: {
-            _idRel: this.data._id,
+            _idRel: this.data[this.idKey],
             _dataType: "familiarity",
             _systemId: PUB._systemId,
             _data: {
@@ -138,7 +143,11 @@ export default {
       }
     }
   },
-  created() {}
+  created() {
+
+
+
+  }
 };
 </script>
 

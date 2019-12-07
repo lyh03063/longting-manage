@@ -262,9 +262,32 @@ D_ITEMS.importance = {
 //#endregion
 
 
+//#region 分组
+D_ITEMS.group_dataType = {
+  label: "数据类型",
+  prop: "dataType",
 
+};
+//#endregion
 
+//#region 关系
+D_ITEMS._idRel = {
+  label: "关联数据1",
+  prop: "_idRel",
 
+};
+
+D_ITEMS._idRel2 = {
+  label: "关联数据2",
+  prop: "_idRel2",
+
+};
+D_ITEMS.sort = {
+  label: "序号",
+  prop: "sort",
+
+};
+//#endregion
 
 D_ITEMS.aaaa = 1111;
 D_ITEMS.aaaa = 1111;

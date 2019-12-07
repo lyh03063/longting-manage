@@ -1,9 +1,9 @@
 
 window.PUB = {}
-//PUB.domain = "http://localhost:3000"
+PUB.domain = "http://localhost:3000"
 //PUB.domain = 'http://test.dmagic.cn'
 //PUB.domain="http://e6234kn.hn3.mofasuidao.cn"//魔法隧道地址
-PUB.domain = "http://120.76.160.41:3000"
+//PUB.domain = "http://120.76.160.41:3000"
 PUB.urlUpload = `https://up-z2.qiniup.com`//七牛云上传地址（域名）
 PUB.urlGetQiniuToken = `${PUB.domain}/api_third_part/get_qiniu_token?scope=dmagic`
 let _systemId = "sys_api";
@@ -34,7 +34,7 @@ PUB.listCFCommon = {
 
 
 //函数：{补充熟悉度ajax配置（动态数据字典）函数}
-window.setFamiliarityAjaxCF = function (listCF) {
+window.setFamiliarityAjaxCF = function (listCF,idKey="_id") {
   util.setObjDefault(listCF, { dynamicDict: [] });
   let dict = {
     ajax: {
@@ -43,7 +43,7 @@ window.setFamiliarityAjaxCF = function (listCF) {
     },
 
     populateColumn: "familiarityDoc",
-    idColumn: "_id",
+    idColumn: idKey,
     idColumn2: "_idRel"
   }
   listCF.dynamicDict.push(dict)

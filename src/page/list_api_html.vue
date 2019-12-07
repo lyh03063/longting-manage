@@ -27,6 +27,7 @@ export default {
     };
   },
   computed: {
+    //用于监听变化
     arrLookup: function() {
       return this.$store.state.arrLookup["list_html_api"];
     }

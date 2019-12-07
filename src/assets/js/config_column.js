@@ -97,6 +97,17 @@ COLUMNS.userId = { ...D_ITEMS.userId, width: 120, };
 COLUMNS._id = { ...D_ITEMS._id, width: 120, };
 
 
+//#region 分组
+COLUMNS.group_dataType = { ...D_ITEMS.group_dataType, width: 120, };
+
+//#endregion
+
+//#region 关系
+COLUMNS._idRel = { ...D_ITEMS._idRel, width: 220, };
+COLUMNS._idRel2 = { ...D_ITEMS._idRel2, width: 220, };
+COLUMNS.sort = { ...D_ITEMS.sort, width: 70, };
+//#endregion
+
 
 
 

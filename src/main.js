@@ -11,32 +11,17 @@ import moment from "moment";
 window.moment = moment;
 
 // import util from "@/assets/js/util.js";
-import config from "@/assets/js/config.js";
+//config from
+import  "@/assets/js/config.js";
 
 
 
 // import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import "./mock.js";
-import login from "@/login";
-import modify_password from "@/page/modify_password";
+// import login from "@/login";
+
 import manage from "@/manage";
-import listHome from "@/page/listHome";
-
-
-
-import list_article_category from "@/page/list_article_category";
-import list_article from "@/page/list_article";
-import list_admin from "@/page/list_admin";
-import list_role from "@/page/list_role";
-import list_area from "@/page/list_area";
-
-import list_api_html from "@/page/list_api_html";
-import list_html_api_category from "@/page/list_html_api_category";
-import list_familiarity from "@/page/list_familiarity";
-
-import list_note from "@/page/list_note";
-import list_note_category from "@/page/list_note_category";
 
 // 本来想实现这个路由表的优化，通过数组实现，但失败***用eval有不行
 // let arrPageManage = ["modify_password", "list_article_category", "list_article", "list_area", "list_admin", "list_role", "list_api_html", "list_html_api_category", "list_familiarity", "listHome"]
@@ -52,77 +37,49 @@ import list_note_category from "@/page/list_note_category";
 console.log("global:", global);
 
 
+let arrRouteListName = [
+  "modify_password", 
+  "list_article_category", 
+  "list_article", 
+  "list_area", 
+  "list_admin", 
+  "list_role", 
+  "list_api_html", 
+  "list_html_api_category", 
+  "list_familiarity", 
+  "list_note", 
+  "list_note_category", 
+  "list_group", 
+  "list_all", 
+  "list_relation", 
+  "listHome", 
+]
 
 
+let arrRouteListPage = arrRouteListName.map((item) => {
+  return {
+    path: `/${item}`,
+    component: () => import(`@/page/${item}`)
+  }
+})
+console.log("arrRouteListPage:", arrRouteListPage);
 
 // window.util=util;
 // 3. 创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({
   routes: [
     { path: '/', redirect: '/login' },
-    { path: '/login', component: login },
+    { path: '/login', component: () => import("@/login") },
 
-
+    { path: '/detail_group', component: () => import("@/page/detail_group") },
 
     {
       path: '/manage',
       component: manage,
       redirect: '/listHome', //跳转
       children: [//子路由
+        ...arrRouteListPage,
 
-        {
-          path: '/modify_password', component: modify_password
-        },
-
-        {
-          path: '/list_article_category',
-          component: list_article_category
-        },
-        {
-          path: '/list_article',
-          component: list_article
-        },
-        {
-          path: '/list_area',
-          component: list_area
-        },
-        {
-          path: '/list_admin',
-          component: list_admin
-        },
-        {
-          path: '/list_role',
-          component: list_role
-        },
-
-        {
-          path: '/list_api_html',
-          component: list_api_html
-        },
-        {
-          path: '/list_html_api_category',
-          component: list_html_api_category
-        },
-        {
-          path: '/list_familiarity',
-          component: list_familiarity
-        },
-        {
-          path: '/list_note',
-          component: list_note
-        },
-        {
-          path: '/list_note_category',
-          component: list_note_category
-        },
-
-
-
-
-        {
-          path: '/listHome',
-          component: listHome
-        },
 
 
 
@@ -156,7 +113,7 @@ const store = new Vuex.Store({//定义Vuex的存储对象
     setListArrLookup(state, param) {//设置列表的联合查询参数值
       state.arrLookup[param.listIndex] = param.arrLookup;
       //对listState进行整个对象的变更（深拷贝），因为listState是有注册的，可以触发响应
-      state.arrLookup =lodash.cloneDeep(state.arrLookup);  //深拷贝
+      state.arrLookup = lodash.cloneDeep(state.arrLookup);  //深拷贝
       // let str = JSON.stringify(state.arrLookup)//对象转换成字符串
       // state.arrLookup = JSON.parse(str)//字符串转换成对象
     },
