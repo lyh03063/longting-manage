@@ -23,8 +23,40 @@ DYDICT.arr_html_display =  [
   { label: "none", value: "none" },
 ]
 
+DYDICT.arr_difficulty =  [
+  { label: "简单", value: 1 },
+  { label: "一般", value: 2 },
+  { label: "困难", value: 3 },
+  { label: "很难", value: 4 },
+]
+DYDICT.difficulty =  lodash.keyBy(DYDICT.arr_difficulty, 'value')
 
 
+DYDICT.arr_html_version =  [
+  { label: "HTML4", value: "HTML4" },
+  { label: "HTML5", value: "HTML5" },
+
+]
+
+DYDICT.arr_selfClose =  [
+  { label: "否", value: 0 },
+  { label: "是", value: 1 },
+
+]
+DYDICT.selfClose =  lodash.keyBy(DYDICT.arr_selfClose, 'value')
+
+
+DYDICT.arr_aaaa =  [
+ 
+]
+
+DYDICT.arr_aaaa =  [
+ 
+]
+
+DYDICT.arr_aaaa =  [
+ 
+]
 DYDICT.html_api_category = {
   ajax: {
     param: { _systemId, _dataType: "html_api_category" },
@@ -259,6 +291,37 @@ D_ITEMS.importance = {
   prop: "importance",
 
 };
+
+D_ITEMS.difficulty = {
+  label: "难度",
+  prop: "difficulty",
+
+};
+
+D_ITEMS.english = {
+  label: "原英文",
+  prop: "english",
+
+};
+
+D_ITEMS.html_version = {
+  label: "版本",
+  prop: "version",
+
+};
+
+D_ITEMS.selfClose = {
+  label: "自闭合",
+  prop: "selfClose",
+
+};
+
+D_ITEMS.cateIdOld = {
+  label: "旧分类Id",
+  prop: "cateIdOld",
+
+};
+
 //#endregion
 
 

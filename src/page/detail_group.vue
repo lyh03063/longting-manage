@@ -1,5 +1,5 @@
 <template>
-  <div class="table_visible" style="padding:10px">
+  <div class="" style="padding:10px">
     <h1 class>专题详情页</h1>
 
     <dm_debug_list>
@@ -18,7 +18,15 @@
         </div>
       </template>
       <template v-slot:slot_in_toolbar="{data}">
-        <score_panel ref="scorePanel" v-if="data" :param="scoreParam" :listIndex="cfList.listIndex">
+        <score_panel
+          ref="scorePanel"
+          v-if="data"
+          :param="data.objParam"
+          idKey="_idRel2"
+          :listIndex="cfList.listIndex"
+          data-type="note"
+          :arrLookup="cfList.objParamAddon.arrLookup"
+        >
           <!-- 计分板组件 -->
         </score_panel>
       </template>
@@ -33,7 +41,7 @@ export default {
   components: { familiarity_select, score_panel },
   data() {
     return {
-      groupId: "5dea1f8d1e03240e07122777",
+      groupId: null,
       // 计分板的ajax参数
       scoreParam: {
         _systemId: "sys_api",
@@ -45,23 +53,68 @@ export default {
       cfList: util.deepCopy(PUB.listCF.detail_group)
     };
   },
+
+  computed: {
+    //用于监听变化
+    arrLookup: function() {
+      return this.$store.state.arrLookup[this.cfList.listIndex];
+    }
+  },
+  watch: {
+    arrLookup: {
+      async handler(newVal, oldVal) {
+        console.log("arrLookup changed######@@@@@@");
+        //更新列表的联合查询参数-这句会有问题！！影响到原来的表单查询
+
+        let arrLookupAdd = [
+          {
+            $lookup: {
+              from: "sheet232",
+              localField: "_idRel2", //这里要使用_idRel2
+              foreignField: "_idRel",
+              as: "relDoc"
+            }
+          },
+          {
+            $unwind: "$relDoc"
+          },
+          {
+            $match: {
+              "relDoc._data.familiarity": 3,
+              "relDoc._data.userId": "lyh"
+            }
+          }
+        ];
+
+        this.$refs.listData.objParam.arrLookup = [
+          ...this.cfList.objParamAddon.arrLookup,
+          ...newVal
+        ];
+        await this.$nextTick(); //延迟到视图更新
+        //列表更新
+        this.$refs.listData.getDataList();
+      },
+      deep: true
+    }
+  },
   methods: {
     async afterSearch(list) {
       console.log("list:", list);
 
-      let arrId = list.map(doc => doc._idRel2)
+      let arrId = list.map(doc => doc._idRel2);
 
-console.log("arrId:", arrId);
-
-
+      console.log("arrId:", arrId);
 
       //设置id数组
-      lodash.set(this.scoreParam, `findJson._id.$in`, arrId);
+      // lodash.set(this.scoreParam, `findJson._id.$in`, arrId);
 
       this.$refs.scorePanel.ajaxGetScore(); //调用：{ajax获取分数函数}
     }
   },
   async created() {
+    console.log(" this.$route.query.groupId:", this.$route.query.groupId);
+    this.groupId = this.$route.query.groupId;
+
     //专题id
 
     this.cfList.findJsonDefault = {
@@ -109,9 +162,4 @@ console.log("arrId:", arrId);
 </script>
 
 
-<style >
-/* 暴力操作，取消单元格里的溢出隐藏 */
-.table_visible .cell {
-  overflow: visible;
-}
-</style>
+

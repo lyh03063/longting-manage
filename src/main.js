@@ -12,8 +12,8 @@ window.moment = moment;
 
 // import util from "@/assets/js/util.js";
 //config from
-import  "@/assets/js/config.js";
-
+import "@/assets/js/config.js";
+import "@/assets/css/util.scss"; //导入公共样式文件
 
 
 // import VueRouter from 'vue-router'
@@ -38,21 +38,22 @@ console.log("global:", global);
 
 
 let arrRouteListName = [
-  "modify_password", 
-  "list_article_category", 
-  "list_article", 
-  "list_area", 
-  "list_admin", 
-  "list_role", 
-  "list_api_html", 
-  "list_html_api_category", 
-  "list_familiarity", 
-  "list_note", 
-  "list_note_category", 
-  "list_group", 
-  "list_all", 
-  "list_relation", 
-  "listHome", 
+  "modify_password",
+  "list_article_category",
+  "list_article",
+  "list_area",
+  "list_admin",
+  "list_role",
+  "list_api_html",
+  "list_html_api_category",
+  "list_familiarity",
+  "list_note",
+  "list_note_category",
+  "list_group",
+  "list_all",
+  "list_relation",
+  "listHome",
+  "list_exercises",
 ]
 
 
@@ -72,7 +73,7 @@ const router = new VueRouter({
     { path: '/login', component: () => import("@/login") },
 
     { path: '/detail_group', component: () => import("@/page/detail_group") },
-
+    { path: '/detail_data', component: () => import("@/page/detail_data") },
     {
       path: '/manage',
       component: manage,

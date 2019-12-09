@@ -26,8 +26,19 @@
 export default {
   //用于列表模糊查询的组件
   props: {
+    idKey: {
+      default: "_id"
+    },
     param: {},
-    listIndex: {} //列表标记
+    listIndex: {}, //列表标记
+    dataType: {}, //对应数据类型
+    //单独的arrLookup***
+    arrLookup: {
+      
+      default: function() {
+        return [];
+      }
+    }
   },
   data() {
     return {
@@ -39,13 +50,15 @@ export default {
   methods: {
     //函数：{按熟悉度过滤数据函数}
     filterData(familiarity) {
+      console.log("filterData");
+      console.log("this.listIndex:", this.listIndex);
       this.focusId = familiarity;
       let arrLookup = [
         {
           //联合目标数据表
           $lookup: {
             from: "sheet232",
-            localField: "_id",
+            localField: this.idKey,
             foreignField: "_idRel",
             as: "relDoc"
           }
@@ -54,17 +67,14 @@ export default {
       //Q1：未学
       if (familiarity == "null") {
         //加入熟悉度联合查询条件
-        arrLookup.push(
-          {
-            $match: {
-              "relDoc._data.userId": {
-                $ne: localStorage.api_loginUserName
-              }
+        arrLookup.push({
+          $match: {
+            "relDoc._data.userId": {
+              $ne: localStorage.api_loginUserName
             }
-          },
-          
-        );
-         //Q2：不是未学，熟悉度存在
+          }
+        });
+        //Q2：不是未学，熟悉度存在
       } else if (familiarity) {
         //加入熟悉度联合查询条件
         arrLookup.push(
@@ -82,7 +92,6 @@ export default {
       }
 
       //层级太多太麻烦，这里需要使用vuex!!!!!
-
       //设置列表的联合查询参数值
       this.$store.commit("setListArrLookup", {
         listIndex: this.listIndex,
@@ -92,6 +101,7 @@ export default {
     //函数：{ajax获取分数函数}
     async ajaxGetScore() {
       let { _systemId, _dataType, findJson, arrLookup } = this.param;
+
       let { data } = await axios({
         //请求接口
         method: "post",
@@ -99,7 +109,10 @@ export default {
         data: {
           _systemId,
           _dataType,
+          dataType: this.dataType, //补充单独的dataType
+          idKey: this.idKey, //需要传递idKey****
           findJson,
+          arrLookup:this.arrLookup,
           userId: localStorage.api_loginUserName
         }
       });

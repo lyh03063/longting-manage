@@ -33,8 +33,9 @@ PUB.listCF.list_note = {
     _systemId,
     _dataType
   },
+  
   //-------列配置数组-------
-  columns: [COLUMNS.title_fixed, COLUMNS.desc, COLUMNS.category_multiple, COLUMNS.familiarity_select, COLUMNS.importance],
+  columns: [COLUMNS._id,COLUMNS.title_fixed, COLUMNS.desc, COLUMNS.category_multiple, COLUMNS.familiarity_select, COLUMNS.importance],
   //-------筛选表单字段数组-------
   searchFormItems: [F_ITEMS.title_search, F_ITEMS.note_category, F_ITEMS.importance],
   //-------详情字段数组-------

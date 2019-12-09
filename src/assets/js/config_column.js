@@ -44,6 +44,8 @@ COLUMNS.aaaa = 11111;
 
 
 COLUMNS.title_fixed = { ...D_ITEMS.title, width: 320, fixed: true };
+COLUMNS.title_fixed_w150 = { ...COLUMNS.title_fixed, width: 150 };
+
 COLUMNS.desc = { ...D_ITEMS.desc, width: 160, };
 COLUMNS.html_display = { ...D_ITEMS.html_display, width: 70, };
 COLUMNS.importance = {
@@ -52,6 +54,19 @@ COLUMNS.importance = {
     return lodash.get(DYDICT.importance, `${rowData.importance}.label`);
   }
 };
+
+
+
+//#region html_api
+COLUMNS.html_display = { ...D_ITEMS.html_display, width: 70, };
+COLUMNS.difficulty = { ...D_ITEMS.difficulty, width: 70, };
+COLUMNS.english = { ...D_ITEMS.english, width: 70, };
+COLUMNS.html_version = { ...D_ITEMS.html_version, width: 70, };
+COLUMNS.selfClose = { ...D_ITEMS.selfClose, width: 70, };
+COLUMNS.cateIdOld = { ...D_ITEMS.cateIdOld, width: 70, };
+//#endregion
+
+
 
 //  COLUMNS.detail = {...D_ITEMS.detail, width: 120,};
 
@@ -79,7 +94,7 @@ COLUMNS.category_remark = { ...D_ITEMS.category_remark, width: 180, };
 COLUMNS.familiarity_select = {
   ...D_ITEMS.familiarity, width: 120,
   slot: "slot_column_familiarity",
-  showOverflowTooltip: false,//溢出不隐藏，但没啥用
+  cfColumn:{"class-name":"table_cell_visible"}//补充特殊单元格类名，进行特殊控制！
 };
 
 COLUMNS.familiarity = {

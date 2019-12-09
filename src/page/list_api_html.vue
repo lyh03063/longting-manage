@@ -1,5 +1,5 @@
 <template>
-  <div class="table_visible">
+  <div class="">
     <dm_list_data ref="listData" :cf="cfList" @after-search="afterSearch">
       <template v-slot:slot_column_familiarity="{row}">
         <div class>
@@ -43,7 +43,6 @@ export default {
         //列表更新
         this.$refs.listData.getDataList();
       },
-      // immediate: true,
       deep: true
     }
   },
@@ -61,8 +60,6 @@ export default {
 
 
 <style >
-/* 暴力操作，取消单元格里的溢出隐藏 */
-.table_visible .cell {
-  overflow: visible;
-}
+
+
 </style>

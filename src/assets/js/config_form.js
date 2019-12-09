@@ -84,6 +84,7 @@ F_ITEMS.title_search = { ...D_ITEMS.title, type: "input_find_vague" };
 F_ITEMS.desc = { ...D_ITEMS.desc, type: "textarea" };
 F_ITEMS.detail = { ...D_ITEMS.detail, type: "editorTM" };
 
+//#region html_api
 F_ITEMS.html_display = {
   ...D_ITEMS.html_display, type: "select",
   options: DYDICT.arr_html_display
@@ -93,6 +94,28 @@ F_ITEMS.importance = {
   ...D_ITEMS.importance, type: "select",
   options: DYDICT.arr_importance
 };
+
+F_ITEMS.difficulty = {
+  ...D_ITEMS.difficulty, type: "select",
+  options: DYDICT.arr_difficulty
+};
+
+F_ITEMS.english = {
+  ...D_ITEMS.english, type: "input",
+};
+
+F_ITEMS.html_version = {
+  ...D_ITEMS.html_version, type: "select",
+  options: DYDICT.arr_html_version
+};
+
+F_ITEMS.selfClose = {
+  ...D_ITEMS.selfClose, type: "select",
+  options: DYDICT.arr_selfClose
+};
+//#endregion
+
+
 
 /****************************通用数据-END****************************/
 

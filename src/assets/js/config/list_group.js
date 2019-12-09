@@ -10,6 +10,21 @@ PUB.listCF.list_group = {
   focusMenu: true, //进行菜单聚焦
   twoTitle: "分组", //面包屑2级菜单
   ...PUB.listCFCommon,//展开公共配置
+  //列表单项操作按钮的配置
+  singleBtns: {
+    addon: [
+        util.cfList.sBtns.detail,
+        util.cfList.sBtns.modify,
+        util.cfList.sBtns.copy,
+        util.cfList.sBtns.delete,
+        {
+            uiType: "link",
+            text: "分组详情",
+            target: "_blank",
+            url: "#/detail_group?groupId=" //这里要配置好参数名，内部会把参数加进来
+        }
+    ]
+},
   objParamAddon: {
     _systemId,
     _dataType

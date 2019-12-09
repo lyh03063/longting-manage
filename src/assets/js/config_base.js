@@ -23,6 +23,19 @@ PUB.listCFCommon = {
     detail: "/info/commonDetail",
     delete: "/info/commonDelete" //删除接口
   },
+  columnOperate:{"min-width":160},
+  //列表单项操作按钮的配置
+  singleBtns: {
+
+    addon: [
+      util.cfList.sBtns.detail,
+      util.cfList.sBtns.modify,
+      // util.cfList.sBtns.copy,
+      util.cfList.sBtns.delete,
+    ]
+  },
+
+
 
 }
 
@@ -34,7 +47,7 @@ PUB.listCFCommon = {
 
 
 //函数：{补充熟悉度ajax配置（动态数据字典）函数}
-window.setFamiliarityAjaxCF = function (listCF,idKey="_id") {
+window.setFamiliarityAjaxCF = function (listCF, idKey = "_id") {
   util.setObjDefault(listCF, { dynamicDict: [] });
   let dict = {
     ajax: {

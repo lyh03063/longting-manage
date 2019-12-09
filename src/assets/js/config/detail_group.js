@@ -21,11 +21,28 @@ PUB.listCF.detail_group = {
             { uiType: "slot", slot: "slot_in_toolbar" }
         ],
     },
+    //列表单项操作按钮的配置
+    singleBtns: {
+        addon: [
+            util.cfList.sBtns.detail,
+            util.cfList.sBtns.modify,
+            util.cfList.sBtns.delete,
+            {
+                uiType: "link",
+                text: "查看详情",
+                target: "_blank",
+                //地址格式函数
+                urlFormatter: function (row) {
+                    return `#/detail_data?dataId=${row._idRel2}`;
+                },
+            }
+        ]
+    },
     sortJsonDefault: {
         "sort": -1
     },
     findJsonDefault: {
-        
+
     },
     objParamAddon: {
         findJson: {},
@@ -52,7 +69,13 @@ PUB.listCF.detail_group = {
     //-------筛选表单字段数组-------
     searchFormItems: [],
     //-------详情字段数组-------
-    detailItems: [D_ITEMS._id, D_ITEMS._idRel, D_ITEMS._idRel2, D_ITEMS.sort],
+    detailItems: [D_ITEMS.title, D_ITEMS.detail, D_ITEMS.desc, D_ITEMS.category, D_ITEMS.importance, D_ITEMS._id, D_ITEMS._idRel, D_ITEMS._idRel2, D_ITEMS.sort],
     //-------新增、修改表单字段数组-------
     formItems: [F_ITEMS._idRel, F_ITEMS._idRel2, F_ITEMS.sort,]
+
+
+
+
+
+
 }

@@ -29,6 +29,8 @@ import  "@/assets/js/config/list_group.js";
 import  "@/assets/js/config/list_all.js";
 import  "@/assets/js/config/list_relation.js";
 import  "@/assets/js/config/detail_group.js";
+
+import  "@/assets/js/config/list_exercises.js";
 //#region PUB.objDictArr/PUB.dict公共字典对象
 PUB.objDictArr = {
   taskType: [

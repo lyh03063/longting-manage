@@ -105,6 +105,11 @@ export default {
             route: "/list_note_category",
             title: "笔记分类"
           },
+           {
+            index: "list_exercises",
+            route: "/list_exercises",
+            title: "习题"
+          },
             {
             index: "list_group",
             route: "/list_group",
