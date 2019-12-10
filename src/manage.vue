@@ -4,7 +4,9 @@
     <el-container>
       <el-header class="home-head-box">
         <el-row>
-          <div class="FL MT13 FS24 C_fff">{{systemName}}</div>
+          <div class="FL MT13  C_fff"><img class="W200 H36" src="http://www.dmagic.cn/images/IconS/IconS_2578.png" alt="" ></div>
+
+          <div class="FL ML10 MT17 FS24 C_fff" >{{systemName}}</div>
           <div class="FR MT30 C_fff">
             <i class="el-icon-s-custom MR5" title="用户名"></i>
             {{this.api_loginUserName}}({{this.api_roleName}})&nbsp;&nbsp;&nbsp;
@@ -86,8 +88,8 @@ export default {
         title: "API手册",
         menuItem: [
           {
-            index: "list_api_html",
-            route: "/list_api_html",
+            index: "list_html_api",
+            route: "/list_html_api",
             title: "Html-API"
           },
           {
@@ -140,6 +142,11 @@ export default {
         icon: "el-icon-setting",
         title: "系统管理",
         menuItem: [
+          {
+            index: "list_data_type",
+            route: "/list_data_type",
+            title: "数据类型"
+          },
            {
             index: "list_all",
             route: "/list_all",

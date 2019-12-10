@@ -352,6 +352,14 @@ D_ITEMS.sort = {
 };
 //#endregion
 
+D_ITEMS.dataTypekey = {
+  label: "类型代号",
+  prop: "key",
+
+};
+
+
+
 D_ITEMS.aaaa = 1111;
 D_ITEMS.aaaa = 1111;
 D_ITEMS.aaaa = 1111;

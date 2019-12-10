@@ -24,7 +24,7 @@ import "./mock.js";
 import manage from "@/manage";
 
 // 本来想实现这个路由表的优化，通过数组实现，但失败***用eval有不行
-// let arrPageManage = ["modify_password", "list_article_category", "list_article", "list_area", "list_admin", "list_role", "list_api_html", "list_html_api_category", "list_familiarity", "listHome"]
+// let arrPageManage = ["modify_password", "list_article_category", "list_article", "list_area", "list_admin", "list_role", "list_html_api", "list_html_api_category", "list_familiarity", "listHome"]
 
 // let arrRoutesManage = [
 
@@ -44,7 +44,7 @@ let arrRouteListName = [
   "list_area",
   "list_admin",
   "list_role",
-  "list_api_html",
+  "list_html_api",
   "list_html_api_category",
   "list_familiarity",
   "list_note",
@@ -54,6 +54,7 @@ let arrRouteListName = [
   "list_relation",
   "listHome",
   "list_exercises",
+  "list_data_type",//数据类型
 ]
 
 

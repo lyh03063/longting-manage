@@ -1,6 +1,6 @@
 
 
-//#region COLUMNS:列字段管理
+
 
 
 window.COLUMNS = {}
@@ -158,5 +158,7 @@ COLUMNS.studyTime = {
 };
 
 
-//#endregion
+
+
+COLUMNS.dataTypekey = { ...D_ITEMS.dataTypekey, width: 120, };
 

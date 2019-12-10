@@ -158,18 +158,23 @@ F_ITEMS.dataType = { ...D_ITEMS.dataType, type: "input" };
 F_ITEMS.dataId = { ...D_ITEMS.dataId, type: "input" };
 F_ITEMS.userId = { ...D_ITEMS.userId, type: "input" };
 
-
+//数据类型
+F_ITEMS.dataTypekey = { ...D_ITEMS.dataTypekey, type: "input" };
 
 //#region 分组
 F_ITEMS.group_dataType = {
   ...D_ITEMS.group_dataType,
   type: "select",
-  options: [
-    { value: "group", label: "组" },
-    { value: "html_api", label: "片段" },
-    { value: "note", label: "文件" },
-  ]
+  
+  ajax: {
+    param: { _systemId, _dataType: "data_type" },
+    url: "/info/getCommonList",
+    keyLabel: "title",
+    keyValue: "key"
+  }
 };
+
+
 
 //#endregion
 
@@ -312,6 +317,10 @@ COLUMNS.rolePower = {
 };
 
 /****************************角色-END****************************/
+
+
+
+
 
 F_ITEMS.aaaa = 11111;
 
