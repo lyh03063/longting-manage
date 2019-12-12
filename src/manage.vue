@@ -125,6 +125,11 @@ export default {
         title: "资讯中心",
         menuItem: [
           {
+            index: "list_url",
+            route: "/list_url",
+            title: "网址"
+          },
+          {
             index: "list_article_category",
             route: "/list_article_category",
             title: "资讯分类"

@@ -1,4 +1,3 @@
-
 window.PUB = {}
 //PUB.domain = "http://localhost:3000"
 //PUB.domain = 'http://test.dmagic.cn'
@@ -10,11 +9,8 @@ let _systemId = "sys_api";
 PUB._systemId = _systemId;
 PUB.systemName = "前端学习系统";
 PUB.userId = localStorage.api_loginUserName;
-
 //公共的列表对象
 PUB.listCF = {}
-
-
 PUB.listCFCommon = {
   url: {
     list: `/info/getCommonList`, //列表接口
@@ -26,7 +22,6 @@ PUB.listCFCommon = {
   columnOperate:{"min-width":160},
   //列表单项操作按钮的配置
   singleBtns: {
-
     addon: [
       util.cfList.sBtns.detail,
       util.cfList.sBtns.modify,
@@ -34,18 +29,7 @@ PUB.listCFCommon = {
       util.cfList.sBtns.delete,
     ]
   },
-
-
-
 }
-
-
-
-
-
-
-
-
 //函数：{补充熟悉度ajax配置（动态数据字典）函数}
 window.setFamiliarityAjaxCF = function (listCF, idKey = "_id") {
   util.setObjDefault(listCF, { dynamicDict: [] });
@@ -54,29 +38,9 @@ window.setFamiliarityAjaxCF = function (listCF, idKey = "_id") {
       param: { _systemId, _dataType: "familiarity", findJson: { userId: PUB.userId }, },
       url: "/info/getCommonList",
     },
-
     populateColumn: "familiarityDoc",
     idColumn: idKey,
     idColumn2: "_idRel"
   }
   listCF.dynamicDict.push(dict)
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -55,6 +55,7 @@ let arrRouteListName = [
   "listHome",
   "list_exercises",
   "list_data_type",//数据类型
+  "list_url",//网址
 ]
 
 
@@ -92,6 +93,27 @@ const router = new VueRouter({
     },
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  console.log("from:####", from);
+  console.log("to:####", to);
+  
+  // 如果用户未登录，跳转登录页面
+  if (localStorage.api_isLogin != 1) {
+    
+    if (to.path == '/login') {
+      next();
+    } else {
+      PUB.goUrlAfterLogin = to.fullPath//变量赋值：{登录后要跳转的地址}
+      next('/login');
+    }
+  } else {
+    PUB.goUrlAfterLogin = null//变量赋值：{登录后要跳转的地址}
+    next();
+  }
+})
+
+
 // import Vuex from 'vuex'//导入vuex模块
 // Vue.use(Vuex)//应用组件
 const store = new Vuex.Store({//定义Vuex的存储对象

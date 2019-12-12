@@ -33,6 +33,7 @@ import  "@/assets/js/config/detail_group.js";
 import  "@/assets/js/config/list_exercises.js";
 
 import  "@/assets/js/config/list_data_type.js";
+import  "@/assets/js/config/list_url.js";
 //#region PUB.objDictArr/PUB.dict公共字典对象
 PUB.objDictArr = {
   taskType: [

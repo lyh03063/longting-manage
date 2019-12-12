@@ -57,9 +57,9 @@ export default {
     };
 
     return {
-       systemName: PUB.systemName,
+      systemName: PUB.systemName,
       ak47: true,
-     
+
       ruleForm: {
         //表单数据.
         userName: "",
@@ -103,9 +103,15 @@ export default {
         // localStorage.api_roleId = roleId; //存储角色Id
 
         await util.timeout(500); //延迟
-        this.$router.push({ path: "/listhome" });
+ 
+        if (PUB.goUrlAfterLogin) {
+          //Q1:{登录后要跳转的地址}存在
+          this.$router.push({ path: PUB.goUrlAfterLogin });
+        } else {
+          //Q2:{登录后要跳转的地址}不存在
+          this.$router.push({ path: "/listhome" });
+        }
       } else {
-     
         this.$message.error("用户名或密码错误");
       }
     },

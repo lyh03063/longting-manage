@@ -1,8 +1,7 @@
-
 let _systemId = "sys_api";
-//#region F_ITEMS:表单字段管理
 import "@/assets/js/config_detail.js"
 window.F_ITEMS = {};
+//#region 唐球过来
 F_ITEMS.Id = {
   label: "数据id",
   prop: "P1",
@@ -40,7 +39,6 @@ F_ITEMS.album = {
   col_span: 24, //控制显示一行多列
   tips: "图片尺寸比例最好保持在1:0.8，建议尺寸：宽500px，高400px"
 };
-
 /****************************赛事报名-START****************************/
 F_ITEMS.phone = {
   label: "手机号",
@@ -63,72 +61,69 @@ F_ITEMS.career = {
   prop: "career",
   type: "input"
 };
-
 F_ITEMS.idCard = {
   label: "身份证号",
   prop: "idCard"
 };
-
-F_ITEMS.aaaa = 11111;
-F_ITEMS.aaaa = 11111;
-F_ITEMS.aaaa = 11111;
-F_ITEMS.aaaa = 11111;
-F_ITEMS.aaaa = 11111;
-/****************************赛事报名-END****************************/
-
-
-
-/****************************通用数据-START****************************/
+//#endregion
+//#region 通用数据
 F_ITEMS.title = { ...D_ITEMS.title };
 F_ITEMS.title_search = { ...D_ITEMS.title, type: "input_find_vague" };
 F_ITEMS.desc = { ...D_ITEMS.desc, type: "textarea" };
 F_ITEMS.detail = { ...D_ITEMS.detail, type: "editorTM" };
-
+//#endregion
 //#region html_api
 F_ITEMS.html_display = {
   ...D_ITEMS.html_display, type: "select",
   options: DYDICT.arr_html_display
 };
-
 F_ITEMS.importance = {
   ...D_ITEMS.importance, type: "select",
   options: DYDICT.arr_importance
 };
-
 F_ITEMS.difficulty = {
   ...D_ITEMS.difficulty, type: "select",
   options: DYDICT.arr_difficulty
 };
-
 F_ITEMS.english = {
   ...D_ITEMS.english, type: "input",
 };
-
 F_ITEMS.html_version = {
   ...D_ITEMS.html_version, type: "select",
   options: DYDICT.arr_html_version
 };
-
 F_ITEMS.selfClose = {
   ...D_ITEMS.selfClose, type: "select",
   options: DYDICT.arr_selfClose
 };
+F_ITEMS.demoList = {
+  ...D_ITEMS.demoList,
+   type: "collection",
+  collectionlistType: "form",
+  // showToolbar: false, //不显示集合的工具栏
+  collectionCfForm: {
+    col_span: 12,
+    formItems: [
+      {
+        label: "标题",
+        prop: "title",
+        type: "input"
+      },
+      {
+        label: "链接",
+        prop: "link",
+        type: "input"
+      },
+    ]
+  }
+};
+
+
 //#endregion
-
-
-
-/****************************通用数据-END****************************/
-
-/****************************分类-START****************************/
-
-
+//#region 分类
 F_ITEMS.category_name = { ...D_ITEMS.category_name, type: "input" };
 F_ITEMS.category_remark = { ...D_ITEMS.category_remark, type: "textarea" };
-
-/****************************分类-END****************************/
-
 F_ITEMS.category = { ...D_ITEMS.category, type: "input" };
-
 F_ITEMS.html_api_category = {
   ...D_ITEMS.category,
   type: "select",
@@ -139,7 +134,6 @@ F_ITEMS.html_api_category = {
     keyValue: "_id"
   }
 };
-
 F_ITEMS.note_category = {
   ...D_ITEMS.category,
   type: "select",
@@ -151,21 +145,19 @@ F_ITEMS.note_category = {
     keyValue: "_id"
   }
 };
-
-
+//#endregion
+//#region 熟悉度
 F_ITEMS.familiarity = { ...D_ITEMS.familiarity, type: "input" };
 F_ITEMS.dataType = { ...D_ITEMS.dataType, type: "input" };
 F_ITEMS.dataId = { ...D_ITEMS.dataId, type: "input" };
 F_ITEMS.userId = { ...D_ITEMS.userId, type: "input" };
-
 //数据类型
 F_ITEMS.dataTypekey = { ...D_ITEMS.dataTypekey, type: "input" };
-
+//#endregion
 //#region 分组
 F_ITEMS.group_dataType = {
   ...D_ITEMS.group_dataType,
   type: "select",
-  
   ajax: {
     param: { _systemId, _dataType: "data_type" },
     url: "/info/getCommonList",
@@ -173,37 +165,23 @@ F_ITEMS.group_dataType = {
     keyValue: "key"
   }
 };
-
-
-
 //#endregion
-
 //#region 关系
 F_ITEMS._idRel = { ...D_ITEMS._idRel, type: "input" };
 F_ITEMS._idRel2 = { ...D_ITEMS._idRel2, type: "input" };
 F_ITEMS.sort = { ...D_ITEMS.sort, type: "number" };
-
 //#endregion
-
-
-
-/****************************管理员-START****************************/
+//#region 管理员
 F_ITEMS.userName = { ...D_ITEMS.userName, type: "input" };
 F_ITEMS.passWord = { ...D_ITEMS.passWord, type: "passWord" };
 F_ITEMS.nickName = { ...D_ITEMS.nickName, type: "input" };
 F_ITEMS.role = { ...D_ITEMS.role, type: "jsonEditor" };
-/****************************管理员-END****************************/
-
-
-
-/****************************角色-START****************************/
-
+//#endregion
+//#region 角色
 let styleMenuPowerItem = `margin-bottom:10px;padding:0 5px`;
 let styleMenuGPowerItem = `margin-bottom:0;border:none;padding:0`;
 //函数定义：{获取菜单权限表单配置函数}
 function getFormMenuGPower({ menuName = "XXX" }) {
-
-
   return {
     col_span: 4,
     labelWidth: "10px",
@@ -250,9 +228,6 @@ function getFormMenuGPower({ menuName = "XXX" }) {
     ]
   };
 }
-
-
-
 COLUMNS.roleName = { ...D_ITEMS.roleName, type: "input" };
 COLUMNS.rolePower = {
   ...D_ITEMS.rolePower,
@@ -280,11 +255,9 @@ COLUMNS.rolePower = {
               style: styleMenuPowerItem,
               cfForm: getFormMenuGPower({ menuName: "资讯分类" })
             },
-
           ]
         }
       },
-
       {
         label: "系统管理",
         prop: "systemManage",
@@ -304,7 +277,6 @@ COLUMNS.rolePower = {
               cfForm: getFormMenuGPower({ menuName: "角色" })
             },
             {
-
               prop: "list_area",
               style: styleMenuPowerItem,
               cfForm: getFormMenuGPower({ menuName: "地区管理" })
@@ -315,13 +287,25 @@ COLUMNS.rolePower = {
     ]
   }
 };
-
-/****************************角色-END****************************/
-
-
-
-
-
-F_ITEMS.aaaa = 11111;
-
 //#endregion
+
+//#region 网址
+F_ITEMS.link = { ...D_ITEMS.link, type: "input" };
+//#endregion
+
+// import list_note_for_select from "@/assets/js/config/list_note.js"
+// //#region 笔记
+// F_ITEMS.note_linkList = { ...D_ITEMS.note_linkList, 
+//   type: "select_list_data",
+//   cfSelectList: {
+//     //选择列表配置
+//     dataName: "球员",
+//     valueKey: "P1",
+//     labelKey: "name",
+//     pageName: "tangball_member",
+//     cfList: list_note_for_select
+//   },
+//  };
+ 
+//#endregion
+F_ITEMS.aaaa = 11111;

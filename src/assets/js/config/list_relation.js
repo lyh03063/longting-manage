@@ -19,6 +19,12 @@ PUB.listCF.list_relation = {
     _systemId,
     _dataType
   },
+  //列表单项操作按钮的配置
+  singleBtns: {
+    addon: [
+      ...util.cfList.sBtns.arrAllBtns,
+    ]
+  },
   //-------列配置数组-------
   columns: [COLUMNS._id,COLUMNS._idRel, COLUMNS._idRel2, COLUMNS.sort],
   //-------筛选表单字段数组-------
