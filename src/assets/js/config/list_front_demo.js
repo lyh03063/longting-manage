@@ -8,7 +8,7 @@ PUB.listCF.list_front_demo = {
   listIndex: "list_front_demo", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
   twoTitle: "前端Demo", //面包屑2级菜单
-  ...PUB.listCFCommon2,//展开公共配置
+  ...PUB.listCFCommon3,//展开公共配置
   objParamAddon: {
     _systemId,
     _dataType
@@ -19,14 +19,16 @@ PUB.listCF.list_front_demo = {
     _dataType
   },
   //-------列配置数组-------
-  columns: [COLUMNS.title_fixed, COLUMNS.desc, COLUMNS.category],
+  columns: [COLUMNS.title_fixed,COLUMNS.keyword,COLUMNS.link, COLUMNS.desc, COLUMNS.category],
   //-------筛选表单字段数组-------
   searchFormItems: [F_ITEMS.title_search],
   //-------详情字段数组-------
-  detailItems: [D_ITEMS.title, D_ITEMS.desc, D_ITEMS.category, D_ITEMS.detail,],
+  detailItems: [D_ITEMS.title,D_ITEMS.keyword,D_ITEMS.link, D_ITEMS.desc, D_ITEMS.category, D_ITEMS.detail,D_ITEMS._id,],
   //-------新增、修改表单字段数组-------
   formItems: [
     F_ITEMS.title,
+    F_ITEMS.link,
+    F_ITEMS.keyword,
     F_ITEMS.desc,
     F_ITEMS.detail,
 

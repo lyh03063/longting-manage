@@ -1,14 +1,12 @@
 <template>
   <div class style="padding:10px">
     <h1 class="title TAC">{{doc.title}}</h1>
-
     <div class="C_999 TAR" style="padding:10px">数据类型：{{doc._dataType}} 关键词：{{doc.keyword}}</div>
-
     <el-tabs tab-position="left">
       <el-tab-pane label="详情">
         <div class v-html="doc._detail"></div>
       </el-tab-pane>
-      <el-tab-pane label="demo列表" v-if="doc.demoLinkList">
+      <!-- <el-tab-pane label="demo列表" v-if="doc.demoLinkList">
         <div class>
           <ul>
             <li v-for="docLink in doc.demoLinkList" :key="docLink._id">
@@ -16,7 +14,7 @@
             </li>
           </ul>
         </div>
-      </el-tab-pane>
+      </el-tab-pane>-->
       <!-- <el-tab-pane label="相关笔记" v-if="doc.noteList">
         <div class>
           <ul>
@@ -26,7 +24,7 @@
           </ul>
         </div>
       </el-tab-pane>-->
-      <el-tab-pane label="关联笔记" v-if="noteListByKeyword&&noteListByKeyword.length">
+      <el-tab-pane :label="`关联笔记 (${noteListByKeyword.length})`">
         <div class>
           <ul class="list-link">
             <li v-for="docNote in noteListByKeyword" :key="docNote._id">
@@ -35,11 +33,23 @@
           </ul>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="关联Html-API" v-if="htmlAPIListByKeyword&&htmlAPIListByKeyword.length">
+      <el-tab-pane :label="`关联Html-API (${htmlAPIListByKeyword.length})`">
         <div class>
           <ul class="list-link">
             <li v-for="docNote in htmlAPIListByKeyword" :key="docNote._id">
-              <a target="_blank" :href="`https://www.runoob.com/tags/tag-${docNote.title}.html`">{{docNote.title}}</a>
+              <a
+                target="_blank"
+                :href="`https://www.runoob.com/tags/tag-${docNote.title}.html`"
+              >{{docNote.title}}</a>
+            </li>
+          </ul>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane :label="`关联前端Demo (${frontDemoListByKeyword.length})`">
+        <div class>
+          <ul class="list-link">
+            <li v-for="docFrontDemo in frontDemoListByKeyword" :key="docFrontDemo._id">
+              <a target="_blank" :href="`${docFrontDemo.link}`">{{docFrontDemo.title}}</a>
             </li>
           </ul>
         </div>
@@ -55,12 +65,58 @@ export default {
     return {
       dataId: null,
       doc: {},
-      noteListByKeyword: null, //关键词匹配的笔记
-      htmlAPIListByKeyword: null, //关键词匹配的HtmlAPI
+      noteListByKeyword: [], //关键词匹配的笔记列表
+      htmlAPIListByKeyword: [], //关键词匹配的HtmlAPI列表
+      frontDemoListByKeyword: [], //关键词匹配的前端demo列表
+      paramByKeyword: null //根据关键词请求关联数据的ajax固定参数
     };
   },
 
-  methods: {},
+  methods: {
+    //函数：{ajax获取关联笔记列表}
+    async ajaxGetNoteList() {
+      //如果关键词数组存在
+      let { data } = await axios({
+        //请求接口
+        method: "post",
+        url: `${PUB.domain}/info/getListBykeyword`,
+        data: {
+          ...this.paramByKeyword,
+          _dataType: "note"
+        }
+      });
+      this.noteListByKeyword = data.list;
+    },
+
+    //函数：{ajax获取关联Html-API列表}
+    async ajaxGetHtmlApiList() {
+      //如果关键词数组存在
+      let { data } = await axios({
+        //请求接口
+        method: "post",
+        url: `${PUB.domain}/info/getListBykeyword`,
+        data: {
+          ...this.paramByKeyword,
+          _dataType: "html_api"
+        }
+      });
+      this.htmlAPIListByKeyword = data.list;
+    },
+    //函数：{ajax获取关联前端demo列表}
+    async ajaxGetFrontDemoList() {
+      //如果关键词数组存在
+      let { data } = await axios({
+        //请求接口
+        method: "post",
+        url: `${PUB.domain}/info/getListBykeyword`,
+        data: {
+          ...this.paramByKeyword,
+          _dataType: "front_demo"
+        }
+      });
+      this.frontDemoListByKeyword = data.list;
+    }
+  },
   async created() {
     console.log(" this.$route.query.groupId:", this.$route.query.groupId);
     this.dataId = this.$route.query.dataId;
@@ -75,46 +131,23 @@ export default {
       } //传递参数
     });
     this.doc = data.doc;
+    let keyword = this.doc.keyword;
 
-    let keyword = data.doc.keyword;
+    //根据关键词请求关联数据的ajax固定参数
+    this.paramByKeyword = {
+      _systemId: PUB._systemId,
+      _id: this.dataId,
+      selectJson: {
+        _id: 1,
+        title: 1,
+        keyword: 1
+      }
+    };
 
     if (keyword) {
-      //如果关键词数组存在
-      let { data } = await axios({
-        //请求接口
-        method: "post",
-        url: `${PUB.domain}/info/getListBykeyword`,
-        data: {
-          _systemId: PUB._systemId,
-          _dataType: "note",
-          _id: this.dataId,
-          selectJson: {
-            _id: 1,
-            title: 1,
-            keyword: 1
-          }
-        } //传递参数
-      });
-      this.noteListByKeyword = data.list;
-      {
-        //如果关键词数组存在
-        let { data } = await axios({
-          //请求接口
-          method: "post",
-          url: `${PUB.domain}/info/getListBykeyword`,
-          data: {
-            _systemId: PUB._systemId,
-            _dataType: "html_api",
-            _id: this.dataId,
-            selectJson: {
-              _id: 1,
-              title: 1,
-              keyword: 1
-            }
-          } //传递参数
-        });
-        this.htmlAPIListByKeyword = data.list;
-      }
+      this.ajaxGetNoteList(); //调用：{ajax获取关联笔记列表}
+      this.ajaxGetHtmlApiList(); //调用：{ajax获取关联Html-API列表}
+      this.ajaxGetFrontDemoList(); //调用：{ajax获取关联前端demo列表}
     }
   }
 };

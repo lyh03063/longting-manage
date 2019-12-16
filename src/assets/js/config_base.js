@@ -11,14 +11,16 @@ PUB.systemName = "前端学习系统";
 PUB.userId = localStorage.api_loginUserName;
 //公共的列表对象
 PUB.listCF = {}
+
+PUB.listUrl={
+  list: `/info/getCommonList`, //列表接口
+  add: "/info/commonAdd", //新增接口
+  modify: "/info/commonModify", //修改接口
+  detail: "/info/commonDetail",
+  delete: "/info/commonDelete" //删除接口
+}
 PUB.listCFCommon = {
-  url: {
-    list: `/info/getCommonList`, //列表接口
-    add: "/info/commonAdd", //新增接口
-    modify: "/info/commonModify", //修改接口
-    detail: "/info/commonDetail",
-    delete: "/info/commonDelete" //删除接口
-  },
+  url: PUB.listUrl,
   columnOperate: { "min-width": 160 },
   //列表单项操作按钮的配置
   singleBtns: {
@@ -30,43 +32,9 @@ PUB.listCFCommon = {
   },
 }
 
-
-PUB.listCFCommon2 = {
-  url: {
-    list: `/info/getCommonList`, //列表接口
-    add: "/info/commonAdd", //新增接口
-    modify: "/info/commonModify", //修改接口
-    detail: "/info/commonDetail",
-    delete: "/info/commonDelete" //删除接口
-  },
-  columnOperate: { "min-width": 210 },
-  //列表单项操作按钮的配置
-  singleBtns: {
-    addon: [
-      util.cfList.sBtns.detail,
-      util.cfList.sBtns.modify,
-      util.cfList.sBtns.copy,
-      util.cfList.sBtns.delete,
-      {
-        uiType: "link",
-        text: "详情",
-        target: "_blank",
-        //地址格式函数
-        urlFormatter: function (row) {
-          return `#/detail_data?dataId=${row._id}`;
-        },
-      },
-    ]
-  },
-}
-
-
 PUB.singleBtns_copy_detail = {
   addon: [
-    util.cfList.sBtns.detail,
-    util.cfList.sBtns.modify,
-    util.cfList.sBtns.copy,
-    util.cfList.sBtns.delete,
+    ...util.cfList.sBtns.arrAllBtns,
     {
       uiType: "link",
       text: "详情",
@@ -78,6 +46,42 @@ PUB.singleBtns_copy_detail = {
     },
   ]
 }
+
+PUB.listCFCommon2 = {
+  url: PUB.listUrl,
+  columnOperate: { "min-width": 230 },
+  //列表单项操作按钮的配置
+  singleBtns: PUB.singleBtns_copy_detail,
+}
+
+
+
+
+
+PUB.singleBtns_copy_link = {
+  addon: [
+    ...util.cfList.sBtns.arrAllBtns,
+    {
+      uiType: "link",
+      text: "打开网址",
+      target: "_blank",
+      urlFormatter: function (row) {
+        return `${row.link}`;
+      },
+
+    },
+  ]
+}
+
+PUB.listCFCommon3 = {
+  url: PUB.listUrl,
+  columnOperate: { "min-width": 230 },
+  //列表单项操作按钮的配置
+  singleBtns: PUB.singleBtns_copy_link,
+}
+
+
+
 
 
 //函数：{补充熟悉度ajax配置（动态数据字典）函数}
