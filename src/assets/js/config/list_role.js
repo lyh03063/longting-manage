@@ -1,13 +1,12 @@
 let _dataType = "role",
-_systemId = PUB._systemId;
-PUB.listCF.list_role= {
+  _systemId = PUB._systemId;
+PUB.listCF.list_role = {
   idKey: "_id", //键名
   pageSize: 20,
   listIndex: "list_role", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
   threeTitle: "角色", //面包屑2级菜单
-  ...PUB.listCFCommon,//展开公共配置
-  //objParamAddon列表接口的附加参数
+  ...PUB.listCFCommon2,//展开公共配置
   objParamAddon: {
     _systemId,
     _dataType
@@ -17,9 +16,9 @@ PUB.listCF.list_role= {
     _systemId,
     _dataType
   },
-   //-------列配置数组-------
+  //-------列配置数组-------
 
-   columns: [
+  columns: [
     COLUMNS.Id,
     COLUMNS.roleName,
     COLUMNS.rolePower

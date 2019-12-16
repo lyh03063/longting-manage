@@ -7,7 +7,7 @@ let _dataType = "html_api_category",
   listIndex: "list_html_api_category", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
   twoTitle: "Html-api分类", //面包屑2级菜单
-  ...PUB.listCFCommon,//展开公共配置
+  ...PUB.listCFCommon2,//展开公共配置
   //objParamAddon列表接口的附加参数
   objParamAddon: {
     _systemId,

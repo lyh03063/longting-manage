@@ -9,7 +9,7 @@ PUB.listCF.list_all = {
   listIndex: "list_all", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
   twoTitle: "所有数据", //面包屑2级菜单
-  ...PUB.listCFCommon,//展开公共配置
+  ...PUB.listCFCommon2,//展开公共配置
   objParamAddon: {
     _systemId,
     _dataType

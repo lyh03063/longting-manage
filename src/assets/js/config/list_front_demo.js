@@ -1,15 +1,14 @@
-// import "@/assets/js/config_base.js"
 
-let _dataType = "article",
+let _dataType = "front_demo",
   _systemId = PUB._systemId;
-PUB.listCF.list_article = {
+
+PUB.listCF.list_front_demo = {
   idKey: "_id", //键名
   pageSize: 20,
-  listIndex: "list_article", //vuex对应的字段~
+  listIndex: "list_front_demo", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
-  threeTitle: "文章", //面包屑2级菜单
+  twoTitle: "前端Demo", //面包屑2级菜单
   ...PUB.listCFCommon2,//展开公共配置
-  //objParamAddon列表接口的附加参数
   objParamAddon: {
     _systemId,
     _dataType
@@ -20,15 +19,16 @@ PUB.listCF.list_article = {
     _dataType
   },
   //-------列配置数组-------
-  columns: [COLUMNS.title_fixed, COLUMNS.desc],
+  columns: [COLUMNS.title_fixed, COLUMNS.desc, COLUMNS.category],
   //-------筛选表单字段数组-------
   searchFormItems: [F_ITEMS.title_search],
   //-------详情字段数组-------
-  detailItems: [D_ITEMS.title, D_ITEMS.desc],
+  detailItems: [D_ITEMS.title, D_ITEMS.desc, D_ITEMS.category, D_ITEMS.detail,],
   //-------新增、修改表单字段数组-------
   formItems: [
     F_ITEMS.title,
     F_ITEMS.desc,
     F_ITEMS.detail,
+
   ]
 }

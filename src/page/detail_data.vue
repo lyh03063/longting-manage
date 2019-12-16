@@ -39,7 +39,7 @@
         <div class>
           <ul class="list-link">
             <li v-for="docNote in htmlAPIListByKeyword" :key="docNote._id">
-              <a target="_blank" :href="`#/detail_data?dataId=${docNote._id}`">{{docNote.title}}</a>
+              <a target="_blank" :href="`https://www.runoob.com/tags/tag-${docNote.title}.html`">{{docNote.title}}</a>
             </li>
           </ul>
         </div>

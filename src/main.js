@@ -23,17 +23,7 @@ import "./mock.js";
 
 import manage from "@/manage";
 
-// 本来想实现这个路由表的优化，通过数组实现，但失败***用eval有不行
-// let arrPageManage = ["modify_password", "list_article_category", "list_article", "list_area", "list_admin", "list_role", "list_html_api", "list_html_api_category", "list_familiarity", "listHome"]
 
-// let arrRoutesManage = [
-
-// ];
-// arrPageManage.forEach(itemEach => {//循环：{000数组}
-//   arrRoutesManage.push({
-//     path: `/${itemEach}`, component: eval(itemEach)
-//   })
-// })
 console.log("global:", global);
 
 
@@ -41,24 +31,14 @@ let arrRouteListName = [
   "modify_password",
   "list_article_category",
   "list_article",
-  "list_area",
   "list_admin",
   "list_role",
   "list_html_api",
-  "list_html_api_category",
-  "list_familiarity",
   "list_note",
-  "list_note_category",
-  "list_group",
   "list_all",
-  "list_relation",
   "listHome",
-  "list_exercises",
-  "list_data_type",//数据类型
-  "list_url",//网址
   "list_common",//通用列表
 ]
-
 
 let arrRouteListPage = arrRouteListName.map((item) => {
   return {

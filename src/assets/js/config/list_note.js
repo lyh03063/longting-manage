@@ -8,7 +8,7 @@ PUB.listCF.list_note = {
   listIndex: "list_note", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
   twoTitle: "笔记", //面包屑2级菜单
-  ...PUB.listCFCommon,//展开公共配置
+  ...PUB.listCFCommon2,//展开公共配置
   //批量操作按钮的配置
   batchBtns: {
     addon: [
@@ -16,21 +16,6 @@ PUB.listCF.list_note = {
       util.cfList.bBtns.delete,
       { uiType: "slot", slot: "slot_in_toolbar" }
     ],
-  },
-  //列表单项操作按钮的配置
-  singleBtns: {
-    addon: [
-      ...util.cfList.sBtns.arrAllBtns,
-      {
-        uiType: "link",
-        text: "详情",
-        target: "_blank",
-        //地址格式函数
-        urlFormatter: function (row) {
-          return `#/detail_data?dataId=${row._id}`;
-        },
-      }
-    ]
   },
   //dynamicDict动态数据字典配置
   dynamicDict: [

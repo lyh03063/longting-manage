@@ -113,38 +113,33 @@ export default {
           },
          
           {
-            index: "list_group",
-            route: "/list_common?type=group",
-            title: "分组"
+            index: "list_front_demo",
+            route: "/list_common?type=front_demo",
+            title: "前端demo"
           },
           {
             index: "list_exercises",
             route: "/list_common?type=exercises",
             title: "习题"
-          }
+          },
         ]
       },
       {
         index: "newsCenter",
         icon: "el-icon-document",
-        title: "资讯中心",
+        title: "其他数据",
         menuItem: [
           {
             index: "list_url",
             route: "/list_common?type=url",
             title: "网址"
           },
-         
           {
-            index: "list_article_category",
-            route: "/list_article_category",
-            title: "资讯分类"
+            index: "list_group",
+            route: "/list_common?type=group",
+            title: "分组"
           },
-          {
-            index: "list_article",
-            route: "/list_article",
-            title: "资讯管理"
-          }
+         
         ]
       },
 

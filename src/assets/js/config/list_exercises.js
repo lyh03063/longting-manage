@@ -9,8 +9,7 @@ PUB.listCF.list_exercises = {
   listIndex: "list_exercises", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
   twoTitle: "前端习题", //面包屑2级菜单
-  ...PUB.listCFCommon,//展开公共配置
-  //objParamAddon列表接口的附加参数
+  ...PUB.listCFCommon2,//展开公共配置
   objParamAddon: {
     _systemId,
     _dataType

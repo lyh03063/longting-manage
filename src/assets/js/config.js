@@ -9,7 +9,7 @@ import "@/assets/js/config_form.js"//表单字段
 
 
 
-import  "@/assets/js/config/list_area.js";
+
 import  "@/assets/js/config/list_admin.js";
 import  "@/assets/js/config/list_role.js";
 
@@ -34,6 +34,10 @@ import  "@/assets/js/config/list_exercises.js";
 
 import  "@/assets/js/config/list_data_type.js";
 import  "@/assets/js/config/list_url.js";
+import  "@/assets/js/config/list_front_demo.js";
+
+
+
 //#region PUB.objDictArr/PUB.dict公共字典对象
 PUB.objDictArr = {
   taskType: [

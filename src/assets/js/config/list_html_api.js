@@ -6,7 +6,7 @@ PUB.listCF.list_html_api = {
   listIndex: "list_html_api", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
   twoTitle: "Html-api", //面包屑2级菜单
-  ...PUB.listCFCommon,//展开公共配置
+  ...PUB.listCFCommon2,//展开公共配置
   //批量操作按钮的配置
   batchBtns: {
 

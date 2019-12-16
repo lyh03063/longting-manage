@@ -9,7 +9,7 @@ PUB.listCF.list_relation = {
   listIndex: "list_relation", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
   twoTitle: "关系数据", //面包屑2级菜单
-  ...PUB.listCFCommon,//展开公共配置
+  ...PUB.listCFCommon2,//展开公共配置
   objParamAddon: {
     _systemId,
     _dataType
@@ -18,12 +18,6 @@ PUB.listCF.list_relation = {
   paramAddonPublic: {
     _systemId,
     _dataType
-  },
-  //列表单项操作按钮的配置
-  singleBtns: {
-    addon: [
-      ...util.cfList.sBtns.arrAllBtns,
-    ]
   },
   //-------列配置数组-------
   columns: [COLUMNS._id,COLUMNS._idRel, COLUMNS._idRel2, COLUMNS.sort],

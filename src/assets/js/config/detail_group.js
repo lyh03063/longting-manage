@@ -24,9 +24,7 @@ PUB.listCF.detail_group_note = {
     //列表单项操作按钮的配置
     singleBtns: {
         addon: [
-            // util.cfList.sBtns.detail,
             util.cfList.sBtns.modify,
-            util.cfList.sBtns.copy,
             util.cfList.sBtns.delete,
             {
                 uiType: "link",

@@ -19,17 +19,67 @@ PUB.listCFCommon = {
     detail: "/info/commonDetail",
     delete: "/info/commonDelete" //删除接口
   },
-  columnOperate:{"min-width":160},
+  columnOperate: { "min-width": 160 },
   //列表单项操作按钮的配置
   singleBtns: {
     addon: [
       util.cfList.sBtns.detail,
       util.cfList.sBtns.modify,
-      // util.cfList.sBtns.copy,
       util.cfList.sBtns.delete,
     ]
   },
 }
+
+
+PUB.listCFCommon2 = {
+  url: {
+    list: `/info/getCommonList`, //列表接口
+    add: "/info/commonAdd", //新增接口
+    modify: "/info/commonModify", //修改接口
+    detail: "/info/commonDetail",
+    delete: "/info/commonDelete" //删除接口
+  },
+  columnOperate: { "min-width": 210 },
+  //列表单项操作按钮的配置
+  singleBtns: {
+    addon: [
+      util.cfList.sBtns.detail,
+      util.cfList.sBtns.modify,
+      util.cfList.sBtns.copy,
+      util.cfList.sBtns.delete,
+      {
+        uiType: "link",
+        text: "详情",
+        target: "_blank",
+        //地址格式函数
+        urlFormatter: function (row) {
+          return `#/detail_data?dataId=${row._id}`;
+        },
+      },
+    ]
+  },
+}
+
+
+PUB.singleBtns_copy_detail = {
+  addon: [
+    util.cfList.sBtns.detail,
+    util.cfList.sBtns.modify,
+    util.cfList.sBtns.copy,
+    util.cfList.sBtns.delete,
+    {
+      uiType: "link",
+      text: "详情",
+      target: "_blank",
+      //地址格式函数
+      urlFormatter: function (row) {
+        return `#/detail_data?dataId=${row._id}`;
+      },
+    },
+  ]
+}
+
+
 //函数：{补充熟悉度ajax配置（动态数据字典）函数}
 window.setFamiliarityAjaxCF = function (listCF, idKey = "_id") {
   util.setObjDefault(listCF, { dynamicDict: [] });
