@@ -127,7 +127,8 @@ export default {
           sort: 1, //序号获取
           title: "$targetDoc.title",
           importance: "$targetDoc.importance",
-          category: "$targetDoc.category"
+          category: "$targetDoc.category",
+          difficulty: "$targetDoc.difficulty",
         }
       }
     ];

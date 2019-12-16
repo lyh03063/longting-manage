@@ -289,6 +289,12 @@ COLUMNS.rolePower = {
 };
 //#endregion
 
+
+
+//#region 笔记
+F_ITEMS.keyword = { ...D_ITEMS.keyword, type: "tag_list" };
+
+//#endregion
 //#region 网址
 F_ITEMS.link = { ...D_ITEMS.link, type: "input" };
 //#endregion

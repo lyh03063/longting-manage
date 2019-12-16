@@ -56,6 +56,7 @@ let arrRouteListName = [
   "list_exercises",
   "list_data_type",//数据类型
   "list_url",//网址
+  "list_common",//通用列表
 ]
 
 
@@ -82,13 +83,6 @@ const router = new VueRouter({
       redirect: '/listHome', //跳转
       children: [//子路由
         ...arrRouteListPage,
-
-
-
-
-
-
-
       ]
     },
   ]

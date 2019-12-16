@@ -4,3 +4,11 @@ $boxHeight: 160px; //盒子高度
 .table_cell_visible .cell {
   overflow: visible;
 }
+
+.list-link > li {
+  padding: 5px 10px;
+  line-height: 1;
+  border-bottom: 1px #ddd dashed;
+
+
+}

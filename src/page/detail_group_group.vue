@@ -102,7 +102,8 @@ export default {
           _idRel: 1,
           _idRel2: 1,
           sort: 1,
-          title: "$targetDoc.title"
+          title: "$targetDoc.title",
+          dataType: "$targetDoc.dataType"
         }
       }
     ];

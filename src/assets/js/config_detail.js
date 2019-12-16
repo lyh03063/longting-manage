@@ -139,7 +139,7 @@ D_ITEMS.desc = {
 };
 D_ITEMS.detail = {
   label: "详情",
-  prop: "detail",
+  prop: "_detail",
   type:"html",
 };
 //#endregion
@@ -276,6 +276,10 @@ D_ITEMS.dataTypekey = {
 
 //#endregion
 //#region 笔记
+D_ITEMS.keyword = {
+  label: "关键词",
+  prop: "keyword",
+};
 D_ITEMS.note_linkList = {
   label: "相关demo列表",
   prop: "demoLinkList",
@@ -293,15 +297,7 @@ D_ITEMS.link = {
 
 
 //#endregion
-D_ITEMS.aaaa = 1111;
-D_ITEMS.aaaa = 1111;
-D_ITEMS.aaaa = 1111;
-D_ITEMS.aaaa = 1111;
-D_ITEMS.aaaa = 1111;
-D_ITEMS.aaaa = 1111;
-D_ITEMS.aaaa = 1111;
-D_ITEMS.aaaa = 1111;
-D_ITEMS.aaaa = 1111;
+
 D_ITEMS.item_prop = {
   label: "prop",
   prop: "prop",

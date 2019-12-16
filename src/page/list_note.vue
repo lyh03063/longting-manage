@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     arrLookup: function() {
-      return this.$store.state.arrLookup["list_note"];
+      return this.$store.state.arrLookup["list_note"]||[];
     }
   },
   watch: {

@@ -4,9 +4,11 @@
     <el-container>
       <el-header class="home-head-box">
         <el-row>
-          <div class="FL MT13  C_fff"><img class="W200 H36" src="http://www.dmagic.cn/images/IconS/IconS_2578.png" alt="" ></div>
+          <div class="FL MT13 C_fff">
+            <img class="W200 H36" src="http://www.dmagic.cn/images/IconS/IconS_2578.png" alt />
+          </div>
 
-          <div class="FL ML10 MT17 FS24 C_fff" >{{systemName}}</div>
+          <div class="FL ML10 MT17 FS24 C_fff">{{systemName}}</div>
           <div class="FR MT30 C_fff">
             <i class="el-icon-s-custom MR5" title="用户名"></i>
             {{this.api_loginUserName}}({{this.api_roleName}})&nbsp;&nbsp;&nbsp;
@@ -92,9 +94,10 @@ export default {
             route: "/list_html_api",
             title: "Html-API"
           },
-          {
+        
+           {
             index: "list_html_api_category",
-            route: "/list_html_api_category",
+            route: "/list_common?type=html_api_category",
             title: "Html-API分类"
           },
           {
@@ -102,21 +105,23 @@ export default {
             route: "/list_note",
             title: "笔记"
           },
-          {
+       
+           {
             index: "list_note_category",
-            route: "/list_note_category",
+            route: "/list_common?type=note_category",
             title: "笔记分类"
           },
-           {
-            index: "list_exercises",
-            route: "/list_exercises",
-            title: "习题"
-          },
-            {
+         
+          {
             index: "list_group",
-            route: "/list_group",
+            route: "/list_common?type=group",
             title: "分组"
           },
+          {
+            index: "list_exercises",
+            route: "/list_common?type=exercises",
+            title: "习题"
+          }
         ]
       },
       {
@@ -126,9 +131,10 @@ export default {
         menuItem: [
           {
             index: "list_url",
-            route: "/list_url",
+            route: "/list_common?type=url",
             title: "网址"
           },
+         
           {
             index: "list_article_category",
             route: "/list_article_category",
@@ -147,29 +153,37 @@ export default {
         icon: "el-icon-setting",
         title: "系统管理",
         menuItem: [
-          {
+           {
             index: "list_data_type",
-            route: "/list_data_type",
+            route: "/list_common?type=data_type",
             title: "数据类型"
           },
+         
            {
             index: "list_all",
-            route: "/list_all",
+            route: "/list_common?type=all",
             title: "所有数据"
           },
+         
            {
             index: "list_relation",
-            route: "/list_relation",
+            route: "/list_common?type=relation",
             title: "关系数据"
           },
-          {
+         
+           {
             index: "list_familiarity",
-            route: "/list_familiarity",
+            route: "/list_common?type=familiarity",
             title: "熟悉度"
           },
-          { index: "list_admin", route: "/list_admin", title: "管理员" },
-          { index: "list_role", route: "/list_role", title: "角色" },
           
+           {
+            index: "list_admin",
+            route: "/list_common?type=admin",
+            title: "管理员"
+          },
+          
+          { index: "list_role", route: "/list_role", title: "角色" }
         ]
       }
     ];

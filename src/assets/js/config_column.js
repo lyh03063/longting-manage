@@ -26,13 +26,18 @@ COLUMNS.importance = {
   ...D_ITEMS.importance, width: 70,
   formatter: function (rowData) {
     return lodash.get(DYDICT.importance, `${rowData.importance}.label`);
-  }
+  },
 };
 
 //#endregion
 //#region html_api
 COLUMNS.html_display = { ...D_ITEMS.html_display, width: 70, };
-COLUMNS.difficulty = { ...D_ITEMS.difficulty, width: 70, };
+COLUMNS.difficulty = {
+  ...D_ITEMS.difficulty, width: 70,
+  formatter: function (rowData) {
+    return lodash.get(DYDICT.difficulty, `${rowData.difficulty}.label`);
+  },
+};
 COLUMNS.english = { ...D_ITEMS.english, width: 70, };
 COLUMNS.html_version = { ...D_ITEMS.html_version, width: 70, };
 COLUMNS.selfClose = { ...D_ITEMS.selfClose, width: 70, };
@@ -84,7 +89,7 @@ COLUMNS.category = {
   formatter: function (rowData) {
     let title = lodash.get(rowData, "categoryDoc.title");
     return title;
-  }
+  },
 };
 //支持多个的分类
 COLUMNS.category_multiple = {
@@ -105,7 +110,7 @@ COLUMNS.studyTime = {
 COLUMNS.dataTypekey = { ...D_ITEMS.dataTypekey, width: 120, };
 
 //#endregion
-  
+
 //#region 网址
 
 COLUMNS.link = { ...D_ITEMS.link, width: 120, };
@@ -113,4 +118,5 @@ COLUMNS.link = { ...D_ITEMS.link, width: 120, };
 //#region 笔记
 COLUMNS.note_linkList = { ...D_ITEMS.note_linkList, width: 120, };
 COLUMNS.note_noteList = { ...D_ITEMS.note_noteList, width: 120, };
+COLUMNS.keyword = { ...D_ITEMS.keyword, width: 70, };
 //#endregion

@@ -33,18 +33,19 @@ PUB.listCF.list_html_api = {
     _dataType
   },
   //-------列配置数组-------
-  columns: [COLUMNS.title_fixed_w150, COLUMNS.desc, COLUMNS.category, COLUMNS.familiarity_select, COLUMNS.html_display, COLUMNS.importance,
+  columns: [COLUMNS.title_fixed_w150,COLUMNS.keyword,  COLUMNS.desc, COLUMNS.category, COLUMNS.familiarity_select, COLUMNS.html_display, COLUMNS.importance,
   COLUMNS.difficulty, COLUMNS.english, COLUMNS.html_version,
    COLUMNS.selfClose, COLUMNS.cateIdOld, COLUMNS.demoList],
   //-------筛选表单字段数组-------
   searchFormItems: [F_ITEMS.title_search, F_ITEMS.html_api_category, F_ITEMS.html_display, F_ITEMS.importance, F_ITEMS.difficulty, F_ITEMS.html_version, F_ITEMS.selfClose],
   //-------详情字段数组-------
-  detailItems: [D_ITEMS._id, D_ITEMS.title, D_ITEMS.desc, D_ITEMS.detail, D_ITEMS.category, D_ITEMS.html_display, D_ITEMS.importance,
+  detailItems: [D_ITEMS._id, D_ITEMS.title,D_ITEMS.keyword,  D_ITEMS.desc, D_ITEMS.detail, D_ITEMS.category, D_ITEMS.html_display, D_ITEMS.importance,
   D_ITEMS.difficulty, D_ITEMS.english,
   D_ITEMS.html_version, D_ITEMS.selfClose, D_ITEMS.demoList, D_ITEMS.cateIdOld],
   //-------新增、修改表单字段数组-------
   formItems: [
-    F_ITEMS.title, F_ITEMS.html_api_category, F_ITEMS.desc,
+    F_ITEMS.title,
+    F_ITEMS.keyword, F_ITEMS.html_api_category, F_ITEMS.desc,
     F_ITEMS.detail, F_ITEMS.html_display, F_ITEMS.importance,
     F_ITEMS.difficulty, F_ITEMS.english, F_ITEMS.html_version,
      F_ITEMS.selfClose, F_ITEMS.demoList

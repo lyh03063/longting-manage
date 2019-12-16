@@ -17,6 +17,21 @@ PUB.listCF.list_note = {
       { uiType: "slot", slot: "slot_in_toolbar" }
     ],
   },
+  //列表单项操作按钮的配置
+  singleBtns: {
+    addon: [
+      ...util.cfList.sBtns.arrAllBtns,
+      {
+        uiType: "link",
+        text: "详情",
+        target: "_blank",
+        //地址格式函数
+        urlFormatter: function (row) {
+          return `#/detail_data?dataId=${row._id}`;
+        },
+      }
+    ]
+  },
   //dynamicDict动态数据字典配置
   dynamicDict: [
     DYDICT.note_category
@@ -33,26 +48,26 @@ PUB.listCF.list_note = {
     _systemId,
     _dataType
   },
-  //列表单项操作按钮的配置
-  singleBtns: {
-    addon: [
-      ...util.cfList.sBtns.arrAllBtns,
-    ]
-  },
 
+  //操作列配置
+  columnOperate: {
+    "min-width": 210
+  },
   //-------列配置数组-------
-  columns: [COLUMNS._id, COLUMNS.title_fixed, COLUMNS.desc, COLUMNS.category_multiple, COLUMNS.familiarity_select, COLUMNS.importance, COLUMNS.demoList],
+  columns: [COLUMNS._id, COLUMNS.title_fixed, COLUMNS.keyword, COLUMNS.familiarity_select, COLUMNS.importance, COLUMNS.difficulty, COLUMNS.category_multiple, COLUMNS.demoList],
   //-------筛选表单字段数组-------
-  searchFormItems: [F_ITEMS.title_search, F_ITEMS.note_category, F_ITEMS.importance],
+  searchFormItems: [F_ITEMS.title_search, F_ITEMS.note_category, F_ITEMS.importance, F_ITEMS.difficulty,],
   //-------详情字段数组-------
-  detailItems: [D_ITEMS.title, D_ITEMS.detail, D_ITEMS.desc, D_ITEMS.category, D_ITEMS.importance, D_ITEMS._id, D_ITEMS.demoList, D_ITEMS.note_linkList, D_ITEMS.note_noteList],
+  detailItems: [D_ITEMS.title, D_ITEMS.keyword, D_ITEMS.detail, D_ITEMS.desc, D_ITEMS.category, D_ITEMS.importance, D_ITEMS.difficulty, D_ITEMS._id, D_ITEMS.demoList, D_ITEMS.note_linkList, D_ITEMS.note_noteList],
   //-------新增、修改表单字段数组-------
   formItems: [
     F_ITEMS.title,
+    F_ITEMS.keyword,
     F_ITEMS.note_category,
     F_ITEMS.desc,
     F_ITEMS.detail,
     F_ITEMS.importance,
+    F_ITEMS.difficulty,
     //F_ITEMS.demoList,
     //F_ITEMS.note_linkList
   ]

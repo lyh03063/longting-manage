@@ -63,9 +63,12 @@ PUB.listCF.detail_group_note = {
     //-------列配置数组-------
     columns: [
         // COLUMNS._idRel2,
-        COLUMNS.sort, COLUMNS.title_fixed,
-        COLUMNS.desc, COLUMNS.category_multiple,
-        COLUMNS.familiarity_select, COLUMNS.importance
+         COLUMNS.title_fixed,
+        // COLUMNS.desc,
+        
+        COLUMNS.familiarity_select, COLUMNS.importance, COLUMNS.difficulty,
+        COLUMNS.category_multiple,
+        COLUMNS.sort,
     ],
     //-------筛选表单字段数组-------
     searchFormItems: [],
@@ -146,9 +149,10 @@ PUB.listCF.detail_group_group = {
     //-------列配置数组-------
     columns: [
         // COLUMNS._idRel2,
-        COLUMNS.sort, COLUMNS.title_fixed,
+        COLUMNS.title_fixed,
+        COLUMNS.group_dataType,
         COLUMNS.desc,
-    
+        COLUMNS.sort, 
     ],
     //-------筛选表单字段数组-------
     searchFormItems: [],
