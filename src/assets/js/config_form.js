@@ -121,6 +121,7 @@ F_ITEMS.demoList = {
 
 //#endregion
 //#region 分类
+F_ITEMS.cateIdOld = { ...D_ITEMS.cateIdOld, type: "input" };
 F_ITEMS.category_name = { ...D_ITEMS.category_name, type: "input" };
 F_ITEMS.category_remark = { ...D_ITEMS.category_remark, type: "textarea" };
 F_ITEMS.category = { ...D_ITEMS.category, type: "input" };
@@ -134,6 +135,20 @@ F_ITEMS.html_api_category = {
     keyValue: "_id"
   }
 };
+
+F_ITEMS.js_api_category = {
+  ...D_ITEMS.category,
+  type: "select",
+  ajax: {
+    param: { _systemId, _dataType: "js_api_category" },
+    url: "/info/getCommonList",
+    keyLabel: "title",
+    keyValue: "_id"
+  }
+};
+
+
+
 F_ITEMS.note_category = {
   ...D_ITEMS.category,
   type: "select",
@@ -151,6 +166,7 @@ F_ITEMS.familiarity = { ...D_ITEMS.familiarity, type: "input" };
 F_ITEMS.dataType = { ...D_ITEMS.dataType, type: "input" };
 F_ITEMS.dataId = { ...D_ITEMS.dataId, type: "input" };
 F_ITEMS.userId = { ...D_ITEMS.userId, type: "input" };
+F_ITEMS._userId = { ...D_ITEMS._userId, type: "input" };
 //数据类型
 F_ITEMS.dataTypekey = { ...D_ITEMS.dataTypekey, type: "input" };
 //#endregion

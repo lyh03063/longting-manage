@@ -4,7 +4,13 @@
       <dm_debug_item v-model="groupId" text="groupId" />
     </dm_debug_list>
 
-    <dm_list_data ref="listData" :cf="cfList" v-if="ready" @after-search="afterSearch">
+    <dm_list_data
+      ref="listData"
+      :cf="cfList"
+      v-if="ready"
+      @after-search="afterSearch"
+  
+    >
       <template v-slot:slot_column_familiarity="{row}">
         <div class>
           <familiarity_select
@@ -86,8 +92,28 @@ export default {
       //设置id数组
       // lodash.set(this.scoreParam, `findJson._id.$in`, arrId);
       this.$refs.scorePanel.ajaxGetScore(); //调用：{ajax获取分数函数}
+
+      this.updateGroupCountData()//调用：{更新当前分组的数据量的函数}
+    },
+    //函数：{更新当前分组的数据的函数}
+    async updateGroupCountData() {
+      let urlModify = PUB.listCF.list_group.url.modify;
+      let ajaxParam = {
+        _id: this.groupId,
+        _data: {countData:this.$refs.listData.allCount}//获取列表的数据总量
+      };
+      Object.assign(ajaxParam, PUB.listCF.list_group.paramAddonPublic); //合并公共参数
+      let response = await axios({
+        //请求接口
+        method: "post",
+        url: PUB.domain + urlModify,
+        data: ajaxParam //传递参数
+      });
     }
   },
+
+
+
   async created() {
     this.cfList.findJsonDefault = {
       _idRel: this.groupId
@@ -128,7 +154,7 @@ export default {
           title: "$targetDoc.title",
           importance: "$targetDoc.importance",
           category: "$targetDoc.category",
-          difficulty: "$targetDoc.difficulty",
+          difficulty: "$targetDoc.difficulty"
         }
       }
     ];

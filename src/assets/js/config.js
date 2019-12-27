@@ -35,7 +35,8 @@ import  "@/assets/js/config/list_exercises.js";
 import  "@/assets/js/config/list_data_type.js";
 import  "@/assets/js/config/list_url.js";
 import  "@/assets/js/config/list_front_demo.js";
-
+import  "@/assets/js/config/list_js_api.js";
+import  "@/assets/js/config/list_js_api_category.js";
 
 
 //#region PUB.objDictArr/PUB.dict公共字典对象

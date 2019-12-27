@@ -34,7 +34,6 @@ export default {
     dataType: {}, //对应数据类型
     //单独的arrLookup***
     arrLookup: {
-      
       default: function() {
         return [];
       }
@@ -112,12 +111,40 @@ export default {
           dataType: this.dataType, //补充单独的dataType
           idKey: this.idKey, //需要传递idKey****
           findJson,
-          arrLookup:this.arrLookup,
+          arrLookup: this.arrLookup,
           userId: localStorage.api_loginUserName
         }
       });
 
       this.data = data;
+
+      this.updateGroupUserScore(); //调用：{更新当前分组的用户学习缓存数据函数}
+    },
+    //函数：{更新当前分组的用户学习缓存数据函数}
+    async updateGroupUserScore() {
+      //变量：{对应的分组id}
+      let groupId = lodash.get(this.param, `findJson._idRel`);
+      if (!groupId) return;
+      let urlModify = PUB.listCF.list_familiarity.url.modify;
+      let ajaxParam = {
+        //_id: null,
+        _idRel: groupId,
+
+        findJson: { _idRel: groupId, _userId: localStorage.api_loginUserName }, //用户名
+        _data: {
+          _idRel: groupId,
+          _userId: localStorage.api_loginUserName,
+          score: this.data,
+          dataType: "group"
+        } //获取列表的数据总量
+      };
+      Object.assign(ajaxParam, PUB.listCF.list_familiarity.paramAddonPublic); //合并公共参数
+      let response = await axios({
+        //请求接口
+        method: "post",
+        url: PUB.domain + urlModify,
+        data: ajaxParam //传递参数
+      });
     }
   },
   async created() {

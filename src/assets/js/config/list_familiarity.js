@@ -23,14 +23,15 @@ let _dataType = "familiarity",
     _dataType
   },
   //-------列配置数组-------
-  columns: [COLUMNS.familiarity, COLUMNS.dataType, COLUMNS.dataId, COLUMNS.userId,COLUMNS.studyTime ],
+  columns: [COLUMNS.familiarity, COLUMNS.dataType, COLUMNS.dataId, COLUMNS._userId,COLUMNS.userId,COLUMNS.studyTime ],
   //-------筛选表单字段数组-------
-  searchFormItems: [F_ITEMS.dataId, F_ITEMS.userId,],
+  searchFormItems: [F_ITEMS.dataId, F_ITEMS.userId,F_ITEMS._userId,],
   //-------详情字段数组-------
   detailItems: [
     D_ITEMS.familiarity,
     D_ITEMS.dataType,
     D_ITEMS.dataId,
+    
     D_ITEMS.userId,D_ITEMS.studyTime
   ],
   //-------新增、修改表单字段数组-------
@@ -39,5 +40,6 @@ let _dataType = "familiarity",
     F_ITEMS.dataType,
     F_ITEMS.dataId,
     F_ITEMS.userId,
+    F_ITEMS._userId,
   ]
 }

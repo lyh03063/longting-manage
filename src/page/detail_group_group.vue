@@ -2,9 +2,14 @@
   <div class style="padding:10px">
     <dm_debug_list>
       <dm_debug_item v-model="groupId" text="groupId" />
+      <dm_debug_item v-model="dictScore" text="用户的分组分数数据字典" />
     </dm_debug_list>
 
-    <dm_list_data ref="listData" :cf="cfList" v-if="ready"></dm_list_data>
+    <dm_list_data ref="listData" :cf="cfList" v-if="ready" @after-search="afterSearch">
+      <template v-slot:slot_column_score="{row}">
+        {{$lodash.get(dictScore, `${row._idRel2}.score`)}}
+        </template>
+    </dm_list_data>
   </div>
 </template>
 
@@ -19,6 +24,7 @@ export default {
   },
   data() {
     return {
+      dictScore: {}, //用户的分组分数数据字典
       // // 计分板的ajax参数
       // scoreParam: {
       //   _systemId: "sys_api",
@@ -55,14 +61,45 @@ export default {
   //   }
   // },
   methods: {
-    // async afterSearch(list) {
-    //   console.log("list:", list);
-    //   let arrId = list.map(doc => doc._idRel2);
-    //   console.log("arrId:", arrId);
-    //   //设置id数组
-    //   // lodash.set(this.scoreParam, `findJson._id.$in`, arrId);
-    //   this.$refs.scorePanel.ajaxGetScore(); //调用：{ajax获取分数函数}
-    // },
+    async afterSearch(list) {
+      console.log("list:", list);
+      let arrGroupId = list.map(doc => doc._idRel2);
+      console.log("arrGroupId:#######", arrGroupId);
+      let datalist = await this.getGroupUserScore(arrGroupId);
+      console.log("datalist####:", datalist);
+
+      if (datalist && datalist.length) {
+        datalist.forEach(itemEach => {
+          this.dictScore[itemEach._idRel] = itemEach.score;
+        });
+      }
+      this.$refs.listData.$forceUpdate()//强制视图更新this.$forceUpdate()//强制视图更新
+    },
+
+    //函数：{ajax获取的用户学习缓存数据函数}
+    async getGroupUserScore(arrGroupId) {
+      let urlList = PUB.listCF.list_familiarity.url.list;
+      let ajaxParam = {
+        //_id: null,
+        // _userId: localStorage.api_loginUserName,//用户名
+        findJson: {
+          _idRel: { $in: arrGroupId },
+          dataType: "group",
+          _userId: localStorage.api_loginUserName
+        } //获取列表的数据总量
+      };
+      Object.assign(ajaxParam, PUB.listCF.list_familiarity.paramAddonPublic); //合并公共参数
+      console.log("ajaxParam:$$$$", ajaxParam);
+      let {
+        data: { list }
+      } = await axios({
+        //请求接口
+        method: "post",
+        url: PUB.domain + urlList,
+        data: ajaxParam //传递参数
+      });
+      return list;
+    }
   },
   async created() {
     this.cfList.findJsonDefault = {
@@ -70,7 +107,7 @@ export default {
     };
 
     //补充联合查询参数，很复杂！！！！
-  
+
     this.cfList.objParamAddon.arrLookup = [
       {
         //联合目标数据表
@@ -87,11 +124,11 @@ export default {
           _id: 1,
           _idRel: 1,
           _idRel2: 1,
-          sort: "$_data.sort",//序号获取
+          sort: "$_data.sort", //序号获取
           targetDoc: "$relDoc2._data"
         }
       },
-       //将targetDoc展开
+      //将targetDoc展开
       {
         $unwind: "$targetDoc"
       },
@@ -103,7 +140,8 @@ export default {
           _idRel2: 1,
           sort: 1,
           title: "$targetDoc.title",
-          dataType: "$targetDoc.dataType"
+          dataType: "$targetDoc.dataType",
+          countData: "$targetDoc.countData"
         }
       }
     ];

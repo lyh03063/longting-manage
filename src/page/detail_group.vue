@@ -40,6 +40,7 @@ export default {
       });
       this.groupDoc = data.doc;
       this.componentName = `detail_group_${this.groupDoc.dataType}`;
+      document.title=this.groupDoc.title;//修改浏览器标题栏文字
       this.ready = true;
     }
   },

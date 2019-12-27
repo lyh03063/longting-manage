@@ -46,6 +46,18 @@ DYDICT.html_api_category = {
   idColumn: "category",
   idColumn2: "_id"
 };
+
+DYDICT.js_api_category = {
+  ajax: {
+    param: { _systemId, _dataType: "js_api_category" },
+    url: "/info/getCommonList",
+  },
+  populateColumn: "categoryDoc",
+  idColumn: "category",
+  idColumn2: "_id"
+};
+
+
 DYDICT.note_category = {
   ajax: {
     param: { _systemId, _dataType: "note_category" },
@@ -202,6 +214,10 @@ D_ITEMS.userId = {
   label: "用户Id",
   prop: "userId",
 };
+D_ITEMS._userId = {
+  label: "_userId",
+  prop: "_userId",
+};
 D_ITEMS._id = {
   label: "uuid",
   prop: "_id",
@@ -249,6 +265,15 @@ D_ITEMS.demoList = {
 D_ITEMS.group_dataType = {
   label: "数据类型",
   prop: "dataType",
+};
+
+D_ITEMS.countData = {
+  label: "数据量",
+  prop: "countData",
+};
+D_ITEMS.myScore = {
+  label: "我的分数",
+  prop: "myScore",
 };
 //#endregion
 //#region 关系

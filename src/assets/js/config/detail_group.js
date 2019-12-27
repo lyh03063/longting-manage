@@ -25,6 +25,7 @@ PUB.listCF.detail_group_note = {
     singleBtns: {
         addon: [
             util.cfList.sBtns.modify,
+            util.cfList.sBtns.copy,
             util.cfList.sBtns.delete,
             {
                 uiType: "link",
@@ -148,6 +149,8 @@ PUB.listCF.detail_group_group = {
     columns: [
         // COLUMNS._idRel2,
         COLUMNS.title_fixed,
+        COLUMNS.countData,
+        COLUMNS.myScore,
         COLUMNS.group_dataType,
         COLUMNS.desc,
         COLUMNS.sort, 
@@ -155,7 +158,7 @@ PUB.listCF.detail_group_group = {
     //-------筛选表单字段数组-------
     searchFormItems: [],
     //-------详情字段数组-------
-    detailItems: [D_ITEMS.title, D_ITEMS.desc,  D_ITEMS._id, D_ITEMS._idRel, D_ITEMS._idRel2, D_ITEMS.sort],
+    detailItems: [D_ITEMS.title, D_ITEMS.desc,D_ITEMS.countData,  D_ITEMS._id, D_ITEMS._idRel, D_ITEMS._idRel2, D_ITEMS.sort],
     //-------新增、修改表单字段数组-------
     formItems: [F_ITEMS._idRel, F_ITEMS._idRel2, F_ITEMS.sort,]
 
