@@ -39,7 +39,7 @@ PUB.listCF.list_note = {
     "min-width": 210
   },
   //-------列配置数组-------
-  columns: [COLUMNS._id, COLUMNS.title_fixed, COLUMNS.keyword, COLUMNS.familiarity_select, COLUMNS.importance, COLUMNS.difficulty, COLUMNS.category_multiple, COLUMNS.demoList],
+  columns: [COLUMNS._id, COLUMNS.title_fixed_edit, COLUMNS.keyword_edit, COLUMNS.familiarity_select, COLUMNS.importance_edit, COLUMNS.difficulty_edit, COLUMNS.category_multiple, COLUMNS.demoList],
   //-------筛选表单字段数组-------
   searchFormItems: [F_ITEMS.title_search, F_ITEMS.note_category, F_ITEMS.importance, F_ITEMS.difficulty,],
   //-------详情字段数组-------

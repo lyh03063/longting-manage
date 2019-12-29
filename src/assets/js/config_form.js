@@ -71,6 +71,8 @@ F_ITEMS.title = { ...D_ITEMS.title };
 F_ITEMS.title_search = { ...D_ITEMS.title, type: "input_find_vague" };
 F_ITEMS.desc = { ...D_ITEMS.desc, type: "textarea" };
 F_ITEMS.detail = { ...D_ITEMS.detail, type: "editorTM" };
+
+F_ITEMS._data = { ...D_ITEMS._data, type: "jsonEditor" };
 //#endregion
 //#region html_api
 F_ITEMS.html_display = {
@@ -81,6 +83,9 @@ F_ITEMS.importance = {
   ...D_ITEMS.importance, type: "select",
   options: DYDICT.arr_importance
 };
+
+
+
 F_ITEMS.difficulty = {
   ...D_ITEMS.difficulty, type: "select",
   options: DYDICT.arr_difficulty
@@ -135,7 +140,16 @@ F_ITEMS.html_api_category = {
     keyValue: "_id"
   }
 };
-
+F_ITEMS.css_api_category = {
+  ...D_ITEMS.category,
+  type: "select",
+  ajax: {
+    param: { _systemId, _dataType: "css_api_category" },
+    url: "/info/getCommonList",
+    keyLabel: "title",
+    keyValue: "_id"
+  }
+};
 F_ITEMS.js_api_category = {
   ...D_ITEMS.category,
   type: "select",

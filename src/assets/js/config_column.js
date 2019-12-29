@@ -20,6 +20,10 @@ COLUMNS.orderId = {
 //#region 通用
 COLUMNS.title_fixed = { ...D_ITEMS.title, width: 320, fixed: true };
 COLUMNS.title_fixed_w150 = { ...COLUMNS.title_fixed, width: 150 };
+COLUMNS.title_fixed_w150_edit = { ...COLUMNS.title_fixed_w150, edit: true };
+COLUMNS.title_fixed_edit = { ...COLUMNS.title_fixed, edit: true };
+
+
 COLUMNS.desc = { ...D_ITEMS.desc, width: 160, };
 COLUMNS.html_display = { ...D_ITEMS.html_display, width: 70, };
 COLUMNS.importance = {
@@ -28,6 +32,11 @@ COLUMNS.importance = {
     return lodash.get(DYDICT.importance, `${rowData.importance}.label`);
   },
 };
+
+COLUMNS.importance_edit = {
+  ...COLUMNS.importance, edit: true
+};
+COLUMNS._data = { ...D_ITEMS._data, width: 90, };
 
 //#endregion
 //#region html_api
@@ -38,11 +47,19 @@ COLUMNS.difficulty = {
     return lodash.get(DYDICT.difficulty, `${rowData.difficulty}.label`);
   },
 };
+
+COLUMNS.difficulty_edit = {
+  ...COLUMNS.difficulty, edit: true
+};
 COLUMNS.english = { ...D_ITEMS.english, width: 70, };
 COLUMNS.html_version = { ...D_ITEMS.html_version, width: 70, };
+
 COLUMNS.selfClose = { ...D_ITEMS.selfClose, width: 70, };
 COLUMNS.cateIdOld = { ...D_ITEMS.cateIdOld, width: 70, };
 COLUMNS.demoList = { ...D_ITEMS.demoList, width: 90, };
+
+
+COLUMNS.css_version = { ...D_ITEMS.css_version, width: 70, };
 //#endregion
 //#region 管理员
 //  COLUMNS.detail = {...D_ITEMS.detail, width: 120,};
@@ -73,6 +90,8 @@ COLUMNS.dataId = { ...D_ITEMS.dataId, width: 210, };
 COLUMNS.userId = { ...D_ITEMS.userId, width: 120, };
 COLUMNS._userId = { ...D_ITEMS._userId, width: 120, };
 COLUMNS._id = { ...D_ITEMS._id, width: 120, };
+COLUMNS.myScore = { ...D_ITEMS.myScore, width: 90, };
+COLUMNS.score = { ...D_ITEMS.score, width: 90, };
 //#endregion
 //#region 分组
 COLUMNS.group_dataType = { ...D_ITEMS.group_dataType, width: 90, };
@@ -122,4 +141,5 @@ COLUMNS.link = { ...D_ITEMS.link, width: 120, };
 COLUMNS.note_linkList = { ...D_ITEMS.note_linkList, width: 120, };
 COLUMNS.note_noteList = { ...D_ITEMS.note_noteList, width: 120, };
 COLUMNS.keyword = { ...D_ITEMS.keyword, width: 70, };
+COLUMNS.keyword_edit = { ...COLUMNS.keyword, edit: true, };
 //#endregion

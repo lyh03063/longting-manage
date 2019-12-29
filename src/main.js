@@ -34,6 +34,7 @@ let arrRouteListName = [
   "list_admin",
   "list_role",
   "list_html_api",
+  "list_css_api",
   "list_js_api",
   "list_note",
   "list_all",

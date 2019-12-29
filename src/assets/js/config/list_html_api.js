@@ -6,7 +6,7 @@ PUB.listCF.list_html_api = {
   listIndex: "list_html_api", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
   twoTitle: "Html-api", //面包屑2级菜单
-  ...PUB.listCFCommon2,//展开公共配置
+  ...PUB.listCFCommon4,//展开公共配置
   //批量操作按钮的配置
   batchBtns: {
 
@@ -33,7 +33,7 @@ PUB.listCF.list_html_api = {
     _dataType
   },
   //-------列配置数组-------
-  columns: [COLUMNS.title_fixed_w150,COLUMNS.keyword,  COLUMNS.desc, COLUMNS.category, COLUMNS.familiarity_select, COLUMNS.html_display, COLUMNS.importance,
+  columns: [COLUMNS.title_fixed_w150_edit,COLUMNS.keyword_edit,  COLUMNS.desc, COLUMNS.category, COLUMNS.familiarity_select, COLUMNS.html_display, COLUMNS.importance,
   COLUMNS.difficulty, COLUMNS.english, COLUMNS.html_version,
    COLUMNS.selfClose, COLUMNS.cateIdOld, COLUMNS.demoList],
   //-------筛选表单字段数组-------

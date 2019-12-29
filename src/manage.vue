@@ -95,6 +95,11 @@ export default {
             title: "Html-API"
           },
           {
+            index: "list_css_api",
+            route: "/list_css_api",
+            title: "Css-API"
+          },
+          {
             index: "list_js_api",
             route: "/list_js_api",
             title: "Javascript-API"
@@ -135,6 +140,11 @@ export default {
             index: "list_html_api_category",
             route: "/list_common?type=html_api_category",
             title: "Html-API分类"
+          },
+           {
+            index: "list_css_api_category",
+            route: "/list_common?type=css_api_category",
+            title: "Css-API分类"
           },
           {
             index: "list_js_api_category",

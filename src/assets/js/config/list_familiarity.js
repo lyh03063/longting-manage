@@ -23,7 +23,7 @@ let _dataType = "familiarity",
     _dataType
   },
   //-------列配置数组-------
-  columns: [COLUMNS.familiarity, COLUMNS.dataType, COLUMNS.dataId, COLUMNS._userId,COLUMNS.userId,COLUMNS.studyTime ],
+  columns: [COLUMNS.familiarity,COLUMNS.score, COLUMNS.dataType, COLUMNS.dataId, COLUMNS._userId,COLUMNS.userId,COLUMNS._idRel,COLUMNS.studyTime ],
   //-------筛选表单字段数组-------
   searchFormItems: [F_ITEMS.dataId, F_ITEMS.userId,F_ITEMS._userId,],
   //-------详情字段数组-------

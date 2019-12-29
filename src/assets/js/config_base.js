@@ -1,3 +1,4 @@
+
 window.PUB = {}
 PUB.domain = "http://localhost:3000"
 //PUB.domain = 'http://test.dmagic.cn'
@@ -12,7 +13,7 @@ PUB.userId = localStorage.api_loginUserName;
 //公共的列表对象
 PUB.listCF = {}
 
-PUB.listUrl={
+PUB.listUrl = {
   list: `/info/getCommonList`, //列表接口
   add: "/info/commonAdd", //新增接口
   modify: "/info/commonModify", //修改接口
@@ -32,18 +33,31 @@ PUB.listCFCommon = {
   },
 }
 
+
+let sBtnDetail = {
+  uiType: "link",
+  text: "详情",
+  target: "_blank",
+  //地址格式函数
+  urlFormatter: function (row) {
+    return `#/detail_data?dataId=${row._id}`;
+  }
+
+}
+let sBtnLink = {
+  uiType: "link",
+  text: "查看",
+  target: "_blank",
+  urlFormatter: function (row) {
+    return `${row.link}`;
+  },
+
+}
+
 PUB.singleBtns_copy_detail = {
   addon: [
     ...util.cfList.sBtns.arrAllBtns,
-    {
-      uiType: "link",
-      text: "详情",
-      target: "_blank",
-      //地址格式函数
-      urlFormatter: function (row) {
-        return `#/detail_data?dataId=${row._id}`;
-      },
-    },
+    sBtnDetail,
   ]
 }
 
@@ -61,15 +75,8 @@ PUB.listCFCommon2 = {
 PUB.singleBtns_copy_link = {
   addon: [
     ...util.cfList.sBtns.arrAllBtns,
-    {
-      uiType: "link",
-      text: "打开网址",
-      target: "_blank",
-      urlFormatter: function (row) {
-        return `${row.link}`;
-      },
+    sBtnLink,
 
-    },
   ]
 }
 
@@ -79,6 +86,24 @@ PUB.listCFCommon3 = {
   //列表单项操作按钮的配置
   singleBtns: PUB.singleBtns_copy_link,
 }
+
+
+PUB.singleBtns4 = {
+  addon: [
+    ...util.cfList.sBtns.arrAllBtns,
+    sBtnDetail,
+    sBtnLink,
+  ]
+}
+//第四套-有详情和链接按钮
+PUB.listCFCommon4 = {
+  url: PUB.listUrl,
+  columnOperate: { "min-width": 270 },
+  //列表单项操作按钮的配置
+  singleBtns: PUB.singleBtns4,
+}
+
+
 
 
 
@@ -97,4 +122,17 @@ window.setFamiliarityAjaxCF = function (listCF, idKey = "_id") {
     idColumn2: "_idRel"
   }
   listCF.dynamicDict.push(dict)
+}
+
+
+window.FN = {}//存放本站公共函数的对象
+//函数：{ajax根据关键词获取关联数据列表的函数}
+FN.ajaxlistBykeyword = async function ({ param = {} }) {
+  let { data } = await axios({
+    //请求接口
+    method: "post",
+    url: `${PUB.domain}/info/getListBykeyword`,
+    data: param
+  });
+  return data.list;
 }

@@ -16,6 +16,8 @@ import  "@/assets/js/config/list_role.js";
 
 import  "@/assets/js/config/list_html_api.js";
 import  "@/assets/js/config/list_html_api_category.js";
+import  "@/assets/js/config/list_css_api.js";
+import  "@/assets/js/config/list_css_api_category.js";
 import  "@/assets/js/config/list_familiarity.js";
 
 import  "@/assets/js/config/list_article.js";

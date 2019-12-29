@@ -31,6 +31,20 @@ DYDICT.arr_selfClose =  [
   { label: "是", value: 1 },
 ]
 DYDICT.selfClose =  lodash.keyBy(DYDICT.arr_selfClose, 'value')
+
+DYDICT.arr_dataType =  [
+  { label: "课堂笔记", value: "note" },
+  { label: "前端demo", value: "front_demo" },
+  { label: "习题", value: "exercises" },
+  { label: "分组", value: "group" },
+  { label: "HtmlApi", value: "html_api" },
+  { label: "Js-Api", value: "js_api" },
+  { label: "Css-Api", value: "css_api" },
+  { label: "视频", value: "vedio" },
+ 
+]
+DYDICT.dataType =  lodash.keyBy(DYDICT.arr_dataType, 'value')
+
 DYDICT.arr_aaaa =  [
 ]
 DYDICT.arr_aaaa =  [
@@ -46,7 +60,15 @@ DYDICT.html_api_category = {
   idColumn: "category",
   idColumn2: "_id"
 };
-
+DYDICT.css_api_category = {
+  ajax: {
+    param: { _systemId, _dataType: "css_api_category" },
+    url: "/info/getCommonList",
+  },
+  populateColumn: "categoryDoc",
+  idColumn: "category",
+  idColumn2: "_id"
+};
 DYDICT.js_api_category = {
   ajax: {
     param: { _systemId, _dataType: "js_api_category" },
@@ -154,6 +176,14 @@ D_ITEMS.detail = {
   prop: "_detail",
   type:"html",
 };
+
+D_ITEMS._data = {
+  label: "_data对象",
+  prop: "_data",
+  
+};
+
+
 //#endregion
 //#region 管理员
 D_ITEMS.userName = {
@@ -261,6 +291,15 @@ D_ITEMS.demoList = {
   prop: "demoList",
 };
 //#endregion
+
+
+D_ITEMS.css_version = {
+  label: "版本",
+  prop: "version",
+};
+
+
+
 //#region 分组
 D_ITEMS.group_dataType = {
   label: "数据类型",
@@ -270,6 +309,10 @@ D_ITEMS.group_dataType = {
 D_ITEMS.countData = {
   label: "数据量",
   prop: "countData",
+};
+D_ITEMS.score = {
+  label: "分数对象",
+  prop: "score",
 };
 D_ITEMS.myScore = {
   label: "我的分数",

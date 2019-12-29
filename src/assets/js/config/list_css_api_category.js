@@ -1,14 +1,14 @@
-
-let _dataType = "front_demo",
+let _dataType = "css_api_category",
   _systemId = PUB._systemId;
-
-PUB.listCF.list_front_demo = {
+ 
+  PUB.listCF.list_css_api_category= {
   idKey: "_id", //键名
   pageSize: 20,
-  listIndex: "list_front_demo", //vuex对应的字段~
+  listIndex: "list_css_api_category", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
-  twoTitle: "前端Demo", //面包屑2级菜单
-  ...PUB.listCFCommon4,//展开公共配置
+  twoTitle: "Css-api分类", //面包屑2级菜单
+  ...PUB.listCFCommon2,//展开公共配置
+  //objParamAddon列表接口的附加参数
   objParamAddon: {
     _systemId,
     _dataType
@@ -19,18 +19,15 @@ PUB.listCF.list_front_demo = {
     _dataType
   },
   //-------列配置数组-------
-  columns: [COLUMNS.title_fixed_edit,COLUMNS.keyword_edit,COLUMNS.link, COLUMNS.desc, COLUMNS.category],
+  columns: [COLUMNS.title_fixed, COLUMNS.desc, COLUMNS.category],
   //-------筛选表单字段数组-------
   searchFormItems: [F_ITEMS.title_search],
   //-------详情字段数组-------
-  detailItems: [D_ITEMS.title,D_ITEMS.keyword,D_ITEMS.link, D_ITEMS.desc, D_ITEMS.category, D_ITEMS.detail,D_ITEMS._id,],
+  detailItems: [D_ITEMS.title, D_ITEMS.desc,D_ITEMS.category],
   //-------新增、修改表单字段数组-------
   formItems: [
     F_ITEMS.title,
-    F_ITEMS.link,
-    F_ITEMS.keyword,
     F_ITEMS.desc,
-    F_ITEMS.detail,
-
+   
   ]
 }

@@ -2,67 +2,78 @@
   <div class style="padding:10px">
     <h1 class="title TAC">{{doc.title}}</h1>
     <div class="C_999 TAR" style="padding:10px">
-      数据类型：{{doc._dataType}} 关键词：{{doc.keyword}}
+      数据类型：{{dataTypeLabel}} &nbsp;&nbsp;关键词：{{doc.keyword}}
       <el-button plain @click="showDialogEdit" size="mini">编辑</el-button>
     </div>
     <el-tabs tab-position="left">
-      <el-tab-pane label="详情">
+      <el-tab-pane :label="`${dataTypeLabel}详情`">
         <div class v-html="doc._detail"></div>
+        <div class v-if="doc.link">
+          以下内容通过嵌入其他网页引用：
+          <a target="_blank" :href="doc.link">在新页面打开</a>
+        </div>
+        <iframe :src="doc.link" v-if="doc.link" class="link_iframe" seamless></iframe>
       </el-tab-pane>
 
       <el-tab-pane
         v-if="noteListByKeyword.length!==0"
         :label="`关联笔记 (${noteListByKeyword.length})`"
       >
-        <div class>
-          <ul class="list-link">
-            <li v-for="docNote in noteListByKeyword" :key="docNote._id">
-              <a target="_blank" :href="`#/detail_data?dataId=${docNote._id}`">{{docNote.title}}</a>
-            </li>
-          </ul>
-        </div>
+        <ul class="list-link">
+          <li v-for="docNote in noteListByKeyword" :key="docNote._id">
+            <a target="_blank" :href="`#/detail_data?dataId=${docNote._id}`">{{docNote.title}}</a>
+          </li>
+        </ul>
       </el-tab-pane>
       <el-tab-pane
         v-if="htmlAPIListByKeyword.length!==0"
         :label="`关联Html-API (${htmlAPIListByKeyword.length})`"
       >
-        <div class>
-          <ul class="list-link">
-            <li v-for="docApi in htmlAPIListByKeyword" :key="docApi._id">
-              <a
-                target="_blank"
-                :href="`https://www.runoob.com/tags/tag-${docApi.title}.html`"
-              >{{docApi.title}}：{{docApi.desc}}</a>
-            </li>
-          </ul>
-        </div>
+        <ul class="list-link">
+          <li v-for="docApi in htmlAPIListByKeyword" :key="docApi._id">
+            <!-- :href="`${docApi.link}`" -->
+            <a
+              target="_blank"
+              :href="`#/detail_data?dataId=${docApi._id}`"
+            >{{docApi.title}}：{{docApi.desc}}</a>
+          </li>
+        </ul>
+      </el-tab-pane>
+      <el-tab-pane
+        v-if="cssAPIListByKeyword.length!==0"
+        :label="`关联Css-API (${cssAPIListByKeyword.length})`"
+      >
+        <ul class="list-link">
+          <li v-for="docApi in cssAPIListByKeyword" :key="docApi._id">
+            <a
+              target="_blank"
+              :href="`#/detail_data?dataId=${docApi._id}`"
+            >{{docApi.title}}：{{docApi.desc}}</a>
+          </li>
+        </ul>
       </el-tab-pane>
       <el-tab-pane
         v-if="jsAPIListByKeyword.length!==0"
         :label="`关联Js-API (${jsAPIListByKeyword.length})`"
       >
-        <div class>
-          <ul class="list-link">
-            <li v-for="docApi in jsAPIListByKeyword" :key="docApi._id">
-              <a
-                target="_blank"
-                :href="`${docApi.link}`"
-              >{{docApi.title}}：{{docApi.desc}}</a>
-            </li>
-          </ul>
-        </div>
+        <ul class="list-link">
+          <li v-for="docApi in jsAPIListByKeyword" :key="docApi._id">
+            <a
+              target="_blank"
+              :href="`#/detail_data?dataId=${docApi._id}`"
+            >{{docApi.title}}：{{docApi.desc}}</a>
+          </li>
+        </ul>
       </el-tab-pane>
       <el-tab-pane
         v-if="frontDemoListByKeyword.length!==0"
         :label="`关联前端Demo (${frontDemoListByKeyword.length})`"
       >
-        <div class>
-          <ul class="list-link">
-            <li v-for="docFrontDemo in frontDemoListByKeyword" :key="docFrontDemo._id">
-              <a target="_blank" :href="`${docFrontDemo.link}`">{{docFrontDemo.title}}</a>
-            </li>
-          </ul>
-        </div>
+        <ul class="list-link">
+          <li v-for="docApi in frontDemoListByKeyword" :key="docApi._id">
+            <a target="_blank" :href="`#/detail_data?dataId=${docApi._id}`">{{docApi.title}}</a>
+          </li>
+        </ul>
       </el-tab-pane>
     </el-tabs>
     <!--编辑数据弹窗-->
@@ -119,8 +130,10 @@ export default {
         ]
       }, //编辑数据表单配置
       doc: {},
+      dataTypeLabel: "", //数据类型标签
       noteListByKeyword: [{}], //关键词匹配的笔记列表
       htmlAPIListByKeyword: [{}], //关键词匹配的Html-API列表
+      cssAPIListByKeyword: [{}], //关键词匹配的Css-API列表
       jsAPIListByKeyword: [{}], //关键词匹配的Js-API列表
       frontDemoListByKeyword: [{}], //关键词匹配的前端demo列表
       paramByKeyword: null //根据关键词请求关联数据的ajax固定参数
@@ -154,61 +167,29 @@ export default {
     },
     //函数：{ajax获取关联笔记列表}
     async ajaxGetNoteList() {
-      //如果关键词数组存在
-      let { data } = await axios({
-        //请求接口
-        method: "post",
-        url: `${PUB.domain}/info/getListBykeyword`,
-        data: {
-          ...this.paramByKeyword,
-          _dataType: "note"
-        }
-      });
-      this.noteListByKeyword = data.list;
+      let param = { ...this.paramByKeyword, _dataType: "note" };
+      this.noteListByKeyword = await FN.ajaxlistBykeyword({ param }); //ajax获取关联列表
     },
 
     //函数：{ajax获取关联Html-API列表}
     async ajaxGetHtmlApiList() {
-      //如果关键词数组存在
-      let { data } = await axios({
-        //请求接口
-        method: "post",
-        url: `${PUB.domain}/info/getListBykeyword`,
-        data: {
-          ...this.paramByKeyword,
-          _dataType: "html_api"
-        }
-      });
-      this.htmlAPIListByKeyword = data.list;
+      let param = { ...this.paramByKeyword, _dataType: "html_api" };
+      this.htmlAPIListByKeyword = await FN.ajaxlistBykeyword({ param }); //ajax获取关联列表
     },
-
+    //函数：{ajax获取关联Css-API列表}
+    async ajaxGetCssApiList() {
+      let param = { ...this.paramByKeyword, _dataType: "css_api" };
+      this.cssAPIListByKeyword = await FN.ajaxlistBykeyword({ param }); //ajax获取关联列表
+    },
     //函数：{ajax获取关联Js-API列表}
     async ajaxGetJsApiList() {
-      //如果关键词数组存在
-      let { data } = await axios({
-        //请求接口
-        method: "post",
-        url: `${PUB.domain}/info/getListBykeyword`,
-        data: {
-          ...this.paramByKeyword,
-          _dataType: "js_api"
-        }
-      });
-      this.jsAPIListByKeyword = data.list;
+      let param = { ...this.paramByKeyword, _dataType: "js_api" };
+      this.jsAPIListByKeyword = await FN.ajaxlistBykeyword({ param }); //ajax获取关联列表
     },
     //函数：{ajax获取关联前端demo列表}
     async ajaxGetFrontDemoList() {
-      //如果关键词数组存在
-      let { data } = await axios({
-        //请求接口
-        method: "post",
-        url: `${PUB.domain}/info/getListBykeyword`,
-        data: {
-          ...this.paramByKeyword,
-          _dataType: "front_demo"
-        }
-      });
-      this.frontDemoListByKeyword = data.list;
+      let param = { ...this.paramByKeyword, _dataType: "front_demo" };
+      this.frontDemoListByKeyword = await FN.ajaxlistBykeyword({ param }); //ajax获取关联列表
     },
     //函数：{初始化函数}
 
@@ -223,8 +204,15 @@ export default {
         } //传递参数
       });
       this.doc = data.doc;
-      let keyword = this.doc.keyword;
 
+      let { title, keyword, _dataType } = this.doc;
+      // let keyword = this.doc.keyword;
+
+      this.dataTypeLabel = lodash.get(
+        DYDICT.dataType,
+        `${this.doc._dataType}.label`
+      );
+      document.title = `${title}-${this.dataTypeLabel}`; //修改浏览器标题栏文字
       //根据关键词请求关联数据的ajax固定参数
       this.paramByKeyword = {
         _systemId: PUB._systemId,
@@ -241,6 +229,7 @@ export default {
       if (keyword) {
         this.ajaxGetNoteList(); //调用：{ajax获取关联笔记列表}
         this.ajaxGetHtmlApiList(); //调用：{ajax获取关联Html-API列表}
+        this.ajaxGetCssApiList(); //调用：{ajax获取关联Css-API列表}
         this.ajaxGetFrontDemoList(); //调用：{ajax获取关联前端demo列表}
         this.ajaxGetJsApiList(); //调用：{ajax获取关联Js-API列表}
       }
@@ -255,5 +244,9 @@ export default {
 </script>
 
 
-<style >
+<style  scoped>
+.link_iframe {
+  width: 100%;
+  height: 600px;
+}
 </style>
