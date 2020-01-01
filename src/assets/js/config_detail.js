@@ -380,6 +380,18 @@ D_ITEMS.item_type = {
   prop: "type",
   width: 160,
 };
+
+D_ITEMS.vedio  = {
+  label: "视频上传",
+  prop: "vedio",
+  
+};
+
+
+
+
+
+
 D_ITEMS.aaaa = 1111;
 D_ITEMS.aaaa = 1111;
 D_ITEMS.aaaa = 1111;

@@ -103,7 +103,7 @@ F_ITEMS.selfClose = {
 };
 F_ITEMS.demoList = {
   ...D_ITEMS.demoList,
-   type: "collection",
+  type: "collection",
   collectionlistType: "form",
   // showToolbar: false, //不显示集合的工具栏
   collectionCfForm: {
@@ -329,6 +329,18 @@ F_ITEMS.keyword = { ...D_ITEMS.keyword, type: "tag_list" };
 F_ITEMS.link = { ...D_ITEMS.link, type: "input" };
 //#endregion
 
+
+F_ITEMS.vedio = {
+  ...D_ITEMS.vedio,
+  type: "upload",
+  uploadConfig: {
+    limit: 2,
+    listType: "text"
+  }
+};
+
+
+
 // import list_note_for_select from "@/assets/js/config/list_note.js"
 // //#region 笔记
 // F_ITEMS.note_linkList = { ...D_ITEMS.note_linkList, 
@@ -342,6 +354,6 @@ F_ITEMS.link = { ...D_ITEMS.link, type: "input" };
 //     cfList: list_note_for_select
 //   },
 //  };
- 
+
 //#endregion
 F_ITEMS.aaaa = 11111;

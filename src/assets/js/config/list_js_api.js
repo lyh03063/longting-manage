@@ -37,7 +37,7 @@ PUB.listCF.list_js_api = {
   COLUMNS.difficulty, COLUMNS.english, 
    COLUMNS.cateIdOld],
   //-------筛选表单字段数组-------
-  searchFormItems: [F_ITEMS.title_search, F_ITEMS.js_api_category,F_ITEMS.importance, F_ITEMS.difficulty, ],
+  searchFormItems: [F_ITEMS.title, F_ITEMS.js_api_category,F_ITEMS.importance, F_ITEMS.difficulty, ],
   //-------详情字段数组-------
   detailItems: [D_ITEMS._id, D_ITEMS.title,D_ITEMS.keyword,  D_ITEMS.desc, D_ITEMS.detail, D_ITEMS.category,  D_ITEMS.importance,
   D_ITEMS.difficulty, D_ITEMS.english,

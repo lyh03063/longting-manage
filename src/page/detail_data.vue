@@ -1,18 +1,30 @@
 <template>
   <div class style="padding:10px">
-    <h1 class="title TAC">{{doc.title}}</h1>
+    <h1 class="title TAC">{{title}}</h1>
     <div class="C_999 TAR" style="padding:10px">
       数据类型：{{dataTypeLabel}} &nbsp;&nbsp;关键词：{{doc.keyword}}
       <el-button plain @click="showDialogEdit" size="mini">编辑</el-button>
     </div>
+
+    <dm_debug_list>
+      <dm_debug_item v-model="doc" text="doc" />
+    </dm_debug_list>
+
     <el-tabs tab-position="left">
       <el-tab-pane :label="`${dataTypeLabel}详情`">
         <div class v-html="doc._detail"></div>
-        <div class v-if="doc.link">
-          以下内容通过嵌入其他网页引用：
-          <a target="_blank" :href="doc.link">在新页面打开</a>
+
+        <div class v-if="doc._dataType=='vedio'">
+          <video width="760" height="440" controls :src="srcVedio"></video>
         </div>
-        <iframe :src="doc.link" v-if="doc.link" class="link_iframe" seamless></iframe>
+
+        <template class v-if="doc.link&&isShowIframe">
+          <div class>
+            以下内容通过嵌入其他网页引用：
+            <a target="_blank" :href="doc.link">在新页面打开</a>
+          </div>
+          <iframe :src="doc.link" class="link_iframe" seamless></iframe>
+        </template>
       </el-tab-pane>
 
       <el-tab-pane
@@ -71,6 +83,16 @@
       >
         <ul class="list-link">
           <li v-for="docApi in frontDemoListByKeyword" :key="docApi._id">
+            <a target="_blank" :href="`#/detail_data?dataId=${docApi._id}`">{{docApi.title}}</a>
+          </li>
+        </ul>
+      </el-tab-pane>
+      <el-tab-pane
+        v-if="vedioListByKeyword.length!==0"
+        :label="`关联视频 (${vedioListByKeyword.length})`"
+      >
+        <ul class="list-link">
+          <li v-for="docApi in vedioListByKeyword" :key="docApi._id">
             <a target="_blank" :href="`#/detail_data?dataId=${docApi._id}`">{{docApi.title}}</a>
           </li>
         </ul>
@@ -136,8 +158,32 @@ export default {
       cssAPIListByKeyword: [{}], //关键词匹配的Css-API列表
       jsAPIListByKeyword: [{}], //关键词匹配的Js-API列表
       frontDemoListByKeyword: [{}], //关键词匹配的前端demo列表
+      vedioListByKeyword: [{}], //关键词匹配的视频列表
       paramByKeyword: null //根据关键词请求关联数据的ajax固定参数
     };
+  },
+  computed: {
+    title() {
+      let { title, desc } = this.doc;
+      if (desc) {
+        title += `：${desc}`;
+      }
+      return title;
+    },
+    srcVedio() {
+      let src = lodash.get(this.doc, `vedio[0].url`);
+
+      return src;
+    },
+    isShowIframe() {
+      let arrTypeNoIframe = ["vedio"];
+      let flag = true;
+      if (arrTypeNoIframe.includes(this.doc._dataType)) {
+        flag = false;
+      }
+      console.log("flag:", flag);
+      return flag;
+    }
   },
 
   methods: {
@@ -191,6 +237,11 @@ export default {
       let param = { ...this.paramByKeyword, _dataType: "front_demo" };
       this.frontDemoListByKeyword = await FN.ajaxlistBykeyword({ param }); //ajax获取关联列表
     },
+    //函数：{ajax获取关联视频列表}
+    async ajaxGetFrontDemoList() {
+      let param = { ...this.paramByKeyword, _dataType: "vedio" };
+      this.vedioListByKeyword = await FN.ajaxlistBykeyword({ param }); //ajax获取关联列表
+    },
     //函数：{初始化函数}
 
     async init() {
@@ -222,7 +273,8 @@ export default {
           title: 1,
           desc: 1,
           keyword: 1,
-          link: 1
+          link: 1,
+          vedio: 1
         }
       };
 

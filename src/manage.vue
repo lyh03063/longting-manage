@@ -114,6 +114,11 @@ export default {
             route: "/list_common?type=front_demo",
             title: "前端demo"
           },
+           {
+            index: "list_vedio",
+            route: "/list_common?type=vedio",
+            title: "视频"
+          },
           {
             index: "list_exercises",
             route: "/list_common?type=exercises",

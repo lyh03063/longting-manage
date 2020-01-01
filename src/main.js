@@ -18,7 +18,7 @@ import "@/assets/css/util.scss"; //导入公共样式文件
 
 // import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-import "./mock.js";
+// import "./mock.js";
 // import login from "@/login";
 
 import manage from "@/manage";

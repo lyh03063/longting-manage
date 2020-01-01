@@ -143,3 +143,5 @@ COLUMNS.note_noteList = { ...D_ITEMS.note_noteList, width: 120, };
 COLUMNS.keyword = { ...D_ITEMS.keyword, width: 70, };
 COLUMNS.keyword_edit = { ...COLUMNS.keyword, edit: true, };
 //#endregion
+
+COLUMNS.vedio = { ...D_ITEMS.vedio, width: 70,};

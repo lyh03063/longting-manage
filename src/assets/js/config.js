@@ -39,7 +39,7 @@ import  "@/assets/js/config/list_url.js";
 import  "@/assets/js/config/list_front_demo.js";
 import  "@/assets/js/config/list_js_api.js";
 import  "@/assets/js/config/list_js_api_category.js";
-
+import  "@/assets/js/config/list_vedio.js";
 
 //#region PUB.objDictArr/PUB.dict公共字典对象
 PUB.objDictArr = {
