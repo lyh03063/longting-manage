@@ -1,7 +1,7 @@
 <template>
   <div class="login-page-box">
     <div class="login-bgimg-box"></div>
-    <div class="login-father-box" v-show="ak47">
+    <div class="login-father-box" >
       <div class="login-box">
         <div class="login-user-img-box">
           <div class="login-user-img el-icon-s-custom"></div>
@@ -48,9 +48,7 @@ export default {
       if (value === "") {
         callback(new Error("请输入密码"));
       }
-      // else if (!regpassWordword.test(value)) {
-      //   callback(new Error("密码格式不合规,请设置8-20位，英文字母+数字的组合"));
-      // }
+     
       else {
         callback(); //通过校验
       }
@@ -58,7 +56,7 @@ export default {
 
     return {
       systemName: PUB.systemName,
-      ak47: true,
+     
 
       ruleForm: {
         //表单数据.
@@ -90,7 +88,7 @@ export default {
             passWord: this.ruleForm.passWord
           }
         }
-      });
+      }); 
       console.log("data:", data);
 
       let userName = lodash.get(data, `doc.userName`);
@@ -116,8 +114,6 @@ export default {
       }
     },
     submitForm(formName) {
-      this.$refs.ruleForm;
-      this.$refs["ruleForm"];
 
       this.$refs.ruleForm.validate(valid => {
         //表单组件执行validate校验方法
@@ -131,31 +127,22 @@ export default {
   created() {
     //------------如果已经登录------------
     if (localStorage.api_isLogin == 1) {
-      this.ak47 = false;
-      // this.$message({
-      //   message: "您已登录,请勿重新登录",
-      //   type: "warning",
-      //   duration: 1200
-      // });
+     
       setTimeout(() => {
         this.$router.push({ path: "/listHome" });
       }, 10);
       //跳转到后台首页
     }
-    // } else {
-    //   this.$router.push({ path: "/home" });
-    // }
+    
   },
   beforeMount() {
-    console.log("挂载前$el是未定义的", this.$el);
   },
   mounted() {
-    console.log("$el是temlate，渲染出整个div", this.$el);
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style lang="scss" >
 .login-page-box {
   background-color: rgb(147, 222, 254);
@@ -165,7 +152,7 @@ export default {
 body,
 html {
   height: 100%;
-  // overflow: hidden;
+
 }
 .login-box {
   width: 100%;

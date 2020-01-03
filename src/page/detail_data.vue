@@ -1,7 +1,6 @@
 <template>
   <div class style="padding:10px">
     <h1 class="title TAC MB10">{{title}}</h1>
-    
 
     <dm_debug_list>
       <dm_debug_item v-model="doc" text="doc" />
@@ -9,19 +8,18 @@
     </dm_debug_list>
 
     <div class="familiarity_box MB10">
-
       {{dataTypeLabel}}-熟悉度：
       <familiarity_select
-      class="MT6 "
+        class="MT6"
         v-model="familiarityDoc"
         :data="doc"
         :dataType="doc._dataType"
         v-if="doc._dataType"
       ></familiarity_select>
-      <div class="C_999 DPIB FR MT6" >
-      关键词：{{doc.keyword}}
-      <el-button plain @click="showDialogEdit" size="mini">编辑</el-button>
-    </div>
+      <div class="C_999 DPIB FR MT6">
+        关键词：{{doc.keyword}}
+        <el-button plain @click="showDialogEdit" size="mini">编辑</el-button>
+      </div>
     </div>
 
     <el-tabs tab-position="left">
@@ -137,7 +135,8 @@
 export default {
   components: {
     familiarity_select: () =>
-      import("@/components/common/familiarity_select.vue")
+      import("@/components/common/familiarity_select.vue"),
+   
   },
   data() {
     return {
@@ -347,6 +346,6 @@ export default {
   /* border: 1px #ddd solid; */
   border-radius: 5px;
   padding: 0 10px;
-  height: 40px
+  height: 40px;
 }
 </style>

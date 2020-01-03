@@ -39,10 +39,13 @@
 </template>
 
 <script>
-import score_panel from "@/components/common/score_panel.vue";
-import familiarity_select from "@/components/common/familiarity_select.vue";
+
 export default {
-  components: { familiarity_select, score_panel },
+   components: {
+    familiarity_select: () =>
+      import("@/components/common/familiarity_select.vue"),
+    score_panel: () => import("@/components/common/score_panel.vue")
+  },
   props: {
     groupDoc: {},
     groupId: {}

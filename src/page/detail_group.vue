@@ -12,11 +12,15 @@
 </template>
 
 <script>
-import detail_group_note from "@/page/detail_group_note";
-import detail_group_group from "@/page/detail_group_group";
+
 
 export default {
-  components: { detail_group_note,detail_group_group },
+  components: { 
+     detail_group_note: () => import("@/page/detail_group_note"),
+      detail_group_group: () => import("@/page/detail_group_group"),
+    
+    // detail_group_note,detail_group_group 
+    },
   data() {
     return {
       componentName: null, //动态组件名称

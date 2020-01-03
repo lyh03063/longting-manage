@@ -14,8 +14,7 @@
 </template>
 
 <script>
-// import score_panel from "@/components/common/score_panel.vue";
-// import familiarity_select from "@/components/common/familiarity_select.vue";
+
 export default {
   components: {},
   props: {

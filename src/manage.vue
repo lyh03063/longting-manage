@@ -39,9 +39,10 @@
 </template>
 
 <script>
-import NavMenu from "./components/NavMenu/NavMenu";
 export default {
-  components: { NavMenu }, //注册组件
+  components: { 
+     NavMenu: () => import("./components/NavMenu/NavMenu"),
+  }, //注册组件
   methods: {
     // //函数：{切换调试模式函数}
     // toggleDebug() {
