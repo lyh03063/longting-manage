@@ -1,14 +1,28 @@
 <template>
   <div class style="padding:10px">
-    <h1 class="title TAC">{{title}}</h1>
-    <div class="C_999 TAR" style="padding:10px">
-      数据类型：{{dataTypeLabel}} &nbsp;&nbsp;关键词：{{doc.keyword}}
-      <el-button plain @click="showDialogEdit" size="mini">编辑</el-button>
-    </div>
+    <h1 class="title TAC MB10">{{title}}</h1>
+    
 
     <dm_debug_list>
       <dm_debug_item v-model="doc" text="doc" />
+      <dm_debug_item v-model="familiarityDoc" text="familiarityDoc" />
     </dm_debug_list>
+
+    <div class="familiarity_box MB10">
+
+      {{dataTypeLabel}}-熟悉度：
+      <familiarity_select
+      class="MT6 "
+        v-model="familiarityDoc"
+        :data="doc"
+        :dataType="doc._dataType"
+        v-if="doc._dataType"
+      ></familiarity_select>
+      <div class="C_999 DPIB FR MT6" >
+      关键词：{{doc.keyword}}
+      <el-button plain @click="showDialogEdit" size="mini">编辑</el-button>
+    </div>
+    </div>
 
     <el-tabs tab-position="left">
       <el-tab-pane :label="`${dataTypeLabel}详情`">
@@ -121,9 +135,13 @@
 
 <script>
 export default {
-  components: {},
+  components: {
+    familiarity_select: () =>
+      import("@/components/common/familiarity_select.vue")
+  },
   data() {
     return {
+      familiarityDoc: {},
       dataId: null,
       isShowDialogEdit: false, //是否显示编辑数据弹窗
       //编辑数据表单数据
@@ -238,9 +256,28 @@ export default {
       this.frontDemoListByKeyword = await FN.ajaxlistBykeyword({ param }); //ajax获取关联列表
     },
     //函数：{ajax获取关联视频列表}
-    async ajaxGetFrontDemoList() {
+    async ajaxGetVedioList() {
       let param = { ...this.paramByKeyword, _dataType: "vedio" };
       this.vedioListByKeyword = await FN.ajaxlistBykeyword({ param }); //ajax获取关联列表
+    },
+
+    //函数：{ajax获取当前数据的熟悉度}
+    async ajaxGetFamiliarity() {
+      let { data } = await axios({
+        //请求接口
+        method: "post",
+        url: `${PUB.domain}/info/commonDetail`,
+        data: {
+          _systemId: PUB._systemId,
+          _dataType: "familiarity",
+          findJson: {
+            _idRel: this.dataId,
+            dataType: this.doc._dataType,
+            userId: localStorage.api_loginUserName
+          } //获取列表的数据总量
+        } //传递参数
+      });
+      this.familiarityDoc = data.doc;
     },
     //函数：{初始化函数}
 
@@ -255,6 +292,8 @@ export default {
         } //传递参数
       });
       this.doc = data.doc;
+
+      this.ajaxGetFamiliarity(); //调用：{ajax获取当前数据的熟悉度}
 
       let { title, keyword, _dataType } = this.doc;
       // let keyword = this.doc.keyword;
@@ -284,6 +323,7 @@ export default {
         this.ajaxGetCssApiList(); //调用：{ajax获取关联Css-API列表}
         this.ajaxGetFrontDemoList(); //调用：{ajax获取关联前端demo列表}
         this.ajaxGetJsApiList(); //调用：{ajax获取关联Js-API列表}
+        this.ajaxGetVedioList(); //调用：{ajax获取关联视频列表}
       }
     }
   },
@@ -300,5 +340,13 @@ export default {
 .link_iframe {
   width: 100%;
   height: 600px;
+}
+
+.familiarity_box {
+  background: #f0f0f0;
+  /* border: 1px #ddd solid; */
+  border-radius: 5px;
+  padding: 0 10px;
+  height: 40px
 }
 </style>

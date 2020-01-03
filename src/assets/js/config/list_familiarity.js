@@ -25,7 +25,7 @@ let _dataType = "familiarity",
   //-------列配置数组-------
   columns: [COLUMNS.familiarity,COLUMNS.score, COLUMNS.dataType, COLUMNS.dataId, COLUMNS._userId,COLUMNS.userId,COLUMNS._idRel,COLUMNS.studyTime ],
   //-------筛选表单字段数组-------
-  searchFormItems: [F_ITEMS.dataId, F_ITEMS.userId,F_ITEMS._userId,],
+  searchFormItems: [F_ITEMS.dataId, F_ITEMS.userId,F_ITEMS._userId,F_ITEMS._idRel,],
   //-------详情字段数组-------
   detailItems: [
     D_ITEMS.familiarity,

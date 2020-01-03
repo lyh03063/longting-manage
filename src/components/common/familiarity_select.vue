@@ -3,17 +3,12 @@
     @mouseenter.stop="showDialogFamiliarity()"
     @click.stop
     @mouseleave.stop="focusId=null"
-    class="PSR DPIP"
+    class="PSR DPIB"
   >
+  
 
-
-    <span
-      :style="{color:dictFColor[valueNeed.familiarity]}"
-    >{{dictFamiliarity[valueNeed.familiarity]||"未学"}}</span>
-    <span class="iconfont iconarrow-down" v-if="focusId!=data[idKey]" style="color:#ddd">
-      <!--编辑按钮-->
-    </span>
-    <div class="PSA T0 L0 BC_fff pop-box" v-if="focusId===data[idKey]">
+    <el-popover placement="right-start" width="240" trigger="hover">
+      <!--候选值列表-->
       <i
         :class="{'familiarity-option':true,'focus':valueNeed.familiarity==1}"
         @click="changeFamiliarity(1)"
@@ -30,7 +25,14 @@
         :class="{'familiarity-option':true,'focus':valueNeed.familiarity==4}"
         @click="changeFamiliarity(4)"
       >精通</i>
-    </div>
+
+      <el-button slot="reference" size="mini">
+        <span
+          :style="{color:dictFColor[valueNeed.familiarity]}"
+        >{{dictFamiliarity[valueNeed.familiarity]||"未学"}}</span>
+      </el-button>
+    </el-popover>
+   
   </div>
 </template>
 
@@ -39,12 +41,12 @@ export default {
   //用于列表模糊查询的组件
   props: {
     //目标数据的id键***，在关系表中就不是_id了
-    idKey:{
-      default:"_id"
+    idKey: {
+      default: "_id"
     },
     value: [Object, Array],
     data: [Object],
-    dataType:{}
+    dataType: {}
   },
   data() {
     return {
@@ -84,22 +86,18 @@ export default {
       immediate: true,
       deep: true
     }
-   
   },
   methods: {
     //显示熟悉度操作界面
     showDialogFamiliarity() {
-
       this.focusId = this.data[this.idKey]; //将focusId设置成当前点击的数据Id
     },
     //切换当前数据的熟悉度函数
     async changeFamiliarity(value) {
       let studyTime = moment().format("YYYY-MM-DD HH:mm"); //获取当前学习时间
-//relDoc[0].
       this.dataIdFamiliarity =
         this.dataIdFamiliarity || lodash.get(this.valueNeed, `_id`);
 
-  
       //Q1:熟悉度uuid存在
       if (this.dataIdFamiliarity) {
         await axios({
@@ -139,15 +137,11 @@ export default {
         this.dataIdFamiliarity = lodash.get(data, `addData._id`);
         this.valueNeed = docAdd; //改变valueNeed---注意结构！！！！
         //this.$emit("input", [{ _data: this.valueNeed }]);
-          this.$emit("input", this.valueNeed);
+        this.$emit("input", this.valueNeed);
       }
     }
   },
-  created() {
-
-
-
-  }
+  created() {}
 };
 </script>
 
@@ -156,7 +150,7 @@ export default {
 /****************************熟悉度切换-START****************************/
 
 .pop-box {
-  top:-10px;
+  top: -10px;
   left: 50px;
   width: 215px;
   border: 1px #ddd solid;
@@ -167,13 +161,13 @@ export default {
 }
 
 .familiarity-option {
-  display: inline-block; 
+  display: inline-block;
   border: 1px #ddd solid;
   border-radius: 5px;
   line-height: 1;
   padding: 5px 8px;
   background-color: #f0f0f0;
-  margin: 0 0 0 0;
+  margin: 0 5px 0 0;
   cursor: pointer;
   color: #999;
   font-style: normal;
