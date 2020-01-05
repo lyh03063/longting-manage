@@ -135,8 +135,7 @@
 export default {
   components: {
     familiarity_select: () =>
-      import("@/components/common/familiarity_select.vue"),
-   
+      import("@/components/common/familiarity_select.vue")
   },
   data() {
     return {
@@ -272,7 +271,7 @@ export default {
           findJson: {
             _idRel: this.dataId,
             dataType: this.doc._dataType,
-            userId: localStorage.api_loginUserName
+            userId: localStorage[PUB.keyLoginUser]
           } //获取列表的数据总量
         } //传递参数
       });
@@ -297,11 +296,15 @@ export default {
       let { title, keyword, _dataType } = this.doc;
       // let keyword = this.doc.keyword;
 
-      this.dataTypeLabel = lodash.get(
-        DYDICT.dataType,
-        `${this.doc._dataType}.label`
-      );
+      this.dataTypeLabel = lodash.get(DYDICT.dataType, `${_dataType}.label`);
       document.title = `${title}-${this.dataTypeLabel}`; //修改浏览器标题栏文字
+
+      /*****************根据数据类型修改编辑按钮的表单配置-START*****************/
+      this.cfFormEdit.paramAddonInit._dataType = _dataType;//设置类型参数
+      let formItems = lodash.get(PUB.listCF, `list_${_dataType}.formItems`);//获取类型对应的表单项
+      this.cfFormEdit.formItems = formItems;//设置对应的表单项
+      /*****************根据数据类型修改编辑按钮的表单配置-END*****************/
+
       //根据关键词请求关联数据的ajax固定参数
       this.paramByKeyword = {
         _systemId: PUB._systemId,

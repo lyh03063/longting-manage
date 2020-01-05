@@ -11,7 +11,7 @@
           <div class="FL ML10 MT17 FS24 C_fff">{{systemName}}</div>
           <div class="FR MT30 C_fff">
             <i class="el-icon-s-custom MR5" title="用户名"></i>
-            {{this.api_loginUserName}}({{this.api_roleName}})&nbsp;&nbsp;&nbsp;
+            {{this.loginUserName}}(管理员)&nbsp;&nbsp;&nbsp;
             <a
               href="javascript:;"
               class="MR10"
@@ -54,8 +54,8 @@ export default {
     // },
     logout() {
       //退出登录函数
-      localStorage.api_isLogin = "0";
-      localStorage.api_loginUserName = null;
+      localStorage[PUB.keyIsLogin] = "0";
+      localStorage[PUB.keyLoginUser] = null;
       this.$router.push({ path: "/login" }); //跳转到manage
     }
   },
@@ -251,8 +251,8 @@ export default {
   },
   created() {
     //*引用当前用户名
-    this.api_loginUserName = localStorage.api_loginUserName;
-    this.api_roleName = localStorage.api_roleName;
+    this.loginUserName = localStorage[PUB.keyLoginUser];
+   
     document.onkeydown = e => {
       //绑定ctrl+D事件
       var keyCode = e.keyCode || e.which || e.charCode;

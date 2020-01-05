@@ -29,7 +29,7 @@ export default {
       //   _systemId: "sys_api",
       //   _dataType: "note",
       //   findJson: null,
-      //   userId: localStorage.api_loginUserName
+      //   userId: localStorage[PUB.keyLoginUser]
       // },
       ready: false,
       cfList: util.deepCopy(PUB.listCF.detail_group_group)
@@ -80,11 +80,11 @@ export default {
       let urlList = PUB.listCF.list_familiarity.url.list;
       let ajaxParam = {
         //_id: null,
-        // _userId: localStorage.api_loginUserName,//用户名
+        // _userId: localStorage[PUB.keyLoginUser],//用户名
         findJson: {
           _idRel: { $in: arrGroupId },
           dataType: "group",
-          _userId: localStorage.api_loginUserName
+          _userId: localStorage[PUB.keyLoginUser]
         } //获取列表的数据总量
       };
       Object.assign(ajaxParam, PUB.listCF.list_familiarity.paramAddonPublic); //合并公共参数

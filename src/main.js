@@ -1,6 +1,4 @@
-// import Vue from 'vue'
 Vue.config.productionTip = false
-// import lodash from 'lodash'//导入lodash方法库
 window.lodash = lodash
 Vue.prototype.$lodash = lodash//让vue实例中可访问$store
 import axios from "axios";
@@ -9,24 +7,10 @@ import ajax from "@/assets/js/ajax.js";
 window.ajax = ajax;
 import moment from "moment";
 window.moment = moment;
-
-// import util from "@/assets/js/util.js";
-//config from
 import "@/assets/js/config.js";
 import "@/assets/css/util.scss"; //导入公共样式文件
-
-
-// import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-// import "./mock.js";
-// import login from "@/login";
-
 import manage from "@/manage";
-
-
-console.log("global:", global);
-
-
 let arrRouteListName = [
   "modify_password",
   "list_article_category",
@@ -41,7 +25,6 @@ let arrRouteListName = [
   "listHome",
   "list_common",//通用列表
 ]
-
 let arrRouteListPage = arrRouteListName.map((item) => {
   return {
     path: `/${item}`,
@@ -49,14 +32,12 @@ let arrRouteListPage = arrRouteListName.map((item) => {
   }
 })
 console.log("arrRouteListPage:", arrRouteListPage);
-
 // window.util=util;
 // 3. 创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: () => import("@/login") },
-
     { path: '/detail_group', component: () => import("@/page/detail_group") },
     { path: '/detail_data', component: () => import("@/page/detail_data") },
     {
@@ -69,14 +50,11 @@ const router = new VueRouter({
     },
   ]
 })
-
 router.beforeEach((to, from, next) => {
   console.log("from:####", from);
   console.log("to:####", to);
-  
   // 如果用户未登录，跳转登录页面
-  if (localStorage.api_isLogin != 1) {
-    
+  if (localStorage[PUB.keyIsLogin] != 1) {
     if (to.path == '/login') {
       next();
     } else {
@@ -88,10 +66,6 @@ router.beforeEach((to, from, next) => {
     next();
   }
 })
-
-
-// import Vuex from 'vuex'//导入vuex模块
-// Vue.use(Vuex)//应用组件
 const store = new Vuex.Store({//定义Vuex的存储对象
   state: {
     debug: false,
@@ -101,7 +75,6 @@ const store = new Vuex.Store({//定义Vuex的存储对象
     defultFindJson: {//存放列表的默认查询参数，
       // list_article:{articleCategory:3  }
     },
-
     arrLookup: {//存放列表的联合查询参数值，
       // list_article:{articleCategory:3  }
     },
@@ -149,10 +122,6 @@ const store = new Vuex.Store({//定义Vuex的存储对象
 })
 Vue.prototype.$store = store//让vue实例中可访问$store
 Vue.prototype.$handelItem = util.handelItem//让vue实例中可访问$handelItem
-
-
-
-
 import Main from './main.vue'
 new Vue({
   render: h => h(Main),

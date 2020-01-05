@@ -94,11 +94,10 @@ export default {
       let userName = lodash.get(data, `doc.userName`);
       if (userName) {
         this.$message.success("登录成功");
-        localStorage.api_isLogin = 1;
-        localStorage.api_loginUserName = userName; //存储用户名
+        localStorage[PUB.keyIsLogin] = 1;
+        localStorage[PUB.keyLoginUser] = userName; //存储用户名
         PUB.userId = userName;
-        // localStorage.api_roleName = name; //存储角色名
-        // localStorage.api_roleId = roleId; //存储角色Id
+      
 
         await util.timeout(500); //延迟
  
@@ -126,7 +125,7 @@ export default {
   },
   created() {
     //------------如果已经登录------------
-    if (localStorage.api_isLogin == 1) {
+    if (localStorage[PUB.keyIsLogin] == 1) {
      
       setTimeout(() => {
         this.$router.push({ path: "/listHome" });

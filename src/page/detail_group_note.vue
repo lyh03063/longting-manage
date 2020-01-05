@@ -4,13 +4,7 @@
       <dm_debug_item v-model="groupId" text="groupId" />
     </dm_debug_list>
 
-    <dm_list_data
-      ref="listData"
-      :cf="cfList"
-      v-if="ready"
-      @after-search="afterSearch"
-  
-    >
+    <dm_list_data ref="listData" :cf="cfList" v-if="ready" @after-search="afterSearch">
       <template v-slot:slot_column_familiarity="{row}">
         <div class>
           <familiarity_select
@@ -39,9 +33,8 @@
 </template>
 
 <script>
-
 export default {
-   components: {
+  components: {
     familiarity_select: () =>
       import("@/components/common/familiarity_select.vue"),
     score_panel: () => import("@/components/common/score_panel.vue")
@@ -57,7 +50,7 @@ export default {
         _systemId: "sys_api",
         _dataType: "note",
         findJson: null,
-        userId: localStorage.api_loginUserName
+        userId: localStorage[PUB.keyLoginUser]
       },
       ready: false,
       cfList: util.deepCopy(PUB.listCF.detail_group_note)
@@ -96,14 +89,17 @@ export default {
       // lodash.set(this.scoreParam, `findJson._id.$in`, arrId);
       this.$refs.scorePanel.ajaxGetScore(); //调用：{ajax获取分数函数}
 
-      this.updateGroupCountData()//调用：{更新当前分组的数据量的函数}
+      if (this.$refs.scorePanel.focusId == undefined) {
+        //如果没有筛选熟悉度（这里的触发机制还需进一步优化，没有必要一直调用）
+        this.updateGroupCountData(); //调用：{更新当前分组的数据量的函数}
+      }
     },
-    //函数：{更新当前分组的数据的函数}
+    //函数：{更新当前分组的数据量的函数}
     async updateGroupCountData() {
       let urlModify = PUB.listCF.list_group.url.modify;
       let ajaxParam = {
         _id: this.groupId,
-        _data: {countData:this.$refs.listData.allCount}//获取列表的数据总量
+        _data: { countData: this.$refs.listData.allCount } //获取列表的数据总量
       };
       Object.assign(ajaxParam, PUB.listCF.list_group.paramAddonPublic); //合并公共参数
       let response = await axios({
@@ -114,8 +110,6 @@ export default {
       });
     }
   },
-
-
 
   async created() {
     this.cfList.findJsonDefault = {
