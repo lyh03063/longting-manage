@@ -137,6 +137,9 @@ export default {
     familiarity_select: () =>
       import("@/components/common/familiarity_select.vue")
   },
+  props: {
+    propDataId: null
+  },
   data() {
     return {
       familiarityDoc: {},
@@ -300,9 +303,9 @@ export default {
       document.title = `${title}-${this.dataTypeLabel}`; //修改浏览器标题栏文字
 
       /*****************根据数据类型修改编辑按钮的表单配置-START*****************/
-      this.cfFormEdit.paramAddonInit._dataType = _dataType;//设置类型参数
-      let formItems = lodash.get(PUB.listCF, `list_${_dataType}.formItems`);//获取类型对应的表单项
-      this.cfFormEdit.formItems = formItems;//设置对应的表单项
+      this.cfFormEdit.paramAddonInit._dataType = _dataType; //设置类型参数
+      let formItems = lodash.get(PUB.listCF, `list_${_dataType}.formItems`); //获取类型对应的表单项
+      this.cfFormEdit.formItems = formItems; //设置对应的表单项
       /*****************根据数据类型修改编辑按钮的表单配置-END*****************/
 
       //根据关键词请求关联数据的ajax固定参数
@@ -332,6 +335,8 @@ export default {
   async created() {
     console.log(" this.$route.query.groupId:", this.$route.query.groupId);
     this.dataId = this.$route.query.dataId;
+    this.dataId = this.dataId || this.propDataId;//如果地址没有，从属性中获取数据id
+
     this.init(); //函数：{初始化函数}
   }
 };

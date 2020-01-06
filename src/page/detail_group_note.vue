@@ -5,6 +5,11 @@
     </dm_debug_list>
 
     <dm_list_data ref="listData" :cf="cfList" v-if="ready" @after-search="afterSearch">
+      <!--自定义详情弹窗插槽-->
+      <template v-slot:customDetail="{detailData}">
+        <detail_data :propDataId="detailData._idRel2"></detail_data>
+      </template>
+      <!--熟悉度插槽-->
       <template v-slot:slot_column_familiarity="{row}">
         <div class>
           <familiarity_select
@@ -37,7 +42,9 @@ export default {
   components: {
     familiarity_select: () =>
       import("@/components/common/familiarity_select.vue"),
-    score_panel: () => import("@/components/common/score_panel.vue")
+    score_panel: () => import("@/components/common/score_panel.vue"),
+    detail_data: () => import("@/page/detail_data.vue") //数据详情页组件
+    //src\page\detail_data.vue
   },
   props: {
     groupDoc: {},
@@ -112,6 +119,8 @@ export default {
   },
 
   async created() {
+    this.cfList.customDetail = true; //开启自定义详情弹窗
+
     this.cfList.findJsonDefault = {
       _idRel: this.groupId
     };
