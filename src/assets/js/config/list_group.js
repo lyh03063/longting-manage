@@ -8,7 +8,10 @@ PUB.listCF.list_group = {
   pageSize: 20,
   listIndex: "list_group", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
-  twoTitle: "分组", //面包屑2级菜单
+  breadcrumb: [
+    { value: "首页", path: "#/listHome" },
+    { value: "分组" }
+  ],
   ...PUB.listCFCommon,//展开公共配置
   //列表单项操作按钮的配置
   singleBtns: {
@@ -32,7 +35,7 @@ PUB.listCF.list_group = {
     _dataType
   },
   //-------列配置数组-------
-  columns: [COLUMNS.title_fixed, COLUMNS.desc,COLUMNS.group_dataType ],
+  columns: [COLUMNS.title_fixed,COLUMNS._id,  COLUMNS.desc,COLUMNS.group_dataType ],
   //-------筛选表单字段数组-------
   searchFormItems: [F_ITEMS.title_search],
   //-------详情字段数组-------

@@ -7,7 +7,10 @@ PUB.listCF.list_front_demo = {
   pageSize: 20,
   listIndex: "list_front_demo", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
-  twoTitle: "前端Demo", //面包屑2级菜单
+  breadcrumb: [
+    { value: "首页", path: "#/listHome" },
+    { value: "前端Demo" }
+  ],
   ...PUB.listCFCommon4,//展开公共配置
   objParamAddon: {
     _systemId,

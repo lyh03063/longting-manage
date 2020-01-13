@@ -183,6 +183,16 @@ D_ITEMS._data = {
   
 };
 
+D_ITEMS.arrGroup = {
+  label: "所属分组",
+  prop: "arrGroup",
+  
+};
+D_ITEMS.countGroup = {
+  label: "分组数",
+  prop: "countGroup",
+  
+};
 
 //#endregion
 //#region 管理员

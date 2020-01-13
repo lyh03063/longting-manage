@@ -18,7 +18,7 @@ export default {
   components: { 
      detail_group_note: () => import("@/page/detail_group_note"),
       detail_group_group: () => import("@/page/detail_group_group"),
-    
+     detail_group_url: () => import("@/page/detail_group_url"),
     // detail_group_note,detail_group_group 
     },
   data() {

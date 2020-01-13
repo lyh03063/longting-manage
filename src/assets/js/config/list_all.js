@@ -8,7 +8,10 @@ PUB.listCF.list_all = {
   pageSize: 20,
   listIndex: "list_all", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
-  twoTitle: "所有数据", //面包屑2级菜单
+  breadcrumb: [
+    { value: "首页", path: "#/listHome" },
+    { value: "所有数据" }
+  ],
   ...PUB.listCFCommon2,//展开公共配置
   objParamAddon: {
     _systemId,

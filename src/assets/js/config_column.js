@@ -38,6 +38,9 @@ COLUMNS.importance_edit = {
 };
 COLUMNS._data = { ...D_ITEMS._data, width: 90, };
 
+COLUMNS.arrGroup = { ...D_ITEMS.arrGroup, width: 100, };
+COLUMNS.countGroup = { ...D_ITEMS.countGroup, width: 60, };
+
 //#endregion
 //#region html_api
 COLUMNS.html_display = { ...D_ITEMS.html_display, width: 70, };

@@ -8,7 +8,10 @@ PUB.listCF.list_note_category = {
   pageSize: 20,
   listIndex: "list_note_category", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
-  twoTitle: "笔记分类", //面包屑2级菜单
+  breadcrumb: [
+    { value: "首页", path: "#/listHome" },
+    { value: "笔记分类" }
+  ],
   ...PUB.listCFCommon2,//展开公共配置
   //objParamAddon列表接口的附加参数
   objParamAddon: {

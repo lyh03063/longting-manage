@@ -73,6 +73,7 @@ F_ITEMS.desc = { ...D_ITEMS.desc, type: "textarea" };
 F_ITEMS.detail = { ...D_ITEMS.detail, type: "editorTM" };
 
 F_ITEMS._data = { ...D_ITEMS._data, type: "jsonEditor" };
+F_ITEMS.countGroup = { ...D_ITEMS.countGroup, type: "number" };
 //#endregion
 //#region html_api
 F_ITEMS.html_display = {

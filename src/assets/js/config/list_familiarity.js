@@ -6,7 +6,10 @@ let _dataType = "familiarity",
   pageSize: 20,
   listIndex: "list_familiarity", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
-  twoTitle: "熟悉度", //面包屑2级菜单
+  breadcrumb: [
+    { value: "首页", path: "#/listHome" },
+    { value: "熟悉度" }
+  ],
   ...PUB.listCFCommon,//展开公共配置
   //dynamicDict动态数据字典配置
   dynamicDict: [

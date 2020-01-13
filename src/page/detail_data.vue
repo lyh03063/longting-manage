@@ -1,6 +1,7 @@
 <template>
   <div class style="padding:10px">
-    <h1 class="title TAC MB10">{{title}}</h1>
+    <h1 class="title TAC MB10">{{doc.title}}</h1>
+    <div class="desc" v-if="doc.desc">{{doc.desc}}</div>
 
     <dm_debug_list>
       <dm_debug_item v-model="doc" text="doc" />
@@ -8,7 +9,19 @@
     </dm_debug_list>
 
     <div class="familiarity_box MB10">
-      {{dataTypeLabel}}-熟悉度：
+      <el-popover class="MR10" placement="top-start" width="200" trigger="hover" v-if="doc.arrGroup&&doc.arrGroup.length">
+        <!--候选值列表-->
+        <el-link
+          type="primary"
+          :href="`#/detail_group?groupId=${docG._idRel}`"
+          v-for="docG in doc.arrGroup"
+          :key="docG.relationId"
+        >{{docG.title}}</el-link>
+
+        <el-button slot="reference" icon="el-icon-more"  size="mini">所属分组</el-button>
+      </el-popover>
+  
+      {{dataTypeLabel}}熟悉度：
       <familiarity_select
         class="MT6"
         v-model="familiarityDoc"
@@ -16,9 +29,9 @@
         :dataType="doc._dataType"
         v-if="doc._dataType"
       ></familiarity_select>
-      <div class="C_999 DPIB FR MT6">
-        关键词：{{doc.keyword}}
-        <el-button plain @click="showDialogEdit" size="mini">编辑</el-button>
+      <div class="C_999 DPIB FR MT6" style="display:flex">
+        <span class="keyword_box">关键词：{{doc.keyword}}</span>
+        <el-button plain @click="showDialogEdit" size="mini" style="width:60px">编辑</el-button>
       </div>
     </div>
 
@@ -182,13 +195,14 @@ export default {
     };
   },
   computed: {
-    title() {
-      let { title, desc } = this.doc;
-      if (desc) {
-        title += `：${desc}`;
-      }
-      return title;
-    },
+    // title() {
+    //   let { title, desc } = this.doc;
+    //   if (desc) {
+    //     title += `：${desc}`;
+    //   }
+    //   return title;
+    // },
+
     srcVedio() {
       let src = lodash.get(this.doc, `vedio[0].url`);
 
@@ -335,7 +349,7 @@ export default {
   async created() {
     console.log(" this.$route.query.groupId:", this.$route.query.groupId);
     this.dataId = this.$route.query.dataId;
-    this.dataId = this.dataId || this.propDataId;//如果地址没有，从属性中获取数据id
+    this.dataId = this.dataId || this.propDataId; //如果地址没有(非页面级组件)，从属性中获取数据id
 
     this.init(); //函数：{初始化函数}
   }
@@ -355,5 +369,22 @@ export default {
   border-radius: 5px;
   padding: 0 10px;
   height: 40px;
+}
+.keyword_box {
+  display: inline-block;
+
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 8px;
+}
+.desc {
+  color: #666;
+  font-size: 12px;
+  padding: 10px;
+  border: 1px #ddd dashed;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 </style>

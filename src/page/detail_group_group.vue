@@ -60,19 +60,20 @@ export default {
   //   }
   // },
   methods: {
+    //函数：{列表查询后执行的函数}
     async afterSearch(list) {
       console.log("list:", list);
       let arrGroupId = list.map(doc => doc._idRel2);
       console.log("arrGroupId:#######", arrGroupId);
       let datalist = await this.getGroupUserScore(arrGroupId);
       console.log("datalist####:", datalist);
-
       if (datalist && datalist.length) {
         datalist.forEach(itemEach => {
-          this.dictScore[itemEach._idRel] = itemEach.score;
+          // this.dictScore[itemEach._idRel] = itemEach.score;
+          this.$set(this.dictScore, itemEach._idRel, itemEach.score);
         });
       }
-      this.$refs.listData.$forceUpdate()//强制视图更新this.$forceUpdate()//强制视图更新
+      // this.$refs.listData.$forceUpdate()//强制视图更新this.$forceUpdate()//强制视图更新
     },
 
     //函数：{ajax获取的用户学习缓存数据函数}

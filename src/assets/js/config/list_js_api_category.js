@@ -6,7 +6,10 @@ let _dataType = "js_api_category",
   pageSize: 20,
   listIndex: "list_js_api_category", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
-  twoTitle: "Javascript-api分类", //面包屑2级菜单
+  breadcrumb: [
+    { value: "首页", path: "#/listHome" },
+    { value: "Javascript-api分类" }
+  ],
   ...PUB.listCFCommon2,//展开公共配置
   //objParamAddon列表接口的附加参数
   objParamAddon: {

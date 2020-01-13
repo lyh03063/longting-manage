@@ -8,7 +8,10 @@ PUB.listCF.list_data_type = {
   pageSize: 20,
   listIndex: "list_data_type", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
-  twoTitle: "数据类型", //面包屑2级菜单
+  breadcrumb: [
+    { value: "首页", path: "#/listHome" },
+    { value: "数据类型" }
+  ],
   ...PUB.listCFCommon2,//展开公共配置
   //objParamAddon列表接口的附加参数
   objParamAddon: {

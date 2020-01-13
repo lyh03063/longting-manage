@@ -8,7 +8,10 @@ PUB.listCF.list_url = {
   pageSize: 20,
   listIndex: "list_url", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
-  twoTitle: "网址", //面包屑2级菜单
+  breadcrumb: [
+    { value: "首页", path: "#/listHome" },
+    { value: "网址" }
+  ],
   ...PUB.listCFCommon3,//展开公共配置
   //objParamAddon列表接口的附加参数
   objParamAddon: {
@@ -22,7 +25,7 @@ PUB.listCF.list_url = {
   },
  
   //-------列配置数组-------
-  columns: [COLUMNS.title_fixed, COLUMNS.desc, COLUMNS.link,],
+  columns: [COLUMNS.title_fixed, COLUMNS._id,COLUMNS.desc, COLUMNS.link,],
   //-------筛选表单字段数组-------
   searchFormItems: [F_ITEMS.title_search],
   //-------详情字段数组-------

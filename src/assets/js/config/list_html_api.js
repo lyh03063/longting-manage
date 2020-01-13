@@ -5,7 +5,12 @@ PUB.listCF.list_html_api = {
   pageSize: 20,
   listIndex: "list_html_api", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
-  twoTitle: "Html-api", //面包屑2级菜单
+
+  breadcrumb: [
+    { value: "首页", path: "#/listHome" },
+    { value: "API手册" },
+    { value: "Html-API" }
+  ],
   ...PUB.listCFCommon4,//展开公共配置
   //批量操作按钮的配置
   batchBtns: {
@@ -37,7 +42,7 @@ PUB.listCF.list_html_api = {
   COLUMNS.difficulty, COLUMNS.english, COLUMNS.html_version,
    COLUMNS.selfClose, COLUMNS.cateIdOld, COLUMNS.demoList],
   //-------筛选表单字段数组-------
-  searchFormItems: [F_ITEMS.title, F_ITEMS.html_api_category, F_ITEMS.html_display, F_ITEMS.importance, F_ITEMS.difficulty, F_ITEMS.html_version, F_ITEMS.selfClose],
+  searchFormItems: [F_ITEMS.title_search, F_ITEMS.html_api_category, F_ITEMS.html_display, F_ITEMS.importance, F_ITEMS.difficulty, F_ITEMS.html_version, F_ITEMS.selfClose],
   //-------详情字段数组-------
   detailItems: [D_ITEMS._id, D_ITEMS.title,D_ITEMS.keyword,  D_ITEMS.desc, D_ITEMS.detail, D_ITEMS.category, D_ITEMS.html_display, D_ITEMS.importance,
   D_ITEMS.difficulty, D_ITEMS.english,

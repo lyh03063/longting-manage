@@ -40,6 +40,7 @@ const router = new VueRouter({
     { path: '/login', component: () => import("@/login") },
     { path: '/detail_group', component: () => import("@/page/detail_group") },
     { path: '/detail_data', component: () => import("@/page/detail_data") },
+    { path: '/detail_group_g_card', component: () => import("@/page/detail_group_g_card") },
     {
       path: '/manage',
       component: manage,
