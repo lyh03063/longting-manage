@@ -48,7 +48,6 @@ export default {
     // toggleDebug() {
     //   //来自vuex的当前行数据
     //   let debug = this.$store.state.debug;
-    //   console.log("debug", debug);
     //   this.$store.commit("setDebug", !debug);
 
     // },
@@ -217,7 +216,6 @@ export default {
       }
 
       let menuItemNeed = []; //当前菜单组最终可用的菜单项
-      // console.log("aaa:", aaa);
       groupEach.menuItem.forEach(menuItemEach => {
         let menuIndex = menuItemEach.index;
         //获取权限
@@ -231,7 +229,6 @@ export default {
         }
       });
 
-      console.log("menuItemNeed:", menuItemNeed);
       //如果{当前菜单组最终可用的菜单项}存在
       if (menuItemNeed.length > 0) {
         menuListNeed.push({
@@ -258,12 +255,9 @@ export default {
       var keyCode = e.keyCode || e.which || e.charCode;
       var ctrlKey = e.ctrlKey || e.metaKey;
       if (ctrlKey && keyCode == 68) {
-        console.log("ctrlKey", ctrlKey);
-        console.log("keyCode", keyCode);
         // this.toggleDebug();//调用：{切换调试模式函数}
 
         let debug = this.$store.state.debug;
-        console.log("debug", debug);
         this.$store.commit("setDebug", !debug);
         e.preventDefault(); //阻止默认事件
         return false;

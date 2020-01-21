@@ -5,6 +5,7 @@ let _dataType = "relation",
 //#region PUB.listCF.detail_group_note:分组下笔记列表配置
 PUB.listCF.detail_group_note = {
     isShowBreadcrumb: false,//面包屑
+    isShowSearchForm: false,//查询表单-这个去掉会筛选所有数据
 
     idKey: "_id", //键名
     pageSize: 20,
@@ -45,12 +46,11 @@ PUB.listCF.detail_group_note = {
     sortJsonDefault: {
         "sort": -1
     },
-    findJsonDefault: {
+    // findJsonDefault: {
 
-    },
+    // },
     objParamAddon: {
-        findJson: {},
-
+        findJson: {},//用了这个就不要使用findJsonDefault
         _systemId,
         _dataType
     },
@@ -74,7 +74,7 @@ PUB.listCF.detail_group_note = {
         COLUMNS.sort,
     ],
     //-------筛选表单字段数组-------
-    searchFormItems: [],
+    searchFormItems: [F_ITEMS.importance],
     //-------详情字段数组-------
     detailItems: [D_ITEMS.title, D_ITEMS.detail, D_ITEMS.desc, D_ITEMS.category, D_ITEMS.importance, D_ITEMS._id, D_ITEMS._idRel, D_ITEMS._idRel2, D_ITEMS.sort],
     //-------新增、修改表单字段数组-------

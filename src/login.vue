@@ -89,7 +89,6 @@ export default {
           }
         }
       }); 
-      console.log("data:", data);
 
       let userName = lodash.get(data, `doc.userName`);
       if (userName) {

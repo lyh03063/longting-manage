@@ -84,13 +84,21 @@ F_ITEMS.importance = {
   ...D_ITEMS.importance, type: "select",
   options: DYDICT.arr_importance
 };
-
+F_ITEMS.importance_radio = {
+  ...F_ITEMS.importance, type: "radio"
+};
 
 
 F_ITEMS.difficulty = {
   ...D_ITEMS.difficulty, type: "select",
   options: DYDICT.arr_difficulty
 };
+F_ITEMS.difficulty_radio = {
+  ...F_ITEMS.difficulty, type: "radio"
+};
+
+
+
 F_ITEMS.english = {
   ...D_ITEMS.english, type: "input",
 };

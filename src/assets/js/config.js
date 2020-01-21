@@ -82,16 +82,13 @@ PUB.objDictArr = {
 //{"P7": Im,"P5":{ $gte: DataStart,$lte: DataEnd } }
 PUB.dict = {};//公共数据字典对象，里面会有多个子数据字典对象
 //for of循环遍历对象，for of不能直接处理对象，本质上是同个Object.keys拼装一个新数组进行辅助
-console.log("Object.keys结果", Object.keys(PUB.objDictArr));
 for (var key of Object.keys(PUB.objDictArr)) {
-  console.log(key + ": " + PUB.objDictArr[key]);
   PUB.dict[key] = {}
   let arrOpt = PUB.objDictArr[key];
   arrOpt.forEach(itemEach => {//循环：{000数组}
     PUB.dict[key][itemEach.value] = itemEach
   })
 }
-console.log("PUB.dict#####", PUB.dict);
 /**
     * @name 获取数据字典值函数
     * @param dictName字典名，value值

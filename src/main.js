@@ -31,7 +31,6 @@ let arrRouteListPage = arrRouteListName.map((item) => {
     component: () => import(`@/page/${item}`)
   }
 })
-console.log("arrRouteListPage:", arrRouteListPage);
 // window.util=util;
 // 3. 创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({
@@ -52,8 +51,6 @@ const router = new VueRouter({
   ]
 })
 router.beforeEach((to, from, next) => {
-  console.log("from:####", from);
-  console.log("to:####", to);
   // 如果用户未登录，跳转登录页面
   if (localStorage[PUB.keyIsLogin] != 1) {
     if (to.path == '/login') {

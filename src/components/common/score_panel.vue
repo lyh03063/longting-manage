@@ -49,8 +49,7 @@ export default {
   methods: {
     //函数：{按熟悉度过滤数据函数}
     filterData(familiarity) {
-      console.log("filterData");
-      console.log("this.listIndex:", this.listIndex);
+      if (this.focusId == familiarity) return;//防止重复点击
       this.focusId = familiarity;
       let arrLookup = [
         {
@@ -96,6 +95,8 @@ export default {
         listIndex: this.listIndex,
         arrLookup: arrLookup
       });
+
+      this.$emit("switch");
     },
     //函数：{ajax获取分数函数}
     async ajaxGetScore() {

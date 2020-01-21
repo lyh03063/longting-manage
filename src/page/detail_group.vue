@@ -49,7 +49,6 @@ export default {
     }
   },
   async created() {
-    console.log(" this.$route.query.groupId:", this.$route.query.groupId);
     this.groupId = this.$route.query.groupId;
 
     this.getGroupDoc(); //调用：{获取分组详情函数}

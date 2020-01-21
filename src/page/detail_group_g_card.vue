@@ -69,7 +69,6 @@ export default {
     },
     //函数：{列表查询后执行的函数}
     async afterSearch() {
-      console.log("this.listData:", this.listData);
 
       let arrGroupId = []; //变量：{需要查询分数的分组id}
 
@@ -80,9 +79,7 @@ export default {
         arrGroupId.push(...arrGroupIdNeed);
       });
 
-      console.log("arrGroupId:#######", arrGroupId);
       let datalist = await this.getGroupUserScore(arrGroupId);
-      console.log("datalist####:", datalist);
       if (datalist && datalist.length) {
         datalist.forEach(itemEach => {
           // this.dictScore[itemEach._idRel] = itemEach.score;

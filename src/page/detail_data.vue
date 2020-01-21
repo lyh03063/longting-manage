@@ -1,6 +1,6 @@
 <template>
   <div class style="padding:10px">
-    <h1 class="title TAC MB10">{{doc.title}}</h1>
+    <h1 class="title TAC MB10" id="id_floor_top">{{doc.title}}</h1>
     <div class="desc" v-if="doc.desc">{{doc.desc}}</div>
 
     <dm_debug_list>
@@ -9,7 +9,13 @@
     </dm_debug_list>
 
     <div class="familiarity_box MB10">
-      <el-popover class="MR10" placement="top-start" width="200" trigger="hover" v-if="doc.arrGroup&&doc.arrGroup.length">
+      <el-popover
+        class="MR10"
+        placement="top-start"
+        width="200"
+        trigger="hover"
+        v-if="doc.arrGroup&&doc.arrGroup.length"
+      >
         <!--候选值列表-->
         <el-link
           type="primary"
@@ -18,9 +24,8 @@
           :key="docG.relationId"
         >{{docG.title}}</el-link>
 
-        <el-button slot="reference" icon="el-icon-more"  size="mini">所属分组</el-button>
+        <el-button slot="reference" icon="el-icon-more" size="mini">所属分组</el-button>
       </el-popover>
-  
       {{dataTypeLabel}}熟悉度：
       <familiarity_select
         class="MT6"
@@ -35,94 +40,23 @@
       </div>
     </div>
 
-    <el-tabs tab-position="left">
-      <el-tab-pane :label="`${dataTypeLabel}详情`">
-        <div class v-html="doc._detail"></div>
+    <!-- <h1>{{dataTypeLabel}}详情</h1> -->
+    <div class="detail_box" >
+      <div class v-html="doc._detail"></div>
 
-        <div class v-if="doc._dataType=='vedio'">
-          <video width="760" height="440" controls :src="srcVedio"></video>
+      <div class v-if="doc._dataType=='vedio'">
+        <video width="760" height="440" controls :src="srcVedio"></video>
+      </div>
+
+      <template class v-if="doc.link&&isShowIframe">
+        <div class>
+          以下内容通过嵌入其他网页引用：
+          <a target="_blank" :href="doc.link">在新页面打开</a>
         </div>
+        <iframe :src="doc.link" class="link_iframe" seamless></iframe>
+      </template>
+    </div>
 
-        <template class v-if="doc.link&&isShowIframe">
-          <div class>
-            以下内容通过嵌入其他网页引用：
-            <a target="_blank" :href="doc.link">在新页面打开</a>
-          </div>
-          <iframe :src="doc.link" class="link_iframe" seamless></iframe>
-        </template>
-      </el-tab-pane>
-
-      <el-tab-pane
-        v-if="noteListByKeyword.length!==0"
-        :label="`关联笔记 (${noteListByKeyword.length})`"
-      >
-        <ul class="list-link">
-          <li v-for="docNote in noteListByKeyword" :key="docNote._id">
-            <a target="_blank" :href="`#/detail_data?dataId=${docNote._id}`">{{docNote.title}}</a>
-          </li>
-        </ul>
-      </el-tab-pane>
-      <el-tab-pane
-        v-if="htmlAPIListByKeyword.length!==0"
-        :label="`关联Html-API (${htmlAPIListByKeyword.length})`"
-      >
-        <ul class="list-link">
-          <li v-for="docApi in htmlAPIListByKeyword" :key="docApi._id">
-            <!-- :href="`${docApi.link}`" -->
-            <a
-              target="_blank"
-              :href="`#/detail_data?dataId=${docApi._id}`"
-            >{{docApi.title}}：{{docApi.desc}}</a>
-          </li>
-        </ul>
-      </el-tab-pane>
-      <el-tab-pane
-        v-if="cssAPIListByKeyword.length!==0"
-        :label="`关联Css-API (${cssAPIListByKeyword.length})`"
-      >
-        <ul class="list-link">
-          <li v-for="docApi in cssAPIListByKeyword" :key="docApi._id">
-            <a
-              target="_blank"
-              :href="`#/detail_data?dataId=${docApi._id}`"
-            >{{docApi.title}}：{{docApi.desc}}</a>
-          </li>
-        </ul>
-      </el-tab-pane>
-      <el-tab-pane
-        v-if="jsAPIListByKeyword.length!==0"
-        :label="`关联Js-API (${jsAPIListByKeyword.length})`"
-      >
-        <ul class="list-link">
-          <li v-for="docApi in jsAPIListByKeyword" :key="docApi._id">
-            <a
-              target="_blank"
-              :href="`#/detail_data?dataId=${docApi._id}`"
-            >{{docApi.title}}：{{docApi.desc}}</a>
-          </li>
-        </ul>
-      </el-tab-pane>
-      <el-tab-pane
-        v-if="frontDemoListByKeyword.length!==0"
-        :label="`关联前端Demo (${frontDemoListByKeyword.length})`"
-      >
-        <ul class="list-link">
-          <li v-for="docApi in frontDemoListByKeyword" :key="docApi._id">
-            <a target="_blank" :href="`#/detail_data?dataId=${docApi._id}`">{{docApi.title}}</a>
-          </li>
-        </ul>
-      </el-tab-pane>
-      <el-tab-pane
-        v-if="vedioListByKeyword.length!==0"
-        :label="`关联视频 (${vedioListByKeyword.length})`"
-      >
-        <ul class="list-link">
-          <li v-for="docApi in vedioListByKeyword" :key="docApi._id">
-            <a target="_blank" :href="`#/detail_data?dataId=${docApi._id}`">{{docApi.title}}</a>
-          </li>
-        </ul>
-      </el-tab-pane>
-    </el-tabs>
     <!--编辑数据弹窗-->
     <el-dialog
       custom-class="n-el-dialog"
@@ -141,6 +75,48 @@
         @cancel="isShowDialogEdit = false"
       ></dm_dynamic_form>
     </el-dialog>
+
+    <div class="float_bar">
+      <ul>
+        <li>
+          <a href="javascript:;" @click="scrollView('top')">详情</a>
+        </li>
+        <template class v-for="(item,i) in arrCards">
+          <li :key="i" v-if="item.list&&item.list.length">
+            <a
+              href="javascript:;"
+              @click="scrollView(item.type)"
+            >{{item.title}}（{{item.list.length}}）</a>
+          </li>
+        </template>
+      </ul>
+    </div>
+
+    <el-collapse v-model="activeNames" class="n-el-collapse">
+      <template class v-for="(item,i) in arrCards">
+        <el-collapse-item
+          :key="i"
+          v-if="item.list&&item.list.length"
+          :id="`id_floor_${item.type}`"
+          :name="item.type"
+        >
+          <template slot="title">
+            <div class="n-title-bar" >
+               <b > {{item.title}}<span class="C_999">（{{item.list.length}}）</span> </b>
+            </div>
+          
+            <!-- <i class="header-icon el-icon-info"></i> -->
+          </template>
+
+          <ul class="list-link">
+            <li v-for="doc in item.list" :key="doc._id">
+              <a target="_blank" :href="`#/detail_data?dataId=${doc._id}`">{{doc.title}}</a>
+            </li>
+          </ul>
+         
+        </el-collapse-item>
+      </template>
+    </el-collapse>
   </div>
 </template>
 
@@ -155,6 +131,7 @@ export default {
   },
   data() {
     return {
+      activeNames: [], //激活的折叠面板
       familiarityDoc: {},
       dataId: null,
       isShowDialogEdit: false, //是否显示编辑数据弹窗
@@ -185,16 +162,51 @@ export default {
       }, //编辑数据表单配置
       doc: {},
       dataTypeLabel: "", //数据类型标签
-      noteListByKeyword: [{}], //关键词匹配的笔记列表
-      htmlAPIListByKeyword: [{}], //关键词匹配的Html-API列表
-      cssAPIListByKeyword: [{}], //关键词匹配的Css-API列表
-      jsAPIListByKeyword: [{}], //关键词匹配的Js-API列表
-      frontDemoListByKeyword: [{}], //关键词匹配的前端demo列表
-      vedioListByKeyword: [{}], //关键词匹配的视频列表
+      noteListByKeyword: [], //关键词匹配的笔记列表
+      htmlAPIListByKeyword: [], //关键词匹配的Html-API列表
+      cssAPIListByKeyword: [], //关键词匹配的Css-API列表
+      jsAPIListByKeyword: [], //关键词匹配的Js-API列表
+      frontDemoListByKeyword: [], //关键词匹配的前端demo列表
+      vedioListByKeyword: [], //关键词匹配的视频列表
       paramByKeyword: null //根据关键词请求关联数据的ajax固定参数
     };
   },
   computed: {
+    arrCards() {
+      let arr = [
+        //关联笔记 (${noteListByKeyword.length})
+        { type: "note", title: "关联笔记", list: this.noteListByKeyword },
+        {
+          type: "html_api",
+          title: "关联Html-API",
+          list: this.htmlAPIListByKeyword
+        },
+        {
+          type: "css_api",
+          title: "关联Css-API",
+          list: this.cssAPIListByKeyword
+        },
+        {
+          type: "js_api",
+          title: "关联Js-API",
+          list: this.jsAPIListByKeyword
+        },
+        {
+          type: "front_demo",
+          title: "关联前端Demo",
+          list: this.frontDemoListByKeyword
+        },
+        {
+          type: "vedio",
+          title: "关联视频",
+          list: this.vedioListByKeyword
+        }
+      ];
+
+      this.activeNames = arr.map(doc => doc.type);
+      return arr;
+    },
+
     // title() {
     //   let { title, desc } = this.doc;
     //   if (desc) {
@@ -214,12 +226,16 @@ export default {
       if (arrTypeNoIframe.includes(this.doc._dataType)) {
         flag = false;
       }
-      console.log("flag:", flag);
       return flag;
     }
   },
 
   methods: {
+    //函数：{滚动到指定位置的函数}
+    scrollView(type) {
+      //让指定元素进入视口
+      document.querySelector(`#id_floor_${type}`).scrollIntoView(true);
+    },
     //函数：{显示编辑数据弹窗函数}
     showDialogEdit() {
       this.formDataEdit._id = this.dataId; //编辑数据表单数据补充数据id
@@ -347,7 +363,6 @@ export default {
     }
   },
   async created() {
-    console.log(" this.$route.query.groupId:", this.$route.query.groupId);
     this.dataId = this.$route.query.dataId;
     this.dataId = this.dataId || this.propDataId; //如果地址没有(非页面级组件)，从属性中获取数据id
 
@@ -358,6 +373,24 @@ export default {
 
 
 <style  scoped>
+
+.detail_box{
+   padding: 8px 0 12px;
+}
+.float_bar {
+  position: fixed;
+  right: 10px;
+  top: 200px;
+  border: 1px #ddd solid;
+  border-radius: 5px;
+  padding: 8px;
+  background: #fff;
+  z-index: 100;
+}
+.float_bar a {
+  color: #666;
+  text-decoration: none
+}
 .link_iframe {
   width: 100%;
   height: 600px;
