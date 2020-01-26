@@ -141,7 +141,7 @@ export default {
         labelWidth: "150px",
         idKey: "_id",
         paramAddonInit: {
-          _systemId: "sys_api",
+          _systemId: PUB._systemId,
           _dataType: "note"
         },
         col_span: 24,

@@ -1,4 +1,4 @@
-let _systemId = "sys_api";
+let _systemId = PUB._systemId;
 import "@/assets/js/config_detail.js"
 window.F_ITEMS = {};
 //#region 唐球过来

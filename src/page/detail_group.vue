@@ -12,15 +12,16 @@
 </template>
 
 <script>
+//变量：{模块导入对象}
+let objDetailGroupMoudles = {}
 
-
+PUB.arrDetailGroupMoudles.forEach(itemEach=>{//循环：{分组数据列表的模块名称数组}
+  objDetailGroupMoudles[`detail_group_${itemEach}`]=() => import(`@/page/detail_group_${itemEach}`)
+})
 export default {
-  components: { 
-     detail_group_note: () => import("@/page/detail_group_note"),
-      detail_group_group: () => import("@/page/detail_group_group"),
-     detail_group_url: () => import("@/page/detail_group_url"),
-    // detail_group_note,detail_group_group 
-    },
+  components: {
+    ...objDetailGroupMoudles//展开{模块导入对象}
+  },
   data() {
     return {
       componentName: null, //动态组件名称
@@ -44,7 +45,7 @@ export default {
       });
       this.groupDoc = data.doc;
       this.componentName = `detail_group_${this.groupDoc.dataType}`;
-      document.title=this.groupDoc.title;//修改浏览器标题栏文字
+      document.title = this.groupDoc.title; //修改浏览器标题栏文字
       this.ready = true;
     }
   },

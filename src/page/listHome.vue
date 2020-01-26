@@ -44,7 +44,7 @@ export default {
       method: "post",
       url: `${PUB.domain}/info/getCommonGroupList`,
       data: {
-        _systemId: "sys_api",
+        _systemId: PUB._systemId,
         groupId: "5e18821555a1e947e7bec88d"
       }
     });

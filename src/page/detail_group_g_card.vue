@@ -135,7 +135,7 @@ export default {
         method: "post",
         url: `${PUB.domain}/info/getCommonGroupList`,
         data: {
-          _systemId: "sys_api",
+          _systemId: PUB._systemId,
           groupId: this.groupId,
           arrType: ["group"]
         }

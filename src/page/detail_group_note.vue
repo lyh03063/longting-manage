@@ -6,9 +6,6 @@
       <dm_debug_item v-model="arrSelect2" text="arrSelect2" />
     </dm_debug_list>
 
-  
-
-
     <dm_dynamic_form :cf="cfFormSearch" v-model="formDataSearch" @submit="searchList"></dm_dynamic_form>
 
     <dm_list_data ref="listData" :cf="cfList" v-if="ready" @after-search="afterSearch">
@@ -27,9 +24,16 @@
           ></familiarity_select>
         </div>
       </template>
-       <template v-slot:slot_btn_select>
-          <dm_select_list_data class="DPIB MR10" v-model="arrSelect2" :cf="cfSelectList2" @select="afterSelect"></dm_select_list_data>
-         </template>
+      <!--分组数据选择列表按钮插槽-->
+      <template v-slot:slot_btn_select>
+        <dm_select_list_data
+          class="DPIB MR10"
+          v-model="arrSelect2"
+          :cf="cfSelectList2"
+          @select="afterSelect"
+        ></dm_select_list_data>
+      </template>
+       <!--计分板和筛选按钮插槽-->
       <template v-slot:slot_in_toolbar="{data}">
         <score_panel
           ref="scorePanel"
@@ -41,10 +45,8 @@
           :arrLookup="arrLookupScore"
           @switch="searchList"
         >
-          <!-- cfList.objParamAddon.arrLookup -->
           <!-- 计分板组件 -->
         </score_panel>
-         
       </template>
     </dm_list_data>
   </div>
@@ -94,7 +96,7 @@ export default {
       },
       // 计分板的ajax参数
       scoreParam: {
-        _systemId: "sys_api",
+        _systemId: PUB._systemId,
         _dataType: "note",
         findJson: null,
         userId: localStorage[PUB.keyLoginUser]
@@ -122,19 +124,13 @@ export default {
     }
   },
   methods: {
+    //函数：{选择并添加数据后的ajax操作函数}
     async afterSelect(arr) {
-      console.log("arr:", arr);
-
       let minSort = this.$refs.listData.tableData;
       let { tableData } = this.$refs.listData;
-      console.log("tableData:", tableData);
 
       let docLast = tableData.slice(-1); //最后一个元素
       let sortStart = lodash.get(docLast, `[0].sort`, 9999);
-      console.log("docLast", docLast);
-      // let sortStart = docLast.sort + 1;
-      console.log("sortStart", sortStart);
-
       let arrDataAdd = arr.map(doc => {
         return {
           sort: --sortStart,
@@ -142,7 +138,6 @@ export default {
           _idRel2: doc._id
         };
       });
-      console.log("arrDataAdd:", arrDataAdd);
       // return;
 
       let urlAdd = PUB.listCF.list_relation.url.add;
@@ -150,7 +145,6 @@ export default {
         _data: arrDataAdd
       };
       Object.assign(ajaxParam, PUB.listCF.list_relation.paramAddonPublic); //合并公共参数
-      console.log("ajaxParam:######", ajaxParam);
       let response = await axios({
         //请求接口
         method: "post",

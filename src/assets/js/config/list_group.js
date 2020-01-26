@@ -1,4 +1,3 @@
-// import "@/assets/js/config_base.js"
 
 let _dataType = "group",
   _systemId = PUB._systemId;

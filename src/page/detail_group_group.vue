@@ -21,13 +21,6 @@ export default {
   data() {
     return {
       dictScore: {}, //用户的分组分数数据字典
-      // // 计分板的ajax参数
-      // scoreParam: {
-      //   _systemId: "sys_api",
-      //   _dataType: "note",
-      //   findJson: null,
-      //   userId: localStorage[PUB.keyLoginUser]
-      // },
       ready: false,
       cfList: util.deepCopy(PUB.listCF.detail_group_group)
     };
@@ -39,22 +32,7 @@ export default {
       return this.$store.state.arrLookup[this.cfList.listIndex];
     }
   },
-  // watch: {
-  //   arrLookup: {
-  //     async handler(newVal, oldVal) {
-  //       //更新列表的联合查询参数-这句会有问题！！影响到原来的表单查询
-
-  //       this.$refs.listData.objParam.arrLookup = [
-  //         ...this.cfList.objParamAddon.arrLookup,
-  //         ...newVal
-  //       ];
-  //       await this.$nextTick(); //延迟到视图更新
-  //       //列表更新
-  //       this.$refs.listData.getDataList();
-  //     },
-  //     deep: true
-  //   }
-  // },
+  
   methods: {
     //函数：{列表查询后执行的函数}
     async afterSearch(list) {

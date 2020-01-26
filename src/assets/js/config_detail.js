@@ -1,4 +1,4 @@
-let _systemId = "sys_api"
+let _systemId = PUB._systemId
 //#region DYDICT:公共数据字典对象管理
 window.DYDICT = {}//公共数据字典对象
 DYDICT.arr_importance =  [
