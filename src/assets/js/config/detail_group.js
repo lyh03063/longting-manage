@@ -20,6 +20,7 @@ PUB.listCF.detail_group_note = {
     batchBtns: {
 
         addon: [
+            { uiType: "slot", slot: "slot_btn_select" },
             util.cfList.bBtns.add,
             util.cfList.bBtns.delete,
             { uiType: "slot", slot: "slot_in_toolbar" }

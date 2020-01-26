@@ -3,9 +3,11 @@
     <dm_debug_list>
       <dm_debug_item v-model="groupId" text="groupId" />
       <dm_debug_item v-model="arrLookup" text="arrLookup" />
+      <dm_debug_item v-model="arrSelect2" text="arrSelect2" />
     </dm_debug_list>
 
-    <dm_select_list_data class v-model="arrSelect2" :cf="cfSelectList2" @select="afterSelect"></dm_select_list_data>
+  
+
 
     <dm_dynamic_form :cf="cfFormSearch" v-model="formDataSearch" @submit="searchList"></dm_dynamic_form>
 
@@ -25,6 +27,9 @@
           ></familiarity_select>
         </div>
       </template>
+       <template v-slot:slot_btn_select>
+          <dm_select_list_data class="DPIB MR10" v-model="arrSelect2" :cf="cfSelectList2" @select="afterSelect"></dm_select_list_data>
+         </template>
       <template v-slot:slot_in_toolbar="{data}">
         <score_panel
           ref="scorePanel"
@@ -39,6 +44,7 @@
           <!-- cfList.objParamAddon.arrLookup -->
           <!-- 计分板组件 -->
         </score_panel>
+         
       </template>
     </dm_list_data>
   </div>
@@ -117,18 +123,34 @@ export default {
   },
   methods: {
     async afterSelect(arr) {
-      alert("afterSelect");
       console.log("arr:", arr);
+
+      let minSort = this.$refs.listData.tableData;
+      let { tableData } = this.$refs.listData;
+      console.log("tableData:", tableData);
+
+      let docLast = tableData.slice(-1); //最后一个元素
+      let sortStart = lodash.get(docLast, `[0].sort`, 9999);
+      console.log("docLast", docLast);
+      // let sortStart = docLast.sort + 1;
+      console.log("sortStart", sortStart);
+
+      let arrDataAdd = arr.map(doc => {
+        return {
+          sort: --sortStart,
+          _idRel: this.groupId,
+          _idRel2: doc._id
+        };
+      });
+      console.log("arrDataAdd:", arrDataAdd);
+      // return;
 
       let urlAdd = PUB.listCF.list_relation.url.add;
       let ajaxParam = {
-        _data: {
-          sort: 111,
-          _idRel: "5e1ed2d9a37d11529222c373",
-          _idRel2: "5e1ed18fc1a88e0394902778"
-        }
+        _data: arrDataAdd
       };
       Object.assign(ajaxParam, PUB.listCF.list_relation.paramAddonPublic); //合并公共参数
+      console.log("ajaxParam:######", ajaxParam);
       let response = await axios({
         //请求接口
         method: "post",
@@ -136,13 +158,16 @@ export default {
         data: ajaxParam //传递参数
       });
       this.$message.success("添加数据成功");
+
+      this.arrSelect2 = []; //清除该数组，否则越积越多
+      this.$refs.listData.getDataList(); //列表更新
     },
     //函数：{查询表单提交的回调函数}
     async searchList() {
       this.initArrLookup(); //调用：{初始化处理arrLookup数组函数}
       await this.$nextTick(); //延迟到视图更新
-      //列表更新
-      this.$refs.listData.getDataList();
+
+      this.$refs.listData.getDataList(); //列表更新
     },
     //函数：{列表查询后的回调函数}
     async afterSearch(list) {

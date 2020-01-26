@@ -92,7 +92,9 @@ COLUMNS.dataType = { ...D_ITEMS.dataType, width: 80, };
 COLUMNS.dataId = { ...D_ITEMS.dataId, width: 210, };
 COLUMNS.userId = { ...D_ITEMS.userId, width: 120, };
 COLUMNS._userId = { ...D_ITEMS._userId, width: 120, };
-COLUMNS._id = { ...D_ITEMS._id, width: 120, };
+COLUMNS._id = { ...D_ITEMS._id, width: 120,
+  sortable: "custom",//开启后端排序
+ };
 COLUMNS.myScore = { ...D_ITEMS.myScore, width: 90, };
 COLUMNS.score = { ...D_ITEMS.score, width: 90, };
 //#endregion
