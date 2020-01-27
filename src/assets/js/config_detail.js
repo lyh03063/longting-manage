@@ -41,7 +41,7 @@ DYDICT.arr_dataType =  [
   { label: "Js-Api", value: "js_api" },
   { label: "Css-Api", value: "css_api" },
   { label: "视频", value: "vedio" },
- 
+  { label: "网址", value: "url" },
 ]
 DYDICT.dataType =  lodash.keyBy(DYDICT.arr_dataType, 'value')
 

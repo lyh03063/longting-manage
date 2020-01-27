@@ -175,13 +175,17 @@ PUB.arrListName=[
 ]
 //#endregion
 //#region 分组数据列表页模块引用配置
-//变量：{分组数据列表的模块名称数组}-会在导入vue文件和js配置文件时用到
+//变量：{分组数据列表的模块名称数组}-会在导入js配置文件时用到
 PUB.arrDetailGroupMoudles=[
   "note","group","url"
 ]
 
 //#endregion  
 
+//变量：{特殊的分组数据列表模块名称数组}-需要有单独对应的分组列表模板vue-会在导入vue文件时用到
+PUB.arrGroupMoudlesSpe=[
+  "note","group"
+]
 
 
 
