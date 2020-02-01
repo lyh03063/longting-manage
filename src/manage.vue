@@ -4,7 +4,7 @@
     <el-container>
       <el-header class="home-head-box">
         <el-row>
-          <div class="FL MT13 C_fff MR10" v-if="logoUrl">
+         <div class="FL MT13 C_fff MR10" v-if="logoUrl">
             <img class="W200 H36" src="http://www.dmagic.cn/images/IconS/IconS_2578.png" alt />
           </div>
 
@@ -138,6 +138,7 @@ export default {
         return false;
       }
     };
+    
   }
 };
 </script>

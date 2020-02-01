@@ -2,7 +2,7 @@
 window.PUB = {}
 PUB.domain = "http://localhost:3000"
 //PUB.domain = 'http://test.dmagic.cn'
-//PUB.domain = "http://120.76.160.41:3000"
+ //PUB.domain = "http://120.76.160.41:3000"
 PUB.urlUpload = `https://up-z2.qiniup.com`//七牛云上传地址（域名）
 PUB.urlGetQiniuToken = `${PUB.domain}/api_third_part/get_qiniu_token?scope=dmagic`
 PUB.systemName = "深圳龙庭后台系统";
@@ -73,19 +73,16 @@ PUB.menuList = [
         route: "/list_common?type=data_type",
         title: "数据类型"
       },
-
       {
         index: "list_all",
         route: "/list_common?type=all",
         title: "所有数据"
       },
-
       {
         index: "list_admin",
         route: "/list_common?type=admin",
         title: "管理员"
       },
-
       { index: "list_role", route: "/list_role", title: "角色" }
     ]
   }
