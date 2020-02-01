@@ -11,36 +11,20 @@ import "@/assets/js/config.js";
 import "@/assets/css/util.scss"; //导入公共样式文件
 Vue.use(VueRouter)
 import manage from "@/manage";
-let arrRouteListName = [
-  "modify_password",
-  "list_article_category",
-  "list_article",
-  "list_admin",
-  "list_role",
-  "list_html_api",
-  "list_css_api",
-  "list_js_api",
-  "list_note",
-  "list_all",
-  "listHome",
-  "list_common",//通用列表
-]
+let arrRouteListName = PUB.arrRouteListName
 let arrRouteListPage = arrRouteListName.map((item) => {
   return {
     path: `/${item}`,
     component: () => import(`@/page/${item}`)
   }
 })
-console.log("arrRouteListPage:", arrRouteListPage);
 // window.util=util;
 // 3. 创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: () => import("@/login") },
-    { path: '/detail_group', component: () => import("@/page/detail_group") },
-    { path: '/detail_data', component: () => import("@/page/detail_data") },
-    { path: '/detail_group_g_card', component: () => import("@/page/detail_group_g_card") },
+    ...PUB.arrRouteAddon,//附加的一级路由
     {
       path: '/manage',
       component: manage,
@@ -52,8 +36,6 @@ const router = new VueRouter({
   ]
 })
 router.beforeEach((to, from, next) => {
-  console.log("from:####", from);
-  console.log("to:####", to);
   // 如果用户未登录，跳转登录页面
   if (localStorage[PUB.keyIsLogin] != 1) {
     if (to.path == '/login') {
@@ -88,8 +70,6 @@ const store = new Vuex.Store({//定义Vuex的存储对象
       state.arrLookup[param.listIndex] = param.arrLookup;
       //对listState进行整个对象的变更（深拷贝），因为listState是有注册的，可以触发响应
       state.arrLookup = lodash.cloneDeep(state.arrLookup);  //深拷贝
-      // let str = JSON.stringify(state.arrLookup)//对象转换成字符串
-      // state.arrLookup = JSON.parse(str)//字符串转换成对象
     },
     setListFindJson(state, param) {//设置列表的初始筛选参数值
       state.defultFindJson[param.listIndex] = param.findJson;

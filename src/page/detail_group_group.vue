@@ -6,15 +6,12 @@
     </dm_debug_list>
 
     <dm_list_data ref="listData" :cf="cfList" v-if="ready" @after-search="afterSearch">
-      <template v-slot:slot_column_score="{row}">
-        {{$lodash.get(dictScore, `${row._idRel2}.score`)}}
-        </template>
+      <template v-slot:slot_column_score="{row}">{{$lodash.get(dictScore, `${row._idRel2}.score`)}}</template>
     </dm_list_data>
   </div>
 </template>
 
 <script>
-
 export default {
   components: {},
   props: {
@@ -24,13 +21,6 @@ export default {
   data() {
     return {
       dictScore: {}, //用户的分组分数数据字典
-      // // 计分板的ajax参数
-      // scoreParam: {
-      //   _systemId: "sys_api",
-      //   _dataType: "note",
-      //   findJson: null,
-      //   userId: localStorage[PUB.keyLoginUser]
-      // },
       ready: false,
       cfList: util.deepCopy(PUB.listCF.detail_group_group)
     };
@@ -42,31 +32,12 @@ export default {
       return this.$store.state.arrLookup[this.cfList.listIndex];
     }
   },
-  // watch: {
-  //   arrLookup: {
-  //     async handler(newVal, oldVal) {
-  //       console.log("arrLookup changed######@@@@@@");
-  //       //更新列表的联合查询参数-这句会有问题！！影响到原来的表单查询
-
-  //       this.$refs.listData.objParam.arrLookup = [
-  //         ...this.cfList.objParamAddon.arrLookup,
-  //         ...newVal
-  //       ];
-  //       await this.$nextTick(); //延迟到视图更新
-  //       //列表更新
-  //       this.$refs.listData.getDataList();
-  //     },
-  //     deep: true
-  //   }
-  // },
+  
   methods: {
     //函数：{列表查询后执行的函数}
     async afterSearch(list) {
-      console.log("list:", list);
       let arrGroupId = list.map(doc => doc._idRel2);
-      console.log("arrGroupId:#######", arrGroupId);
       let datalist = await this.getGroupUserScore(arrGroupId);
-      console.log("datalist####:", datalist);
       if (datalist && datalist.length) {
         datalist.forEach(itemEach => {
           // this.dictScore[itemEach._idRel] = itemEach.score;
@@ -89,7 +60,6 @@ export default {
         } //获取列表的数据总量
       };
       Object.assign(ajaxParam, PUB.listCF.list_familiarity.paramAddonPublic); //合并公共参数
-      console.log("ajaxParam:$$$$", ajaxParam);
       let {
         data: { list }
       } = await axios({
@@ -102,10 +72,7 @@ export default {
     }
   },
   async created() {
-    this.cfList.findJsonDefault = {
-      _idRel: this.groupId
-    };
-
+    this.$set(this.cfList.objParamAddon.findJson, "_idRel", this.groupId);
     //补充联合查询参数，很复杂！！！！
 
     this.cfList.objParamAddon.arrLookup = [

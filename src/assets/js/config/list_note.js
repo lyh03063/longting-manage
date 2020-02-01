@@ -1,4 +1,3 @@
-// import "@/assets/js/config_base.js"
 
 let _dataType = "note",
   _systemId = PUB._systemId;
@@ -50,13 +49,15 @@ PUB.listCF.list_note = {
   //-------新增、修改表单字段数组-------
   formItems: [
     F_ITEMS.title,
+    F_ITEMS.link,
+    F_ITEMS.importance_radio,
+    F_ITEMS.difficulty_radio,
     F_ITEMS.keyword,
     F_ITEMS.note_category,
     F_ITEMS.desc,
     F_ITEMS.detail,
-    F_ITEMS.importance,
-    F_ITEMS.difficulty,
-    F_ITEMS.link,
+  
+   
     //F_ITEMS.demoList,
     //F_ITEMS.note_linkList
   ]

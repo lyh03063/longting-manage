@@ -1,4 +1,4 @@
-let _systemId = "sys_api"
+let _systemId = PUB._systemId
 //#region DYDICT:公共数据字典对象管理
 window.DYDICT = {}//公共数据字典对象
 DYDICT.arr_importance =  [
@@ -41,6 +41,8 @@ DYDICT.arr_dataType =  [
   { label: "Js-Api", value: "js_api" },
   { label: "Css-Api", value: "css_api" },
   { label: "视频", value: "vedio" },
+  { label: "网址", value: "url" },
+  { label: "工程案例", value: "project_case" },
  
 ]
 DYDICT.dataType =  lodash.keyBy(DYDICT.arr_dataType, 'value')
@@ -327,6 +329,10 @@ D_ITEMS.score = {
 D_ITEMS.myScore = {
   label: "我的分数",
   prop: "myScore",
+};
+D_ITEMS.alias = {
+  label: "别名",
+  prop: "alias",
 };
 //#endregion
 //#region 关系

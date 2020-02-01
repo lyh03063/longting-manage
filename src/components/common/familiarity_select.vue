@@ -75,8 +75,6 @@ export default {
   watch: {
     value: {
       handler(newVal, oldVal) {
-        console.log("value change!!!!!");
-        console.log("newVal:", newVal);
         this.valueNeed = this.value;
         // this.valueNeed = lodash.get(this.value, `[0]._data`);
         if (!this.valueNeed) {
@@ -133,7 +131,6 @@ export default {
           }
         });
         let docAdd = lodash.get(data, `addData._data`);
-        console.log("docAdd:", docAdd);
         this.dataIdFamiliarity = lodash.get(data, `addData._id`);
         this.valueNeed = docAdd; //改变valueNeed---注意结构！！！！
         //this.$emit("input", [{ _data: this.valueNeed }]);

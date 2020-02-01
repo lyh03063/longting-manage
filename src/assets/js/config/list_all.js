@@ -1,4 +1,3 @@
-// import "@/assets/js/config_base.js"
 
 let _dataType = "$all",
   _systemId = PUB._systemId;

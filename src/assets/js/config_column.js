@@ -92,7 +92,9 @@ COLUMNS.dataType = { ...D_ITEMS.dataType, width: 80, };
 COLUMNS.dataId = { ...D_ITEMS.dataId, width: 210, };
 COLUMNS.userId = { ...D_ITEMS.userId, width: 120, };
 COLUMNS._userId = { ...D_ITEMS._userId, width: 120, };
-COLUMNS._id = { ...D_ITEMS._id, width: 120, };
+COLUMNS._id = { ...D_ITEMS._id, width: 80,
+  sortable: "custom",//开启后端排序
+ };
 COLUMNS.myScore = { ...D_ITEMS.myScore, width: 90, };
 COLUMNS.score = { ...D_ITEMS.score, width: 90, };
 //#endregion
@@ -100,6 +102,7 @@ COLUMNS.score = { ...D_ITEMS.score, width: 90, };
 COLUMNS.group_dataType = { ...D_ITEMS.group_dataType, width: 90, };
 COLUMNS.countData = { ...D_ITEMS.countData, width: 80, };
 COLUMNS.myScore = { ...D_ITEMS.myScore, width: 90, slot: "slot_column_score", };
+COLUMNS.alias = { ...D_ITEMS.alias, width: 130};
 //#endregion
 //#region 关系
 COLUMNS._idRel = { ...D_ITEMS._idRel, width: 220, };

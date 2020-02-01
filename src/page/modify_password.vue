@@ -146,7 +146,6 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.query);
     if (this.$route.query.flag) {
       this.url = "/crossList?page=tangball_franchisee"
       this.modifyUrl = "/crossModify?page=tangball_franchisee"

@@ -1,4 +1,4 @@
-let _systemId = "sys_api";
+let _systemId = PUB._systemId;
 import "@/assets/js/config_detail.js"
 window.F_ITEMS = {};
 //#region 唐球过来
@@ -37,7 +37,7 @@ F_ITEMS.album = {
   prop: "album",
   type: "upload",
   col_span: 24, //控制显示一行多列
-  tips: "图片尺寸比例最好保持在1:0.8，建议尺寸：宽500px，高400px"
+  // tips: "图片尺寸比例最好保持在1:0.8，建议尺寸：宽500px，高400px"
 };
 /****************************赛事报名-START****************************/
 F_ITEMS.phone = {
@@ -84,13 +84,21 @@ F_ITEMS.importance = {
   ...D_ITEMS.importance, type: "select",
   options: DYDICT.arr_importance
 };
-
+F_ITEMS.importance_radio = {
+  ...F_ITEMS.importance, type: "radio"
+};
 
 
 F_ITEMS.difficulty = {
   ...D_ITEMS.difficulty, type: "select",
   options: DYDICT.arr_difficulty
 };
+F_ITEMS.difficulty_radio = {
+  ...F_ITEMS.difficulty, type: "radio"
+};
+
+
+
 F_ITEMS.english = {
   ...D_ITEMS.english, type: "input",
 };
@@ -196,6 +204,7 @@ F_ITEMS.group_dataType = {
     keyValue: "key"
   }
 };
+F_ITEMS.alias = { ...D_ITEMS.alias, type: "input", };
 //#endregion
 //#region 关系
 F_ITEMS._idRel = { ...D_ITEMS._idRel, type: "input" };

@@ -65,16 +65,12 @@ export default {
     }
   },
   mounted(){
-    // console.log('aaaa',this.cf);
   },
   methods: {
     isCollapseFun() {
       this.isCollapse = !this.isCollapse;
     },
     selectItem(a, b, c) {
-      console.log("a:", a);
-      console.log("b:", b);
-      console.log("c:", c);
     }
   },
 

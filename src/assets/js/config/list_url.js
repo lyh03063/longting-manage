@@ -1,4 +1,3 @@
-// import "@/assets/js/config_base.js"
 
 let _dataType = "url",
   _systemId = PUB._systemId;
@@ -35,6 +34,7 @@ PUB.listCF.list_url = {
     F_ITEMS.title,
     F_ITEMS.link,
     F_ITEMS.desc,
+    F_ITEMS.album,
 
   ]
 }

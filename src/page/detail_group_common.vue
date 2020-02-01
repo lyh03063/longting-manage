@@ -6,24 +6,14 @@
       <dm_debug_item v-model="arrSelect2" text="arrSelect2" />
     </dm_debug_list>
 
-    <dm_dynamic_form :cf="cfFormSearch" v-model="formDataSearch" @submit="searchList"></dm_dynamic_form>
+    <!-- <dm_dynamic_form :cf="cfFormSearch" v-model="formDataSearch" @submit="searchList"></dm_dynamic_form> -->
 
-    <dm_list_data ref="listData" :cf="cfList" v-if="ready" @after-search="afterSearch">
+    <dm_list_data ref="listData" :cf="cfList" v-if="ready">
       <!--自定义详情弹窗插槽-->
       <template v-slot:customDetail="{detailData}">
         <detail_data :propDataId="detailData._idRel2"></detail_data>
       </template>
-      <!--熟悉度插槽-->
-      <template v-slot:slot_column_familiarity="{row}">
-        <div class>
-          <familiarity_select
-            v-model="row.familiarityDoc"
-            :data="row"
-            data-type="note"
-            idKey="_idRel2"
-          ></familiarity_select>
-        </div>
-      </template>
+
       <!--分组数据选择列表按钮插槽-->
       <template v-slot:slot_btn_select>
         <dm_select_list_data
@@ -33,58 +23,44 @@
           @select="afterSelect"
         ></dm_select_list_data>
       </template>
-       <!--计分板和筛选按钮插槽-->
-      <template v-slot:slot_in_toolbar="{data}">
-        <score_panel
-          ref="scorePanel"
-          v-if="data"
-          :param="data.objParam"
-          idKey="_idRel2"
-          :listIndex="cfList.listIndex"
-          data-type="note"
-          :arrLookup="arrLookupScore"
-          @switch="searchList"
-        >
-          <!-- 计分板组件 -->
-        </score_panel>
-      </template>
     </dm_list_data>
   </div>
 </template>
 
 <script>
-window.cfSelectList_note = {
-  hideCollection: true,
-  dataName: "笔记",
-  valueKey: "_id",
-  labelKey: "title",
-  pageName: "tangball_article",
-  multiple: true, //多选
-  //需要保留的集合字段
-  selectJson: {
-    _id: 1,
-    title: 1
-  },
-  cfList: util.deepCopy(PUB.listCF.list_note)
-};
+// let cfSelectList = ;
 
 export default {
   components: {
-    familiarity_select: () =>
-      import("@/components/common/familiarity_select.vue"),
-    score_panel: () => import("@/components/common/score_panel.vue"),
     detail_data: () => import("@/page/detail_data.vue") //数据详情页组件
-    //src\page\detail_data.vue
   },
   props: {
+    dataType: {},//数据类型
+ 
     groupDoc: {},
     groupId: {}
   },
   data() {
+    console.log("this.dataType:", this.dataType);
+    console.log("DYDICT.dataType:", DYDICT.dataType);
+    console.log("DYDICT.dataType[this.dataType]:", DYDICT.dataType[this.dataType]);
     return {
       arrSelect2: [],
 
-      cfSelectList2: window.cfSelectList_note,
+      cfSelectList2: {
+        hideCollection: true,
+        dataName: lodash.get(DYDICT, `dataType.${this.dataType}.label`),
+        valueKey: "_id",
+        labelKey: "title",
+        pageName: "tangball_article",
+        multiple: true, //多选
+        //需要保留的集合字段
+        selectJson: {
+          _id: 1,
+          title: 1
+        },
+        cfList: util.deepCopy(PUB.listCF[`list_${this.dataType}`])
+      },
 
       formDataSearch: {},
       //查询表单配置
@@ -94,15 +70,9 @@ export default {
         formItems: [F_ITEMS.importance],
         btns: [{ text: "查询", event: "submit", type: "primary", size: "mini" }]
       },
-      // 计分板的ajax参数
-      scoreParam: {
-        _systemId: PUB._systemId,
-        _dataType: "note",
-        findJson: null,
-        userId: localStorage[PUB.keyLoginUser]
-      },
+
       ready: false,
-      cfList: util.deepCopy(PUB.listCF.detail_group_note),
+      cfList: util.deepCopy(PUB.listCF[`detail_group_${this.dataType}`]),
       arrLookupScore: null //计分板需要联合查询配置数组-
     };
   },
@@ -162,32 +132,6 @@ export default {
       await this.$nextTick(); //延迟到视图更新
 
       this.$refs.listData.getDataList(); //列表更新
-    },
-    //函数：{列表查询后的回调函数}
-    async afterSearch(list) {
-      let arrId = list.map(doc => doc._idRel2);
-      //设置id数组
-      // lodash.set(this.scoreParam, `findJson._id.$in`, arrId);
-      this.$refs.scorePanel.ajaxGetScore(); //调用：{ajax获取分数函数}
-      if (this.$refs.scorePanel.focusId == undefined) {
-        //如果没有筛选熟悉度（这里的触发机制还需进一步优化，没有必要一直调用）
-        this.updateGroupCountData(); //调用：{更新当前分组的数据量的函数}
-      }
-    },
-    //函数：{更新当前分组的数据量的函数}
-    async updateGroupCountData() {
-      let urlModify = PUB.listCF.list_group.url.modify;
-      let ajaxParam = {
-        _id: this.groupId,
-        _data: { countData: this.$refs.listData.allCount } //获取列表的数据总量
-      };
-      Object.assign(ajaxParam, PUB.listCF.list_group.paramAddonPublic); //合并公共参数
-      let response = await axios({
-        //请求接口
-        method: "post",
-        url: PUB.domain + urlModify,
-        data: ajaxParam //传递参数
-      });
     },
 
     //函数：{初始化处理arrLookup数组函数}

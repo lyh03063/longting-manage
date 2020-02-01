@@ -38,7 +38,6 @@ export default {
   watch: {
     arrLookup: {
       async handler(newVal, oldVal) {
-        console.log("arrLookup changed######");
         //更新列表的联合查询参数-这句会有问题！！影响到原来的表单查询
         //cf.objParamAddon换成objParam解决！！！！
         this.$refs.listData.objParam.arrLookup = newVal;

@@ -16,7 +16,7 @@ export default {
     async roleDataChange(doc) {
       //如果修改的是当前的角色，更新当前的权限
       if (doc.P1 == localStorage[PUB.keyRoleId]) {
-        util.setLocalStorageObj("api_power", doc.power); //调用：{设置一个对象到LocalStorage}
+        util.setLocalStorageObj(PUB.keyPower, doc.power); //调用：{设置一个对象到LocalStorage}
         let clickStatus = await this.$confirm(
           "当前用户的角色被修改，需要刷新页面才能生效，是否刷新？"
         ).catch(() => {});
