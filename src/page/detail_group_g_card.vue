@@ -147,9 +147,7 @@ export default {
   },
   async created() {
     this.groupId = this.$route.query.groupId;
-
     this.getDataList(); //调用：{ajax获取列表函数}
-
     this.getGroupDoc(); //调用：{获取分组详情函数}
   }
 };

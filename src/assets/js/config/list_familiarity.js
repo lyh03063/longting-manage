@@ -1,6 +1,5 @@
 
-let _dataType = "familiarity",
-  _systemId = PUB._systemId;
+let _dataType = "familiarity";
   PUB.listCF.list_familiarity= {
   idKey: "_id", //键名
   pageSize: 20,

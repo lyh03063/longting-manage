@@ -1,5 +1,4 @@
-let _dataType = "css_api",
-  _systemId = PUB._systemId;
+let _dataType = "css_api";
 PUB.listCF.list_css_api = {
   idKey: "_id", //键名
   pageSize: 20,

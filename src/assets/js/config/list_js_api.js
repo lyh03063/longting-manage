@@ -1,5 +1,4 @@
-let _dataType = "js_api",
-  _systemId = PUB._systemId;
+let _dataType = "js_api";
 PUB.listCF.list_js_api = {
   idKey: "_id", //键名
   pageSize: 20,

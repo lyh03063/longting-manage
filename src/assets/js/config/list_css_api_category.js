@@ -1,5 +1,4 @@
-let _dataType = "css_api_category",
-  _systemId = PUB._systemId;
+let _dataType = "css_api_category";
  
   PUB.listCF.list_css_api_category= {
   idKey: "_id", //键名

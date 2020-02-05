@@ -1,6 +1,5 @@
 
-let _dataType = "front_demo",
-  _systemId = PUB._systemId;
+let _dataType = "front_demo";
 
 PUB.listCF.list_front_demo = {
   idKey: "_id", //键名

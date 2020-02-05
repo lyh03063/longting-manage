@@ -1,6 +1,5 @@
 
-let _dataType = "exercises",
-  _systemId = PUB._systemId;
+let _dataType = "exercises";
 
 PUB.listCF.list_exercises = {
   idKey: "_id", //键名
