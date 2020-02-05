@@ -322,7 +322,9 @@ export default {
           _systemId: PUB._systemId
         } //传递参数
       });
+
       this.doc = data.doc;
+      console.log("this.doc:###", this.doc);
 
       this.ajaxGetFamiliarity(); //调用：{ajax获取当前数据的熟悉度}
 
