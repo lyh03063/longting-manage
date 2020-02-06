@@ -1,7 +1,7 @@
 
 
 //#region 基本配置
-window.PUB = window.PUB||{}
+window.PUB = window.PUB||{} 
 PUB.domain = "http://localhost:3000"
 //PUB.domain = "http://120.76.160.41:3000"
 //PUB.domain = 'http://test.dmagic.cn'
