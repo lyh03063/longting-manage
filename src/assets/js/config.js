@@ -7,7 +7,7 @@ PUB.domain = "http://localhost:3000"
 //PUB.domain = 'http://test.dmagic.cn'
 
 
-//#region 列表模块名数组配置
+//#region 列表模块名数组配置 
 PUB.arrListName=[
   
   "project_case", "goods", 
