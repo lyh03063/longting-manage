@@ -11,7 +11,7 @@ PUB.listCF.list_project_case = {
     { value: "首页", path: "#/listHome" },
     { value: "工程案例" }
   ],
-  ...PUB.listCFCommon3,//展开公共配置
+  ...PUB.listCFCommon2,//展开公共配置
   //objParamAddon列表接口的附加参数
   objParamAddon: {
     _systemId,
