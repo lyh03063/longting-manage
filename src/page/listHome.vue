@@ -45,7 +45,8 @@ export default {
       url: `${PUB.domain}/info/getCommonGroupList`,
       data: {
         _systemId: PUB._systemId,
-        groupId: "5e353b08207d941b5ce74f5f"
+        // groupId: "5e353b08207d941b5ce74f5f",
+        groupId: "5e18821555a1e947e7bec88d",
       }
     });
 
