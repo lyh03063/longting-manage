@@ -40,8 +40,6 @@ import detail_group_common from "@/page/detail_group_common.vue";
 export default {
   components: {
     ...objDetailGroupMoudles, //展开{模块导入对象}
-    // detail_group_group: import(`@/page/detail_group_group.vue`),
-    // detail_group_note: import(`@/page/detail_group_note.vue`),
     detail_group_common: detail_group_common
   },
   data() {
