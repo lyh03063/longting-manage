@@ -1,15 +1,15 @@
 
-let _dataType = "goods",
+let _dataType = "order",
   _systemId = PUB._systemId;
 
-PUB.listCF.list_goods = {
+PUB.listCF.list_order = {
   idKey: "_id", //键名
   pageSize: 20,
-  listIndex: "list_goods", //vuex对应的字段~
+  listIndex: "list_order", //vuex对应的字段~
   focusMenu: true, //进行菜单聚焦
   breadcrumb: [
     { value: "首页", path: "#/listHome" },
-    { value: "商品/服务" }
+    { value: "订单" }
   ],
   ...PUB.listCFCommon2,//展开公共配置
 
@@ -26,18 +26,14 @@ PUB.listCF.list_goods = {
   },
  
   //-------列配置数组-------
-  columns: [COLUMNS.title_fixed, COLUMNS._id,COLUMNS.desc, COLUMNS.priceMarket,COLUMNS.priceSell,COLUMNS.isPublish,COLUMNS.countOrder],
+  columns: [COLUMNS.orderId, COLUMNS._id,COLUMNS.openid, COLUMNS.timeOrder, COLUMNS.priceOrder, COLUMNS.listGoods,COLUMNS.payStatus],
   //-------筛选表单字段数组-------
-  searchFormItems: [F_ITEMS.title_search],
+  searchFormItems: [F_ITEMS.orderId],
   //-------详情字段数组-------
-  detailItems: [D_ITEMS.title, D_ITEMS.desc, D_ITEMS.priceMarket,D_ITEMS.priceSell,D_ITEMS.isPublish,D_ITEMS.countOrder],
+  detailItems: [D_ITEMS.orderId, D_ITEMS._id,D_ITEMS.openid, D_ITEMS.timeOrder, D_ITEMS.priceOrder, D_ITEMS.listGoods,D_ITEMS.payStatus,D_ITEMS.addressObj,D_ITEMS.remark],
   //-------新增、修改表单字段数组-------
   formItems: [
-    F_ITEMS.title,
-    F_ITEMS.desc,
-    F_ITEMS.album,
-    F_ITEMS.detail, 
-    F_ITEMS.priceMarket,F_ITEMS.priceSell,F_ITEMS.isPublish,
-    F_ITEMS.listSpecPrice
+
+    F_ITEMS.orderId, F_ITEMS.openid, F_ITEMS.timeOrder, F_ITEMS.priceOrder, F_ITEMS.listGoods,F_ITEMS.payStatus,F_ITEMS.addressObj,F_ITEMS.remark
   ]
 }

@@ -4,11 +4,11 @@
     <el-container>
       <el-header class="home-head-box">
         <el-row>
-         <div class="FL MT13 C_fff MR10" v-if="logoUrl">
+          <div class="FL MT13 C_fff MR10" v-if="logoUrl">
             <img class="W200 H36" src="http://www.dmagic.cn/images/IconS/IconS_2578.png" alt />
           </div>
 
-          <div class="FL  MT17 FS24 C_fff">{{systemName}}</div>
+          <div class="FL MT17 FS24 C_fff">{{systemName}}</div>
           <div class="FR MT30 C_fff">
             <i class="el-icon-s-custom MR5" title="用户名"></i>
             {{this.loginUserName}}(管理员)&nbsp;&nbsp;&nbsp;
@@ -40,8 +40,8 @@
 
 <script>
 export default {
-  components: { 
-     NavMenu: () => import("./components/NavMenu/NavMenu"),
+  components: {
+    NavMenu: () => import("./components/NavMenu/NavMenu")
   }, //注册组件
   methods: {
     // //函数：{切换调试模式函数}
@@ -61,7 +61,9 @@ export default {
   computed: {
     //计算属性
     isProEnvConfig() {
-      return PUB.domain == "http://120.76.160.41:3000";
+      return (
+        PUB.domain ==  "https://www.dmagic.cn"
+      );
     },
 
     activeMenuIndex() {
@@ -114,7 +116,7 @@ export default {
     });
 
     return {
-      logoUrl:PUB.logoUrl,
+      logoUrl: PUB.logoUrl,
       systemName: PUB.systemName,
       // 导航菜单列表
       navMenuList: menuListNeed
@@ -123,8 +125,8 @@ export default {
   created() {
     //*引用当前用户名
     this.loginUserName = localStorage[PUB.keyLoginUser];
-    document.title=PUB.systemName;//修改浏览器标题栏文字
-   
+    document.title = PUB.systemName; //修改浏览器标题栏文字
+
     document.onkeydown = e => {
       //绑定ctrl+D事件
       var keyCode = e.keyCode || e.which || e.charCode;
@@ -138,7 +140,6 @@ export default {
         return false;
       }
     };
-    
   }
 };
 </script>

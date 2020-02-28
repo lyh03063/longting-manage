@@ -3,6 +3,11 @@
     <div class="TAC">
       <h1 class="FS24">欢迎使用{{systemName}}</h1>
 
+     
+
+
+   
+
       <dm_pannel class="MB20" title="默认的列表(4列)">
         <dm_list_flex_res class="MB20" :list="productList" com="product_old" #default="{item}">
           <div class="group">{{item.title}}</div>
@@ -40,6 +45,7 @@
 export default {
   data() {
     return {
+      wxUser: null,
       listData: null,
       systemName: PUB.systemName,
       productList: [
@@ -60,6 +66,9 @@ export default {
       ]
     };
   },
+  methods: {
+  
+  },
   async created() {
     let {
       data: { list: listData }
@@ -70,7 +79,7 @@ export default {
       data: {
         _systemId: PUB._systemId,
         // groupId: "5e353b08207d941b5ce74f5f",
-        groupId: "5e18821555a1e947e7bec88d",
+        groupId: "5e18821555a1e947e7bec88d"
       }
     });
 

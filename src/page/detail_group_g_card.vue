@@ -11,9 +11,9 @@
     <div class="big_group" v-for="docBig in listData" :key="docBig._id">
      
 
-      <dm_pannel class="MB20" :title="docBig.targetDoc.title"  type="plain">
+      <dm_pannel class="MB10" :title="docBig.targetDoc.title"  type="plain">
   
-        <dm_list_flex_res class="MB20 MT10" :list="docBig.sonList" #default="{item:docSmall}">
+        <dm_list_flex_res class=" MT10" :list="docBig.sonList" #default="{item:docSmall}">
           <el-link
             class="small_group_link"
             type="primary"
