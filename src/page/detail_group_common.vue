@@ -41,7 +41,12 @@ export default {
     return {};
   },
   methods: {},
-  async created() {}
+   created() {
+console.log("this.cfList:####", this.cfList);
+
+
+
+   }
 };
 </script>
 

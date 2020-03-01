@@ -8,6 +8,7 @@
       <dm_debug_item v-model="groupDoc" text="groupDoc" />
       <dm_debug_item v-model="isSpecial" text="isSpecial" />
     </dm_debug_list>
+    
 
     <template class v-if="ready">
       <!--动态组件-->

@@ -8,11 +8,11 @@
 
    
 
-      <dm_pannel class="MB20" title="默认的列表(4列)">
-        <dm_list_flex_res class="MB20" :list="productList" com="product_old" #default="{item}">
-          <div class="group">{{item.title}}</div>
-        </dm_list_flex_res>
-      </dm_pannel>
+        <!-- <dm_pannel class="MB20" title="默认的列表(4列)">
+          <dm_list_flex_res class="MB20" :list="productList" com="product_old" #default="{item}">
+            <div class="group">{{item.title}}</div>
+          </dm_list_flex_res>
+        </dm_pannel> -->
 
       <div class="big_group" v-for="docBig in listData" :key="docBig._id">
         <h2 class="big_group_title">{{docBig.targetDoc.title}}</h2>
@@ -27,7 +27,7 @@
             <el-link
               class="small_group_link"
               type="primary"
-              :href="docSmall.targetDoc.link"
+              :href="`#/detail_group?groupId=${docSmall.targetDoc._id}`"
               target="_blank"
             >
               <el-card shadow="hover">
@@ -78,8 +78,8 @@ export default {
       url: `${PUB.domain}/info/getCommonGroupList`,
       data: {
         _systemId: PUB._systemId,
-        // groupId: "5e353b08207d941b5ce74f5f",
-        groupId: "5e18821555a1e947e7bec88d"
+        groupId: "5e353b08207d941b5ce74f5f",
+        // groupId: "5e18821555a1e947e7bec88d"
       }
     });
 

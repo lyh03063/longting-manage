@@ -20,9 +20,20 @@
             >
               <i class="el-icon-right MR5 middle-box"></i>退出登录
             </a>
+
+            
             <router-link to="/modify_password">
-              <i class="el-icon-key MR5 middle-box" style="cursor: pointer;color:white;">修改密码</i>
+              <i class="el-icon-key MR10 middle-box" style="cursor: pointer;color:white;">修改密码</i>
             </router-link>
+
+            <a
+              href="http://www.szltkt.cn/"
+              class="MR5"
+             target="_blank"
+              style="color:white;"
+            >
+              <i class="el-icon-house MR5 middle-box"></i>官网首页
+            </a>
           </div>
         </el-row>
       </el-header>
