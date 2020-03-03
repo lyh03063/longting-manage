@@ -615,56 +615,7 @@ let formData = {
 
 
 
-//#region 临时的基础字段
 
-
-DYDICT.order_user = {
-    ajax: {
-        param: { _systemId: _systemId, _dataType: "user" },
-        url: "/info/getCommonList"
-    },
-    populateColumn: "userDoc",
-    idColumn: "openid",
-    idColumn2: "openid"
-};
-
-
-
-D_ITEMS.trueName = {
-    label: "真实姓名",
-    prop: "trueName",
-
-};
-COLUMNS.trueName = {...D_ITEMS.trueName, width: 70, };
-F_ITEMS.trueName = {...D_ITEMS.trueName };
-
-
-D_ITEMS.deliveryDesc = {
-    label: "配送说明",
-    prop: "deliveryDesc",
-
-};
-COLUMNS.deliveryDesc = {...D_ITEMS.deliveryDesc, width: 70, };
-F_ITEMS.deliveryDesc = {...D_ITEMS.deliveryDesc, type: "textarea" };
-
-
-
-D_ITEMS.orderNickName = {
-    label: "下单人",
-    prop: "orderNickName",
-
-};
-COLUMNS.orderNickName = {...D_ITEMS.orderNickName,
-    width: 70,
-    formatter: function(row) {
-
-        return lodash.get(row, `userDoc.nickName`);
-    }
-};
-
-
-
-//#endregion
 
 
 //#region 分组下的商品列表页

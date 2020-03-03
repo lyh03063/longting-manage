@@ -40,6 +40,8 @@
 </template>
 
 <script>
+
+
 let T;
 
 export default {
@@ -92,7 +94,7 @@ export default {
             prop: "name",
             type: "input"
           },
-       
+
           F_ITEMS.objSpecTerm,
           F_ITEMS.specs_options
         ]
@@ -107,6 +109,11 @@ export default {
         let { listSpecs, listSpecPrice } = T.formDataNeed;
         T.$set(T.formData, "listSpecs", listSpecs);
         T.$set(T.formData, "listSpecPrice", listSpecPrice);
+
+        let priceSellSection = util.getGoodsPrice(T.formData); //调用：{获取商品价格(区间)的函数}
+        console.log("priceSellSection:", priceSellSection);
+
+        T.$set(T.formData, "priceSellSection", priceSellSection);
         // Object.assign(T.formData, { listSpecs, listSpecPrice });//合并对象
       },
       deep: true
