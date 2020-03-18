@@ -20,7 +20,7 @@ PUB.listCF.list_goods = {
                 uiType: "link",
                 text: "查看前台展示",
                 target: "_blank",
-                urlFormatter: function(row) {
+                urlFormatter: function (row) {
                     return `http://www.szltkt.cn/goods/${row._id}`;
                 },
             },
@@ -39,20 +39,17 @@ PUB.listCF.list_goods = {
         _dataType
     },
 
-    //-------列配置数组-------
-    columns: [COLUMNS.title_fixed, COLUMNS._id, COLUMNS.desc, COLUMNS.priceMarket, COLUMNS.priceSell, COLUMNS.priceSellSection, COLUMNS.isPublish, COLUMNS.countOrder],
-    //-------筛选表单字段数组-------
-    searchFormItems: [F_ITEMS.title_search],
+
+
     //-------详情字段数组-------
-    detailItems: [D_ITEMS.title, D_ITEMS.desc, D_ITEMS.deliveryDesc, D_ITEMS.priceMarket, D_ITEMS.priceSell, D_ITEMS.priceSellSection, D_ITEMS.isPublish, D_ITEMS.countOrder],
+    detailItems: ["title", "desc", "deliveryDesc", "priceMarket", "priceSell", "priceSellSection", "isPublish", "countOrder"],
+    //-------列配置数组-------
+    columns: ["title_fixed", "_id", "desc", "priceMarket", "priceSell", "priceSellSection", "isPublish", "countOrder"],
+    //-------筛选表单字段数组-------
+    searchFormItems: ["title_search"],
     //-------新增、修改表单字段数组-------
-    formItems: [
-        F_ITEMS.title,
-        F_ITEMS.desc,
-        F_ITEMS.album,
-        F_ITEMS.deliveryDesc,
-        F_ITEMS.detail,
-        F_ITEMS.priceMarket, F_ITEMS.priceSell, COLUMNS.priceSellSection, F_ITEMS.isPublish,
-        F_ITEMS.listSpecPrice,
-    ]
+    formItems: ["title", "desc", "album", "deliveryDesc", "detail", "priceMarket", "priceSell", "priceSellSection", "isPublish", "listSpecPrice"],
+
+
 }
+util.reformCFListItem(PUB.listCF.list_goods)

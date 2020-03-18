@@ -1,7 +1,7 @@
 //#region 基本配置
 window.PUB = window.PUB || {}
-PUB.domain = "http://localhost:3000"
-//PUB.domain = "https://www.dmagic.cn"
+//PUB.domain = "http://localhost:3000"
+PUB.domain = "https://www.dmagic.cn"
 //PUB.domain = 'http://test.dmagic.cn'
 
 //#endregion
@@ -26,7 +26,7 @@ PUB.arrRouteListName = [
 
 //#region 列表模块名数组配置 
 PUB.arrListName = [
-    "project_case", "order", "goods", "user","refund",
+    "project_case", "order", "goods", "user", "refund",
 ]
 //#endregion
 
@@ -666,18 +666,19 @@ let formData = {
             _dataType
         },
 
+        //-------详情字段数组-------
+        detailItems: ["title", "desc", "countData", "_id", "_idRel", "_idRel2", "sort"],
         //-------列配置数组-------
-        columns: [COLUMNS.title_fixed, COLUMNS._id, COLUMNS.desc, COLUMNS.link, COLUMNS.sort],
-
+        columns: ["title_fixed", "_id", "desc", "link", "sort"],
         //-------筛选表单字段数组-------
         searchFormItems: [],
-        //-------详情字段数组-------
-        detailItems: [D_ITEMS.title, D_ITEMS.desc, D_ITEMS.countData, D_ITEMS._id, D_ITEMS._idRel, D_ITEMS._idRel2, D_ITEMS.sort],
         //-------新增、修改表单字段数组-------
-        formItems: [F_ITEMS._idRel, F_ITEMS._idRel2, F_ITEMS.sort,]
+        formItems: ["_idRel", "_idRel2", "sort"],
+
+
 
     }
-
+    util.reformCFListItem(PUB.listCF.detail_group_goods)
 }
 //#endregion
 
@@ -687,35 +688,12 @@ let formData = {
 {
     let _dataType = "relation";
 
-
+    let cf = lodash.cloneDeep(PUB.listCF.detail_group_goods)
     PUB.listCF.detail_group_project_case = {
-        isShowBreadcrumb: false, //面包屑
-        isShowSearchForm: false, //查询表单-
-        idKey: "_id", //键名
-        pageSize: 20,
+        ...cf,
         listIndex: "detail_group_project_case", //vuex对应的字段~
-        focusMenu: true, //进行菜单聚焦
-
-        // ...PUB.listCFCommon,//展开公共配置
-        ...PUB.listCFCommon3, //展开公共配置
-        singleBtns: PUB.singleBtns_copy_detail_sort,
-        batchBtns: {
-            addon: [
-                { uiType: "slot", slot: "slot_btn_select" },
-                util.cfList.bBtns.add,
-                util.cfList.bBtns.delete,
-
-            ],
-        },
-        sortJsonDefault: {
-            "sort": -1
-        },
-        findJsonDefault: {
-
-        },
         objParamAddon: {
             findJson: {},
-
             _systemId,
             _dataType
         },
@@ -724,71 +702,12 @@ let formData = {
             _systemId,
             _dataType
         },
-
-        //-------列配置数组-------
-        columns: [COLUMNS.title_fixed, COLUMNS._id, COLUMNS.desc, COLUMNS.link, COLUMNS.sort],
-
-        //-------筛选表单字段数组-------
-        searchFormItems: [],
-        //-------详情字段数组-------
-        detailItems: [D_ITEMS.title, D_ITEMS.desc, D_ITEMS.countData, D_ITEMS._id, D_ITEMS._idRel, D_ITEMS._idRel2, D_ITEMS.sort],
-        //-------新增、修改表单字段数组-------
-        formItems: [F_ITEMS._idRel, F_ITEMS._idRel2, F_ITEMS.sort,]
-
     }
-
+    // util.reformCFListItem(PUB.listCF.detail_group_project_case)
 }
 //#endregion
 
 
-
-COLUMNS.payStatus_slot = { ...D_ITEMS.payStatus, slot: "slot_column_payStatus", width: 130, };
-D_ITEMS.timeOrder = {
-    label: "下单时间", prop: "timeOrder", width: 150,
-    formatter: function (row) {
-        if (!row.timeOrder) return "";
-        return moment(row.timeOrder).format("YYYY-MM-DD HH:mm:ss")
-    }
-
-};
-COLUMNS.timeOrder = { ...D_ITEMS.timeOrder };
-
-
-
-D_ITEMS.refundId = {
-    label: "退款Id", prop: "refundId", width: 80
-}
-COLUMNS.refundId = { ...D_ITEMS.refundId };
-F_ITEMS.refundId = { ...D_ITEMS.refundId };
-
-
-D_ITEMS.refundFee = {
-    label: "退款金额", prop: "refundFee", width: 80
-}
-COLUMNS.refundFee = { ...D_ITEMS.refundFee };
-F_ITEMS.refundFee = { ...D_ITEMS.refundFee };
-
-
-
-
-DYDICT.arr_refundStaus = [
-    { label: "未申请", value: 1 },
-    { label: "已申请退款", value: 2 },
-    { label: "退款成功", value: 2 },
-]
-DYDICT.refundStaus = lodash.keyBy(DYDICT.arr_refundStaus, 'value')
-
-D_ITEMS.refundStaus = {
-    label: "退款状态", prop: "refundStaus", width: 80,
-    formatter: function (rowData) {
-        return lodash.get(DYDICT.refundStaus, `${rowData.refundStaus}.label`);
-    },
-}
-COLUMNS.refundStaus = { ...D_ITEMS.refundStaus };
-F_ITEMS.refundStaus = {
-    ...D_ITEMS.refundStaus, type: "select",
-    options: DYDICT.arr_payStatus
-};
 
 
 

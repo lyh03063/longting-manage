@@ -23,17 +23,17 @@ PUB.listCF.list_project_case = {
     _dataType
   },
  
-  //-------列配置数组-------
-  columns: [COLUMNS.title_fixed, COLUMNS._id,COLUMNS.desc, COLUMNS.link,],
-  //-------筛选表单字段数组-------
-  searchFormItems: [F_ITEMS.title_search],
-  //-------详情字段数组-------
-  detailItems: [D_ITEMS.title, D_ITEMS.desc, D_ITEMS.link,],
-  //-------新增、修改表单字段数组-------
-  formItems: [
-    F_ITEMS.title,
-    F_ITEMS.desc,
-    F_ITEMS.album,
-    F_ITEMS.detail, 
-  ]
+//-------详情字段数组-------
+detailItems:["title","desc","link"],
+//-------列配置数组-------
+columns:["title_fixed","_id","desc","link"],
+//-------筛选表单字段数组-------
+searchFormItems:["title_search"],
+//-------新增、修改表单字段数组-------
+formItems:["title","desc","album","detail"],
+
+
+
+
 }
+util.reformCFListItem(PUB.listCF.list_project_case)

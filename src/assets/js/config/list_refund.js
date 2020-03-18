@@ -23,15 +23,16 @@ PUB.listCF.list_refund = {
     _dataType
   },
  
-  //-------列配置数组-------
-  columns: [COLUMNS.refundId, COLUMNS.refundFee,COLUMNS.orderId,COLUMNS.refundStaus, COLUMNS.openid,],
-  //-------筛选表单字段数组-------
-  searchFormItems: [F_ITEMS.refundId,F_ITEMS.openid],
+
   //-------详情字段数组-------
-  detailItems: [ D_ITEMS.refundId, D_ITEMS.refundFee,D_ITEMS.orderId,D_ITEMS.refundStaus, D_ITEMS.openid,],
-  //-------新增、修改表单字段数组-------
-  formItems: [
-    F_ITEMS.refundId, F_ITEMS.refundFee,F_ITEMS.orderId,F_ITEMS.refundStaus, F_ITEMS.openid,
-   
-  ]
+detailItems:["refundId","refundFee","orderId","refundStaus","openid"],
+//-------列配置数组-------
+columns:["refundId","refundFee","orderId","refundStaus","openid"],
+//-------筛选表单字段数组-------
+searchFormItems:["refundId","openid"],
+//-------新增、修改表单字段数组-------
+formItems:["refundId","refundFee","orderId","refundStaus","openid"],
+
+
 }
+util.reformCFListItem(PUB.listCF.list_refund)

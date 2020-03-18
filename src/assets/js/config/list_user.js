@@ -23,18 +23,16 @@ PUB.listCF.list_user = {
     _dataType
   },
  
-  //-------列配置数组-------
-  columns: [COLUMNS.trueName, COLUMNS.nickName,COLUMNS.openid, COLUMNS.phone, COLUMNS.sex, COLUMNS.countOrder,],
-  //-------筛选表单字段数组-------
-  searchFormItems: [F_ITEMS.nickName,F_ITEMS.openid],
+ 
   //-------详情字段数组-------
-  detailItems: [ D_ITEMS.trueName, D_ITEMS.nickName,D_ITEMS.openid, D_ITEMS.phone, D_ITEMS.sex, D_ITEMS.countOrder,],
-  //-------新增、修改表单字段数组-------
-  formItems: [
-    F_ITEMS.trueName,
-    F_ITEMS.nickName,
-    F_ITEMS.openid,
-    F_ITEMS.phone,
-    F_ITEMS.sex,
-  ]
+detailItems:["trueName","nickName","openid","phone","sex","countOrder"],
+//-------列配置数组-------
+columns:["trueName","nickName","openid","phone","sex","countOrder"],
+//-------筛选表单字段数组-------
+searchFormItems:["nickName","openid"],
+//-------新增、修改表单字段数组-------
+formItems:["trueName","nickName","openid","phone","sex"],
+
+
 }
+util.reformCFListItem(PUB.listCF.list_user)
