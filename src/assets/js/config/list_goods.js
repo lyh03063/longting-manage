@@ -44,13 +44,13 @@ PUB.listCF.list_goods = {
     //-------筛选表单字段数组-------
     searchFormItems: [F_ITEMS.title_search],
     //-------详情字段数组-------
-    detailItems: [D_ITEMS.title, D_ITEMS.desc, D_ITEMS.trueName, D_ITEMS.priceMarket, D_ITEMS.priceSell, D_ITEMS.priceSellSection, D_ITEMS.isPublish, D_ITEMS.countOrder],
+    detailItems: [D_ITEMS.title, D_ITEMS.desc, D_ITEMS.deliveryDesc, D_ITEMS.priceMarket, D_ITEMS.priceSell, D_ITEMS.priceSellSection, D_ITEMS.isPublish, D_ITEMS.countOrder],
     //-------新增、修改表单字段数组-------
     formItems: [
         F_ITEMS.title,
         F_ITEMS.desc,
         F_ITEMS.album,
-        F_ITEMS.trueName,
+        F_ITEMS.deliveryDesc,
         F_ITEMS.detail,
         F_ITEMS.priceMarket, F_ITEMS.priceSell, COLUMNS.priceSellSection, F_ITEMS.isPublish,
         F_ITEMS.listSpecPrice,

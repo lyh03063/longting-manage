@@ -12,7 +12,12 @@ PUB.listCF.list_order = {
     ],
     ...PUB.listCFCommon2, //展开公共配置
 
-
+    singleBtns: {
+        addon: [
+            ...util.cfList.sBtns.arrAllBtns,
+        ]
+      },
+    
     //objParamAddon列表接口的附加参数
     objParamAddon: {
         _systemId,
@@ -29,7 +34,7 @@ PUB.listCF.list_order = {
     ],
 
     //-------列配置数组-------
-    columns: [COLUMNS.orderId, COLUMNS._id, COLUMNS.openid, COLUMNS.orderNickName, COLUMNS.timeOrder, COLUMNS.priceOrder, COLUMNS.listGoods, COLUMNS.payStatus],
+    columns: [COLUMNS.orderId, COLUMNS._id, COLUMNS.openid, COLUMNS.orderNickName, COLUMNS.timeOrder, COLUMNS.priceOrder, COLUMNS.listGoods, COLUMNS.payStatus_slot],
     //-------筛选表单字段数组-------
     searchFormItems: [F_ITEMS.orderId],
     //-------详情字段数组-------
