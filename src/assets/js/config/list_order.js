@@ -35,7 +35,7 @@ PUB.listCF.list_order = {
     //-------详情字段数组-------
     detailItems: ["orderId", "_id", "openid", "timeOrder", "priceOrder", "listGoods", "payStatus", "addressObj", "remark"],
     //-------列配置数组-------
-    columns: ["orderId", "_id", "openid", "orderNickName", "timeOrder", "priceOrder", "listGoods", "payStatus_slot"],
+    columns: ["orderId", "_id", "openid", "orderNickName","receiverName", "phone", "timeOrder", "priceOrder", "listGoods", "payStatus_slot"],
     //-------筛选表单字段数组-------
     searchFormItems: ["orderId"],
     //-------新增、修改表单字段数组-------

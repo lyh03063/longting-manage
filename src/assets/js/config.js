@@ -687,21 +687,12 @@ let formData = {
 //#region 分组下的案例列表页
 {
     let _dataType = "relation";
-
     let cf = lodash.cloneDeep(PUB.listCF.detail_group_goods)
     PUB.listCF.detail_group_project_case = {
         ...cf,
         listIndex: "detail_group_project_case", //vuex对应的字段~
-        objParamAddon: {
-            findJson: {},
-            _systemId,
-            _dataType
-        },
-        //公共的附加参数，针对所有接口
-        paramAddonPublic: {
-            _systemId,
-            _dataType
-        },
+        objParamAddon: { findJson: {}, _systemId, _dataType },
+        paramAddonPublic: { _systemId, _dataType },//公共的附加参数，针对所有接口
     }
     // util.reformCFListItem(PUB.listCF.detail_group_project_case)
 }
@@ -709,9 +700,110 @@ let formData = {
 
 
 
+//#region 收货人
+{
+    let objBase = {
+        label: "收货人",
+        prop: "receiverName",
+    }
+    D_ITEMS.receiverName = {
+        ...objBase,
+    };
+    COLUMNS.receiverName = { ...objBase, width: 70, };
+    F_ITEMS.receiverName = { ...objBase, type: "input" };
+}
+
+//#endregion
 
 
+// 注册一个全局组件-针对某个列
+Vue.component('com_listGoods', {
+    template: `<div class="">
+    
+    
+    <ul class="n-flex-ul MB10 BC_fff PL10 PR10">
+    <li v-for="(item) in doc.listGoods" :key="item._id+item.idSpecChain">
+      <b class="W110 ">
+        <el-link type="primary" href="javascript:;">
+          <img class="W100" :src="item.imgSrc" alt />
+        </el-link>
+      </b>
+      <i>
+        <p class="MB6">{{ item.title }}</p>
+        <p class="MB6">规格：{{ item.nameSpecChain }}</p>
+       
 
+        
+      </i>
+    </li>
+  </ul>
+    
+    
+    </div>`,
+    props: ["doc"],//接收属性
+    computed: {
+        goodsText() {
+            let arrArea = lodash.get(this.doc, `addressObj.arrArea`);
+            let detail = lodash.get(this.doc, `addressObj.detail`);
+            if (!arrArea) return ""
+            let provinceName = lodash.get(arrArea, `[0].label`);
+            let cityName = lodash.get(arrArea, `[1].label`);
+            let countryName = lodash.get(arrArea, `[2].label`);
+            return `${provinceName}/${cityName}/${countryName} ${detail}`
+
+        }
+    }
+})
+
+
+Vue.component('com_addressObj', {
+    template: `<span class=" ">{{areaText}}</span>`,
+    props: ["doc"],//接收属性
+    computed: {
+        areaText() {
+            let arrArea = lodash.get(this.doc, `addressObj.arrArea`);
+            let detail = lodash.get(this.doc, `addressObj.detail`);
+            if (!arrArea) return ""
+            let provinceName = lodash.get(arrArea, `[0].label`);
+            let cityName = lodash.get(arrArea, `[1].label`);
+            let countryName = lodash.get(arrArea, `[2].label`);
+            return `${provinceName}/${cityName}/${countryName} ${detail}`
+
+        }
+    }
+})
+
+
+//#region 商品清单
+{
+    let objBase = {
+        label: "商品清单",
+        prop: "listGoods",
+    }
+    D_ITEMS.listGoods = {
+        ...objBase, component: "com_listGoods",
+    };
+    COLUMNS.listGoods = { ...objBase, width: 70, };
+    F_ITEMS.listGoods = { ...objBase, type: "jsonEditor" };
+}
+
+//#endregion
+
+
+//#region 收货地址
+{
+    let objBase = {
+        label: "收货地址",
+        prop: "addressObj",
+    }
+    D_ITEMS.addressObj = {
+        ...objBase, component: "com_addressObj",
+    };
+    COLUMNS.addressObj = { ...objBase, width: 70, };
+    F_ITEMS.addressObj = { ...objBase, type: "jsonEditor" };
+}
+
+//#endregion
 
 
 
